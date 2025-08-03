@@ -1,5 +1,5 @@
 type ScreenType = 
-  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
+  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'quabbletools' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
@@ -14,6 +14,14 @@ const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   havementalissue: ['/images/2-duck.png'],
   whatdealingwith: ['/images/dealing-with-duck.png'],
   wecanhelp: ['/images/we-can-help-background.png'],
+  whatdidyoutry: ['/images/1-duck.png'],
+  quabbletools: [
+    '/images/quabble-tool-1.png', '/images/quabble-tool-2.png', '/images/quabble-tool-3.png', '/images/quabble-tool-4.png',
+    '/images/quabble-tool-5.png', '/images/quabble-tool-6.png', '/images/quabble-tool-7.png', '/images/quabble-tool-8.png',
+    '/images/quabble-tool-9.png', '/images/quabble-tool-10.png', '/images/quabble-tool-11.png', '/images/quabble-tool-12.png',
+    '/images/quabble-tool-13.png', '/images/quabble-tool-14.png', '/images/quabble-tool-15.png', '/images/quabble-tool-16.png',
+    '/images/quabble-tool-17.png', '/images/quabble-tool-18.png'
+  ],
   gender: [],
   focus: ['/images/4-duck.png'],
   confirmation: [],
