@@ -1,41 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
-interface AchievementScreenProps {
+
+interface HaveMentalIssueScreenProps {
   onBack: () => void;
   onNext: () => void;
   onSkip: () => void;
 }
-export function AchivementScreen({
+
+export function HaveMentalIssueScreen({
   onBack,
   onNext,
   onSkip
-}: AchievementScreenProps) {
-  const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
-  const focusOptions = [
-    'Take care of my mental health',
-    'Managing daily stress',
-    'Cultivating a positive mindset',
-    'Boosting self-love',
-    'Connecting with others',
-    'Improving productivity',
-  ];
+}: HaveMentalIssueScreenProps) {
+
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const options = ['Yes', 'No'];
   
   // Mapping from display options to system names
   const toggleSystemNames: { [key: string]: string } = {
-    'Take care of my mental health': 'mental',
-    'Managing daily stress': 'stres',
-    'Cultivating a positive mindset': 'selflove',
-    'Boosting self-love': 'selflove', 
-    'Connecting with others': 'connecting',
-    'Improving productivity': 'productivity'
+    'Yes': 'yes',
+    'No': 'no'
   };
-  const handleFocusClick = (focus: string) => {
-    setSelectedFocus(focus);
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
   };
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_2_part_2:landing"}');
+    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:mental_health_challenges:landing"}');
   }, []); 
 
   return <>
@@ -62,7 +55,9 @@ export function AchivementScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          What do you want to achieve with us?
+          Do you have ongoing
+          <br />
+          mental health challenges?
         </h1>
       </div>
       
@@ -79,8 +74,8 @@ export function AchivementScreen({
           style={{ height: '15vh' }}          /* Smaller image */
         >
           <img
-            src="/images/4-duck.png"
-            alt="Focus illustration"
+            src="/images/have-issue-duck.png"
+            alt="Mental health challenges illustration"
             className="w-full h-full object-contain"
           />
         </div>
@@ -98,23 +93,23 @@ export function AchivementScreen({
         }}
       >
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
-          {focusOptions.map(focus => (
+          {options.map(option => (
             <button 
-              key={focus} 
+              key={option} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedFocus === focus 
+                selectedOption === option 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedFocus === focus ? 'white' : '#4C4A3C',
-                borderColor: selectedFocus === focus ? 'transparent' : '#E1E0D3',
+                color: selectedOption === option ? 'white' : '#4C4A3C',
+                borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
-                fontSize: '2.2vh' // Slightly smaller text
+                fontSize: '2.5vh' // 1/40 of viewport height
               }}
-              onClick={() => handleFocusClick(focus)}
+              onClick={() => handleOptionClick(option)}
             >
-              {focus}
+              {option}
             </button>
           ))}
         </div>
@@ -132,14 +127,14 @@ export function AchivementScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                // Get system name for selected focus
-                const systemName = selectedFocus ? toggleSystemNames[selectedFocus] : null;
-                const focuses = systemName ? [systemName] : [];
+                // Get system name for selected option
+                const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                const mentalHealthChallenges = systemName ? [systemName] : [];
                 
                 sendToFlutter(JSON.stringify({
-                  "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
+                  "event": "v2_5_7_onboarding_A::onboarding:mental_health_challenges:click_next",
                   "eventProperties": {
-                    "focuses": focuses
+                    "mentalHealthChallenges": mentalHealthChallenges
                   }
                 }));
                 onNext();
@@ -175,7 +170,7 @@ export function AchivementScreen({
       @media (min-width: 768px) {
         .text-2xl { font-size: 2rem; }
         .text-3xl { font-size: 2.25rem; }
-        .text-xl { font-size: 1.5rem; }
+        --text-xl { font-size: 1.5rem; }
       }
     `}</style>
   </>;

@@ -1,41 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
-interface AchievementScreenProps {
+
+interface SorryToHeartScreenProps {
   onBack: () => void;
   onNext: () => void;
   onSkip: () => void;
 }
-export function AchivementScreen({
+
+export function SorryToHeartScreen({
   onBack,
   onNext,
   onSkip
-}: AchievementScreenProps) {
-  const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
-  const focusOptions = [
-    'Take care of my mental health',
-    'Managing daily stress',
-    'Cultivating a positive mindset',
-    'Boosting self-love',
-    'Connecting with others',
-    'Improving productivity',
+}: SorryToHeartScreenProps) {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const options = [
+    'Breakup or relationship stress',
+    'Career or academic pressure',
+    'Health issues',
+    'Burnout',
+    'Loneliness',
+    'Loss',
+    'Something else',
+    'Nothing specific'
   ];
   
   // Mapping from display options to system names
   const toggleSystemNames: { [key: string]: string } = {
-    'Take care of my mental health': 'mental',
-    'Managing daily stress': 'stres',
-    'Cultivating a positive mindset': 'selflove',
-    'Boosting self-love': 'selflove', 
-    'Connecting with others': 'connecting',
-    'Improving productivity': 'productivity'
+    'Breakup or relationship stress': 'relationship_stress',
+    'Career or academic pressure': 'career_pressure',
+    'Health issues': 'health_issues',
+    'Burnout': 'burnout',
+    'Loneliness': 'loneliness',
+    'Loss': 'loss',
+    'Something else': 'something_else',
+    'Nothing specific': 'nothing_specific'
   };
-  const handleFocusClick = (focus: string) => {
-    setSelectedFocus(focus);
+
+  const handleOptionClick = (option: string) => {
+    setSelectedOption(option);
   };
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_2_part_2:landing"}');
+    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:sorry_to_hear:landing"}');
   }, []); 
 
   return <>
@@ -62,7 +69,9 @@ export function AchivementScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          What do you want to achieve with us?
+          Sorry to hear that,
+          <br />
+          What's been going on?
         </h1>
       </div>
       
@@ -79,8 +88,8 @@ export function AchivementScreen({
           style={{ height: '15vh' }}          /* Smaller image */
         >
           <img
-            src="/images/4-duck.png"
-            alt="Focus illustration"
+            src="/images/sorry-to-hear-duck.png"
+            alt="Sorry to hear illustration"
             className="w-full h-full object-contain"
           />
         </div>
@@ -98,23 +107,23 @@ export function AchivementScreen({
         }}
       >
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
-          {focusOptions.map(focus => (
+          {options.map(option => (
             <button 
-              key={focus} 
+              key={option} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedFocus === focus 
+                selectedOption === option 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedFocus === focus ? 'white' : '#4C4A3C',
-                borderColor: selectedFocus === focus ? 'transparent' : '#E1E0D3',
+                color: selectedOption === option ? 'white' : '#4C4A3C',
+                borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
-              onClick={() => handleFocusClick(focus)}
+              onClick={() => handleOptionClick(option)}
             >
-              {focus}
+              {option}
             </button>
           ))}
         </div>
@@ -132,14 +141,14 @@ export function AchivementScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                // Get system name for selected focus
-                const systemName = selectedFocus ? toggleSystemNames[selectedFocus] : null;
-                const focuses = systemName ? [systemName] : [];
+                // Get system name for selected option
+                const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                const issues = systemName ? [systemName] : [];
                 
                 sendToFlutter(JSON.stringify({
-                  "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
+                  "event": "v2_5_7_onboarding_A::onboarding:sorry_to_hear:click_next",
                   "eventProperties": {
-                    "focuses": focuses
+                    "issues": issues
                   }
                 }));
                 onNext();

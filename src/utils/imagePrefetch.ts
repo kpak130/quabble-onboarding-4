@@ -1,5 +1,5 @@
 type ScreenType = 
-  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
+  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
@@ -7,10 +7,16 @@ type ScreenType =
 
 const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   referral: [],
-  age: [],
+  age: ['/images/2-duck.png'],
+  duckjar: ['/images/8-duck.png'],
+  askfeelingv2: ['/images/1-duck.png'],
+  sorrytoheart: ['/images/sorry-to-hear-duck.png'],
+  havementalissue: ['/images/2-duck.png'],
   gender: [],
-  focus: [],
+  focus: ['/images/4-duck.png'],
   confirmation: [],
+  achievement: ['/images/4-duck.png'],
+  mindquote: ['/images/mind-quote-background.png'],
   testimonials: ['/images/7-duck.png', '/images/7-reviews.png'],
   completion: ['/images/15-background.png'],
   mentalwellness1: ['/images/8-background.jpg'],
