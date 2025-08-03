@@ -29,10 +29,12 @@ import { MindQuoteScreen } from './components/MindQuoteScreen';
 import { AskFeelingV2Screen } from './components/AskFeelingV2Screen';
 import { SorryToHeartScreen } from './components/SorryToHeartScreen';
 import { HaveMentalIssueScreen } from './components/HaveMentalIssueScreen';
+import { WhatDealingWithScreen } from './components/WhatDealingWithScreen';
+import { WeCanHelpScreen } from './components/WeCanHelpScreen';
 import { AchivementScreen } from './components/AchivementScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -87,6 +89,10 @@ export function App() {
     } else if (currentScreen === 'sorrytoheart') {
       performTransition('havementalissue');
     } else if (currentScreen === 'havementalissue') {
+      performTransition('whatdealingwith');
+    } else if (currentScreen === 'whatdealingwith') {
+      performTransition('wecanhelp');
+    } else if (currentScreen === 'wecanhelp') {
       performTransition('gender');
     } else if (currentScreen === 'testimonials') {
       performTransition('completion');
@@ -134,6 +140,10 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
+      performTransition('wecanhelp');
+    } else if (currentScreen === 'wecanhelp') {
+      performTransition('whatdealingwith');
+    } else if (currentScreen === 'whatdealingwith') {
       performTransition('havementalissue');
     } else if (currentScreen === 'havementalissue') {
       performTransition('sorrytoheart');
@@ -318,6 +328,16 @@ export function App() {
     if (currentScreen === 'havementalissue') {
       return <TransitionWrapper show={!isTransitioning}>
           <HaveMentalIssueScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'whatdealingwith') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <WhatDealingWithScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'wecanhelp') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'focus') {

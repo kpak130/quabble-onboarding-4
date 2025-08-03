@@ -1,5 +1,5 @@
 type ScreenType = 
-  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
+  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
@@ -12,6 +12,8 @@ const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   askfeelingv2: ['/images/1-duck.png'],
   sorrytoheart: ['/images/sorry-to-hear-duck.png'],
   havementalissue: ['/images/2-duck.png'],
+  whatdealingwith: ['/images/dealing-with-duck.png'],
+  wecanhelp: ['/images/we-can-help-background.png'],
   gender: [],
   focus: ['/images/4-duck.png'],
   confirmation: [],

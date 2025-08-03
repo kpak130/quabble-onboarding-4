@@ -1,39 +1,39 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
-interface SorryToHeartScreenProps {
+interface WhatDealingWithScreenProps {
   onBack: () => void;
   onNext: () => void;
   onSkip: () => void;
 }
 
-export function SorryToHeartScreen({
+export function WhatDealingWithScreen({
   onBack,
   onNext,
   onSkip
-}: SorryToHeartScreenProps) {
+}: WhatDealingWithScreenProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const options = [
-    'Breakup or relationship stress',
-    'Career or academic pressure',
-    'Health issues',
-    'Burnout',
-    'Loneliness',
-    'Loss',
-    'Something else',
-    'Nothing specific'
+    'Depression',
+    'Anxiety',
+    'Panic attacks',
+    'OCD',
+    'Bipolar disorder',
+    'Eating disorder',
+    'PTSD',
+    'Something else'
   ];
   
   // Mapping from display options to system names
   const toggleSystemNames: { [key: string]: string } = {
-    'Breakup or relationship stress': 'relationship_stress',
-    'Career or academic pressure': 'career_pressure',
-    'Health issues': 'health_issues',
-    'Burnout': 'burnout',
-    'Loneliness': 'loneliness',
-    'Loss': 'loss',
-    'Something else': 'something_else',
-    'Nothing specific': 'nothing_specific'
+    'Depression': 'depression',
+    'Anxiety': 'anxiety',
+    'Panic attacks': 'panic_attacks',
+    'OCD': 'ocd',
+    'Bipolar disorder': 'bipolar_disorder',
+    'Eating disorder': 'eating_disorder',
+    'PTSD': 'ptsd',
+    'Something else': 'something_else'
   };
 
   const handleOptionClick = (option: string) => {
@@ -42,7 +42,7 @@ export function SorryToHeartScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:sorry_to_hear:landing"}');
+    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:what_dealing_with:landing"}');
   }, []); 
 
   return <>
@@ -69,9 +69,9 @@ export function SorryToHeartScreen({
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
-          Sorry to hear that,
+          What have you been
           <br />
-          What's been going on?
+          dealing with?
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl font-normal text-center" style={{ color: '#7B7968' }}>
           Choose the one that affects you most
@@ -91,8 +91,8 @@ export function SorryToHeartScreen({
           style={{ height: '15vh' }}          /* Smaller image */
         >
           <img
-            src="/images/sorry-to-hear-duck.png"
-            alt="Sorry to hear illustration"
+            src="/images/dealing-with-duck.png"
+            alt="What have you been dealing with illustration"
             className="w-full h-full object-contain"
           />
         </div>
@@ -146,12 +146,12 @@ export function SorryToHeartScreen({
               onClick={() => {
                 // Get system name for selected option
                 const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
-                const issues = systemName ? [systemName] : [];
+                const conditions = systemName ? [systemName] : [];
                 
                 sendToFlutter(JSON.stringify({
-                  "event": "v2_5_7_onboarding_A::onboarding:sorry_to_hear:click_next",
+                  "event": "v2_5_7_onboarding_A::onboarding:what_dealing_with:click_next",
                   "eventProperties": {
-                    "issues": issues
+                    "conditions": conditions
                   }
                 }));
                 onNext();
