@@ -27,7 +27,7 @@ import { CustomizeRoutineScreen } from './components/CustomizeRoutineScreen';
 import { RecommendedRoutineIntroScreen } from './components/RecommendedRoutineIntroScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'gender' | 'focus' | 'confirmation' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -64,6 +64,8 @@ export function App() {
     if (currentScreen === 'referral') {
       performTransition('age');
     } else if (currentScreen === 'age') {
+      performTransition('mentalwellness3');
+    } else if (currentScreen === 'duckjar') {
       performTransition('gender');
     } else if (currentScreen === 'gender') {
       performTransition('focus');
@@ -80,9 +82,9 @@ export function App() {
     } else if (currentScreen === 'mentalwellness2') {
       performTransition('chart');
     } else if (currentScreen === 'chart') {
-      performTransition('mentalwellness3');
-    } else if (currentScreen === 'mentalwellness3') {
       performTransition('ducknaming');
+    } else if (currentScreen === 'mentalwellness3') {
+      performTransition('gender');
     } else if (currentScreen === 'signup') {
       performTransition('ducknaming');
     } else if (currentScreen === 'ducknaming') {
@@ -114,8 +116,10 @@ export function App() {
   const handleBack = () => {
     if (currentScreen === 'age') {
       performTransition('referral');
-    } else if (currentScreen === 'gender') {
+    } else if (currentScreen === 'duckjar') {
       performTransition('age');
+    } else if (currentScreen === 'gender') {
+      performTransition('mentalwellness3');
     } else if (currentScreen === 'focus') {
       performTransition('gender');
     } else if (currentScreen === 'confirmation') {
@@ -131,11 +135,11 @@ export function App() {
     } else if (currentScreen === 'chart') {
       performTransition('mentalwellness2');
     } else if (currentScreen === 'mentalwellness3') {
-      performTransition('chart');
+      performTransition('age');
     } else if (currentScreen === 'signup') {
       performTransition('mentalwellness3');
     } else if (currentScreen === 'ducknaming') {
-      performTransition('mentalwellness3');
+      performTransition('chart');
     } else if (currentScreen === 'tellusintro') {
       performTransition('ducknaming');
     } else if (currentScreen === 'routine') {
@@ -279,6 +283,11 @@ export function App() {
     if (currentScreen === 'age') {
       return <TransitionWrapper show={!isTransitioning}>
           <AgeGroupScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'duckjar') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <DuckWithJarScreen onNext={handleNext} />
         </TransitionWrapper>;
     }
     return <TransitionWrapper show={!isTransitioning}>
