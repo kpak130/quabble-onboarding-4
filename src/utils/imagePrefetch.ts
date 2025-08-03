@@ -1,0 +1,101 @@
+type ScreenType = 
+  | 'referral' | 'age' | 'gender' | 'focus' | 'confirmation' | 'testimonials' 
+  | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
+  | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
+  | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
+  | 'customizeroutine' | 'recommendedroutineintro';
+
+const SCREEN_IMAGES: Record<ScreenType, string[]> = {
+  referral: [],
+  age: [],
+  gender: [],
+  focus: [],
+  confirmation: [],
+  testimonials: ['/images/7-duck.png', '/images/7-reviews.png'],
+  completion: ['/images/15-background.png'],
+  mentalwellness1: ['/images/8-background.jpg'],
+  mentalwellness2: ['/images/9-background.jpg'],
+  chart: ['/images/11-graph.png'],
+  mentalwellness3: ['/images/10-background.jpg'],
+  signup: ['/images/13-background.png'],
+  ducknaming: ['/images/14-duck.png'],
+  tellusintro: [],
+  routine: [],
+  appfinale: [],
+  wakeup: ['/images/18-background.jpg'],
+  goodnight: ['/images/19-background.jpg'],
+  mentalwellnessq1: ['/images/20-background.jpg'],
+  askfeeling: [],
+  askinterests: [
+    '/images/interests/art.png',
+    '/images/interests/books.png',
+    '/images/interests/cooking.png',
+    '/images/interests/fitness.png',
+    '/images/interests/gaming.png',
+    '/images/interests/music.png',
+    '/images/interests/nature.png',
+    '/images/interests/socializing.png',
+    '/images/interests/travel.png'
+  ],
+  supportsystem: ['/images/21-background.jpg'],
+  customizeroutine: ['/images/22-background.png'],
+  recommendedroutineintro: []
+};
+
+const SCREEN_SEQUENCE: ScreenType[] = [
+  'referral', 'age', 'gender', 'focus', 'confirmation', 'testimonials', 'completion',
+  'mentalwellness1', 'mentalwellness2', 'chart', 'mentalwellness3', 'ducknaming',
+  'tellusintro', 'wakeup', 'goodnight', 'mentalwellnessq1', 'askfeeling', 'askinterests',
+  'supportsystem', 'customizeroutine', 'recommendedroutineintro', 'routine', 'appfinale'
+];
+
+const prefetchedImages = new Set<string>();
+
+function preloadImage(src: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (prefetchedImages.has(src)) {
+      resolve();
+      return;
+    }
+
+    const img = new Image();
+    img.onload = () => {
+      prefetchedImages.add(src);
+      resolve();
+    };
+    img.onerror = () => {
+      console.warn(`Failed to preload image: ${src}`);
+      reject(new Error(`Failed to load ${src}`));
+    };
+    img.src = src;
+  });
+}
+
+export function prefetchImagesForScreen(currentScreen: ScreenType): void {
+  const currentIndex = SCREEN_SEQUENCE.indexOf(currentScreen);
+  if (currentIndex === -1) return;
+
+  const screensToPreload = SCREEN_SEQUENCE.slice(currentIndex + 1, currentIndex + 3);
+  
+  screensToPreload.forEach(screenType => {
+    const images = SCREEN_IMAGES[screenType];
+    images.forEach(imageSrc => {
+      preloadImage(imageSrc).catch(() => {});
+    });
+  });
+}
+
+export function prefetchAllCriticalImages(): void {
+  const criticalImages = [
+    '/images/7-duck.png',
+    '/images/7-reviews.png',
+    '/images/11-graph.png',
+    '/images/14-duck.png',
+    '/images/15-background.png',
+    '/images/22-background.png'
+  ];
+
+  criticalImages.forEach(imageSrc => {
+    preloadImage(imageSrc).catch(() => {});
+  });
+}

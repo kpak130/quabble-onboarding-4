@@ -1,0 +1,289 @@
+import React, { useState, useEffect } from 'react';
+import { prefetchImagesForScreen, prefetchAllCriticalImages } from './utils/imagePrefetch';
+import { AgeGroupScreen } from './components/AgeGroupScreen';
+import { GenderScreen } from './components/GenderScreen';
+import { FocusScreen } from './components/FocusScreen';
+import { ConfirmationScreen } from './components/ConfirmationScreen';
+import { TestimonialsScreen } from './components/TestimonialsScreen';
+import { DuckWithJarScreen } from './components/DuckWithJarScreen';
+import { MentalWellness1Screen } from './components/MentalWellness1Screen';
+import { MentalWellness2Screen } from './components/MentalWellness2Screen';
+import { ChartScreen } from './components/ChartScreen';
+import { MentalWellness3Screen } from './components/MentalWellness3Screen';
+import { SignUpScreen } from './components/SignUpScreen';
+import { DuckNamingScreen } from './components/DuckNamingScreen';
+import { TellUsIntroScreen } from './components/TellUsIntroScreen';
+import { RoutineRecommendationScreen } from './components/RoutineRecommendationScreen';
+import { AppFinaleScreen } from './components/AppFinaleScreen';
+import { WakeUpScreen } from './components/WakeUpScreen';
+import { GoodNightScreen } from './components/GoodNightScreen';
+import { MentalWellnessQuestion1 } from './components/MentalWellnessQuestion1';
+import { AskFeelingScreen } from './components/AskFeelingScreen';
+import { AskInterestsPage } from './components/AskInterestsPage';
+import { SupportSystemScreen } from './components/SupportSystemScreen';
+import { TransitionWrapper } from './components/TransitionWrapper';
+import { WhereDidYouHearAboutUs } from './components/WhereDidYouHearAboutUs';
+import { CustomizeRoutineScreen } from './components/CustomizeRoutineScreen';
+import { RecommendedRoutineIntroScreen } from './components/RecommendedRoutineIntroScreen';
+
+export function App() {
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'gender' | 'focus' | 'confirmation' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  
+  // Add transition state
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [nextScreen, setNextScreen] = useState<typeof currentScreen | null>(null);
+
+  // Check URL parameters on component mount and prefetch critical images  
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const step = urlParams.get('step');
+    
+    if (step === 'post-signin') {
+      setCurrentScreen('ducknaming');
+    }
+
+    // Prefetch critical images on app load
+    prefetchAllCriticalImages();
+  }, []);
+
+  // Prefetch images for upcoming screens whenever current screen changes
+  useEffect(() => {
+    prefetchImagesForScreen(currentScreen);
+  }, [currentScreen]);
+
+  const performTransition = (targetScreen: typeof currentScreen) => {
+    setIsTransitioning(true);
+    setNextScreen(targetScreen);
+    // Wait for fade out before changing screen
+    setTimeout(() => {
+      setCurrentScreen(targetScreen);
+      setIsTransitioning(false);
+    }, 300);
+  };
+  const handleNext = () => {
+    if (currentScreen === 'referral') {
+      performTransition('age');
+    } else if (currentScreen === 'age') {
+      performTransition('gender');
+    } else if (currentScreen === 'gender') {
+      performTransition('focus');
+    } else if (currentScreen === 'focus') {
+      performTransition('confirmation');
+    } else if (currentScreen === 'confirmation') {
+      performTransition('testimonials');
+    } else if (currentScreen === 'testimonials') {
+      performTransition('completion');
+    } else if (currentScreen === 'completion') {
+      performTransition('mentalwellness1');
+    } else if (currentScreen === 'mentalwellness1') {
+      performTransition('mentalwellness2');
+    } else if (currentScreen === 'mentalwellness2') {
+      performTransition('chart');
+    } else if (currentScreen === 'chart') {
+      performTransition('mentalwellness3');
+    } else if (currentScreen === 'mentalwellness3') {
+      performTransition('ducknaming');
+    } else if (currentScreen === 'signup') {
+      performTransition('ducknaming');
+    } else if (currentScreen === 'ducknaming') {
+      performTransition('tellusintro');
+    } else if (currentScreen === 'tellusintro') {
+      performTransition('wakeup');
+    } else if (currentScreen === 'routine') {
+      performTransition('appfinale');
+    } else if (currentScreen === 'appfinale') {
+      performTransition('wakeup');
+    } else if (currentScreen === 'wakeup') {
+      performTransition('goodnight');
+    } else if (currentScreen === 'goodnight') {
+      performTransition('mentalwellnessq1');
+    } else if (currentScreen === 'mentalwellnessq1') {
+      performTransition('askfeeling');
+    } else if (currentScreen === 'askfeeling') {
+      performTransition('askinterests');
+    } else if (currentScreen === 'askinterests') {
+      performTransition('supportsystem');
+    } else if (currentScreen === 'supportsystem') {
+      performTransition('customizeroutine');
+    } else if (currentScreen === 'customizeroutine') {
+      performTransition('recommendedroutineintro');
+    } else if (currentScreen === 'recommendedroutineintro') {
+      performTransition('routine');
+    }
+  };
+  const handleBack = () => {
+    if (currentScreen === 'age') {
+      performTransition('referral');
+    } else if (currentScreen === 'gender') {
+      performTransition('age');
+    } else if (currentScreen === 'focus') {
+      performTransition('gender');
+    } else if (currentScreen === 'confirmation') {
+      performTransition('focus');
+    } else if (currentScreen === 'testimonials') {
+      performTransition('confirmation');
+    } else if (currentScreen === 'completion') {
+      performTransition('testimonials');
+    } else if (currentScreen === 'mentalwellness1') {
+      performTransition('completion');
+    } else if (currentScreen === 'mentalwellness2') {
+      performTransition('mentalwellness1');
+    } else if (currentScreen === 'chart') {
+      performTransition('mentalwellness2');
+    } else if (currentScreen === 'mentalwellness3') {
+      performTransition('chart');
+    } else if (currentScreen === 'signup') {
+      performTransition('mentalwellness3');
+    } else if (currentScreen === 'ducknaming') {
+      performTransition('mentalwellness3');
+    } else if (currentScreen === 'tellusintro') {
+      performTransition('ducknaming');
+    } else if (currentScreen === 'routine') {
+      performTransition('recommendedroutineintro');
+    } else if (currentScreen === 'appfinale') {
+      performTransition('routine');
+    } else if (currentScreen === 'wakeup') {
+      performTransition('tellusintro');
+    } else if (currentScreen === 'goodnight') {
+      performTransition('wakeup');
+    } else if (currentScreen === 'mentalwellnessq1') {
+      performTransition('goodnight');
+    } else if (currentScreen === 'askfeeling') {
+      performTransition('mentalwellnessq1');
+    } else if (currentScreen === 'askinterests') {
+      performTransition('askfeeling');
+    } else if (currentScreen === 'supportsystem') {
+      performTransition('askinterests');
+    } else if (currentScreen === 'customizeroutine') {
+      performTransition('supportsystem');
+    } else if (currentScreen === 'recommendedroutineintro') {
+      performTransition('customizeroutine');
+    }
+  };
+  const handleSkip = () => {
+    // Handle skip functionality - move to next screen
+    handleNext();
+  };
+  // Render current screen with transition wrapper
+  const renderCurrentScreen = () => {
+    if (currentScreen === 'recommendedroutineintro') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <RecommendedRoutineIntroScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'customizeroutine') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <CustomizeRoutineScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'supportsystem') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <SupportSystemScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'askinterests') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <AskInterestsPage onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'askfeeling') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <AskFeelingScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'mentalwellnessq1') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <MentalWellnessQuestion1 onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'goodnight') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <GoodNightScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'wakeup') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <WakeUpScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'appfinale') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <AppFinaleScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'tellusintro') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <TellUsIntroScreen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'routine') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <RoutineRecommendationScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'ducknaming') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <DuckNamingScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'signup') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <SignUpScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'mentalwellness3') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <MentalWellness3Screen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'chart') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <ChartScreen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'mentalwellness2') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <MentalWellness2Screen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'mentalwellness1') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <MentalWellness1Screen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'completion') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <DuckWithJarScreen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'testimonials') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <TestimonialsScreen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'confirmation') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <ConfirmationScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'focus') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <FocusScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'gender') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <GenderScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'age') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <AgeGroupScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    return <TransitionWrapper show={!isTransitioning}>
+        <WhereDidYouHearAboutUs onNext={handleNext} onSkip={handleSkip} />
+      </TransitionWrapper>;
+  };
+  return <div className="relative overflow-hidden">{renderCurrentScreen()}</div>;
+}
