@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface ConfirmationScreenProps {
@@ -54,15 +54,17 @@ export function ConfirmationScreen({
       </div>
       <div className="flex flex-col items-center flex-1 px-8" style={{ paddingBottom: '16rem', paddingTop: '12vh' }}>
         {/* Large circular orange section - responsive size */}
-        <div className="relative mb-12" style={{ width: 'min(85vw, 28rem)', height: 'min(85vw, 28rem)' }}>
+        <div className="relative mb-12" style={{ width: 'min(90vw, 30rem)', height: 'min(90vw, 30rem)' }}>
           {/* Outer light orange circle */}
           <div className="absolute inset-0 w-full h-full rounded-full bg-gradient-to-br from-orange-200 to-orange-300 opacity-40"></div>
           
           {/* Inner orange circle with text */}
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
-              <p className="text-white text-3xl sm:text-4xl font-medium leading-relaxed">
-                We would love to<br />help you with it!
+              <p className="text-white text-3xl sm:text-3xl font-medium leading-relaxed">
+                Welcome!<br />
+                Let's find out how<br />
+                we can help you!
               </p>
             </div>
           </div>

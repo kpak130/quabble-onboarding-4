@@ -70,9 +70,9 @@ export function App() {
     } else if (currentScreen === 'gender') {
       performTransition('focus');
     } else if (currentScreen === 'focus') {
-      performTransition('confirmation');
-    } else if (currentScreen === 'confirmation') {
       performTransition('testimonials');
+    } else if (currentScreen === 'confirmation') {
+      performTransition('gender');
     } else if (currentScreen === 'testimonials') {
       performTransition('completion');
     } else if (currentScreen === 'completion') {
@@ -84,7 +84,7 @@ export function App() {
     } else if (currentScreen === 'chart') {
       performTransition('ducknaming');
     } else if (currentScreen === 'mentalwellness3') {
-      performTransition('gender');
+      performTransition('confirmation');
     } else if (currentScreen === 'signup') {
       performTransition('ducknaming');
     } else if (currentScreen === 'ducknaming') {
@@ -119,13 +119,13 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
-      performTransition('mentalwellness3');
+      performTransition('confirmation');
     } else if (currentScreen === 'focus') {
       performTransition('gender');
     } else if (currentScreen === 'confirmation') {
-      performTransition('focus');
+      performTransition('mentalwellness3');
     } else if (currentScreen === 'testimonials') {
-      performTransition('confirmation');
+      performTransition('focus');
     } else if (currentScreen === 'completion') {
       performTransition('testimonials');
     } else if (currentScreen === 'mentalwellness1') {
