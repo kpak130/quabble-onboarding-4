@@ -1,5 +1,5 @@
 type ScreenType = 
-  | 'referral' | 'age' | 'gender' | 'focus' | 'confirmation' | 'testimonials' 
+  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 

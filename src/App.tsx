@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { prefetchImagesForScreen, prefetchAllCriticalImages } from './utils/imagePrefetch';
 import { AgeGroupScreen } from './components/AgeGroupScreen';
 import { GenderScreen } from './components/GenderScreen';
@@ -26,10 +26,11 @@ import { WhereDidYouHearAboutUs } from './components/WhereDidYouHearAboutUs';
 import { CustomizeRoutineScreen } from './components/CustomizeRoutineScreen';
 import { RecommendedRoutineIntroScreen } from './components/RecommendedRoutineIntroScreen';
 import { MindQuoteScreen } from './components/MindQuoteScreen';
+import { AskFeelingV2Screen } from './components/AskFeelingV2Screen';
 import { AchivementScreen } from './components/AchivementScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -78,6 +79,8 @@ export function App() {
     } else if (currentScreen === 'achievement') {
       performTransition('mindquote');
     } else if (currentScreen === 'mindquote') {
+      performTransition('askfeelingv2');
+    } else if (currentScreen === 'askfeelingv2') {
       performTransition('gender');
     } else if (currentScreen === 'testimonials') {
       performTransition('completion');
@@ -125,6 +128,8 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
+      performTransition('askfeelingv2');
+    } else if (currentScreen === 'askfeelingv2') {
       performTransition('mindquote');
     } else if (currentScreen === 'mindquote') {
       performTransition('achievement');
@@ -288,6 +293,11 @@ export function App() {
     if (currentScreen === 'mindquote') {
       return <TransitionWrapper show={!isTransitioning}>
           <MindQuoteScreen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'askfeelingv2') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <AskFeelingV2Screen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'focus') {
