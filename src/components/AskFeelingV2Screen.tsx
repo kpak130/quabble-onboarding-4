@@ -97,7 +97,7 @@ export function AskFeelingV2Screen({
             {feelingOptions.map(feeling => (
               <button 
                 key={feeling} 
-                className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors ${
+                className={`w-full px-6 sm:px-7 rounded-3xl text-center font-normal transition-colors ${
                   selectedFeeling === feeling 
                     ? 'bg-[#f2994a] text-white' 
                     : 'bg-white border-2'
@@ -105,7 +105,7 @@ export function AskFeelingV2Screen({
                 style={{ 
                   color: selectedFeeling === feeling ? 'white' : '#4C4A3C',
                   borderColor: selectedFeeling === feeling ? 'transparent' : '#E1E0D3',
-                  height: '7.5vh',
+                  height: '10.5vh',
                   fontSize: '2.5vh',
                   minHeight: '48px',
                   minWidth: '48px'
@@ -124,13 +124,11 @@ export function AskFeelingV2Screen({
           <div className="p-5 sm:p-6">
             <div className="max-w-md mx-auto">
               <button
-                className="w-4/5 mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg"
-                style={{ 
-                  height: '7.5vh',
-                  fontSize: '2.5vh',
-                  minHeight: '48px',
-                  minWidth: '48px'
-                }}
+                className="w-4/5 mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
+                                 style={{ 
+                   height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                   fontSize: '2.5vh' // 1/40 of viewport height
+                 }}
                 onClick={() => {
                   const systemName = selectedFeeling ? toggleSystemNames[selectedFeeling] : null;
                   const feelings = systemName ? [systemName] : [];
