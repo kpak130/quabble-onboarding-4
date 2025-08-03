@@ -33,10 +33,11 @@ import { WhatDealingWithScreen } from './components/WhatDealingWithScreen';
 import { WeCanHelpScreen } from './components/WeCanHelpScreen';
 import { WhatDidYouTryScreen } from './components/WhatDidYouTryScreen';
 import { QuabbleToolsScreen } from './components/QuabbleToolsScreen';
+import { TherapistScreen } from './components/TherapistScreen';
 import { AchivementScreen } from './components/AchivementScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'quabbletools' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'quabbletools' | 'therapist' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -99,6 +100,8 @@ export function App() {
     } else if (currentScreen === 'whatdidyoutry') {
       performTransition('quabbletools');
     } else if (currentScreen === 'quabbletools') {
+      performTransition('therapist');
+    } else if (currentScreen === 'therapist') {
       performTransition('gender');
     } else if (currentScreen === 'testimonials') {
       performTransition('completion');
@@ -146,6 +149,8 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
+      performTransition('therapist');
+    } else if (currentScreen === 'therapist') {
       performTransition('quabbletools');
     } else if (currentScreen === 'quabbletools') {
       performTransition('whatdidyoutry');
@@ -358,6 +363,11 @@ export function App() {
     if (currentScreen === 'quabbletools') {
       return <TransitionWrapper show={!isTransitioning}>
           <QuabbleToolsScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'therapist') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <TherapistScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'focus') {
