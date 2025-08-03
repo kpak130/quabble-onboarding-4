@@ -25,9 +25,10 @@ import { TransitionWrapper } from './components/TransitionWrapper';
 import { WhereDidYouHearAboutUs } from './components/WhereDidYouHearAboutUs';
 import { CustomizeRoutineScreen } from './components/CustomizeRoutineScreen';
 import { RecommendedRoutineIntroScreen } from './components/RecommendedRoutineIntroScreen';
+import { AchivementScreen } from './components/AchivementScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -72,6 +73,8 @@ export function App() {
     } else if (currentScreen === 'focus') {
       performTransition('testimonials');
     } else if (currentScreen === 'confirmation') {
+      performTransition('achievement');
+    } else if (currentScreen === 'achievement') {
       performTransition('gender');
     } else if (currentScreen === 'testimonials') {
       performTransition('completion');
@@ -119,9 +122,11 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
-      performTransition('confirmation');
+      performTransition('achievement');
     } else if (currentScreen === 'focus') {
       performTransition('gender');
+    } else if (currentScreen === 'achievement') {
+      performTransition('confirmation');
     } else if (currentScreen === 'confirmation') {
       performTransition('mentalwellness3');
     } else if (currentScreen === 'testimonials') {
@@ -268,6 +273,11 @@ export function App() {
     if (currentScreen === 'confirmation') {
       return <TransitionWrapper show={!isTransitioning}>
           <ConfirmationScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'achievement') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <AchivementScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'focus') {
