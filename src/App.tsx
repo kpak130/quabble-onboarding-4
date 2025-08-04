@@ -114,7 +114,7 @@ export function App() {
     } else if (currentScreen === 'testimonialsv2') {
       performTransition('areyouready');
     } else if (currentScreen === 'areyouready') {
-      performTransition('gender');
+      performTransition('wakeup');
     } else if (currentScreen === 'testimonials') {
       performTransition('completion');
     } else if (currentScreen === 'completion') {
@@ -134,13 +134,13 @@ export function App() {
     } else if (currentScreen === 'tellusintro') {
       performTransition('wakeup');
     } else if (currentScreen === 'routine') {
-      performTransition('appfinale');
+      performTransition('gender');
     } else if (currentScreen === 'appfinale') {
       performTransition('wakeup');
     } else if (currentScreen === 'wakeup') {
       performTransition('goodnight');
     } else if (currentScreen === 'goodnight') {
-      performTransition('mentalwellnessq1');
+      performTransition('askinterests');
     } else if (currentScreen === 'mentalwellnessq1') {
       performTransition('askfeeling');
     } else if (currentScreen === 'askfeeling') {
@@ -161,7 +161,7 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
-      performTransition('quabbletools');
+      performTransition('routine');
 
 
 
@@ -210,7 +210,7 @@ export function App() {
     } else if (currentScreen === 'appfinale') {
       performTransition('routine');
     } else if (currentScreen === 'wakeup') {
-      performTransition('tellusintro');
+      performTransition('areyouready');
     } else if (currentScreen === 'goodnight') {
       performTransition('wakeup');
     } else if (currentScreen === 'mentalwellnessq1') {
@@ -218,7 +218,7 @@ export function App() {
     } else if (currentScreen === 'askfeeling') {
       performTransition('mentalwellnessq1');
     } else if (currentScreen === 'askinterests') {
-      performTransition('askfeeling');
+      performTransition('goodnight');
     } else if (currentScreen === 'supportsystem') {
       performTransition('askinterests');
     } else if (currentScreen === 'customizeroutine') {
