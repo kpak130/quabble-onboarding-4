@@ -59,9 +59,9 @@ export function WhatDidYouTryScreen({
           </svg>
         </button>
         <div className="flex-1"></div>
-        <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
+        {/* <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
           Skip
-        </button>
+        </button> */}
       </div>
       
       {/* Title - with padding */}

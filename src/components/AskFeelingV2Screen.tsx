@@ -48,9 +48,9 @@ export function AskFeelingV2Screen({
             </svg>
           </button>
           <div className="flex-1"></div>
-          <button className="p-3 text-lg sm:text-xl font-normal" onClick={onSkip} style={{ color: '#7B7968', minHeight: '48px', minWidth: '48px' }}>
+          {/* <button className="p-3 text-lg sm:text-xl font-normal" onClick={onSkip} style={{ color: '#7B7968', minHeight: '48px', minWidth: '48px' }}>
             Skip
-          </button>
+          </button> */}
         </div>
         
         {/* Title - with padding */}
