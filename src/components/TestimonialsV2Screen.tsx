@@ -41,13 +41,13 @@ export function TestimonialsV2Screen({
     return (
       <div 
         className="flex"
-        style={{ gap: 'min(1vw, 4px)' }}
+        style={{ gap: 'min(0.5vw, 2px)' }}
       >
         {[...Array(5)].map((_, index) => (
           <span 
             key={index} 
             className="text-yellow-400"
-            style={{ fontSize: 'min(3.5vw, 16px)' }}
+            style={{ fontSize: 'min(6vw, 26px)' }}
           >★</span>
         ))}
       </div>
@@ -70,7 +70,7 @@ export function TestimonialsV2Screen({
         style={{ 
           height: '100vh',
           paddingTop: '70vh',
-          paddingBottom: '10vh'
+          paddingBottom: '20vh'
         }}
       >
         
@@ -104,7 +104,7 @@ export function TestimonialsV2Screen({
               <p 
                 className="text-gray-800 font-normal leading-relaxed"
                 style={{ 
-                  fontSize: 'min(3.5vw, 14px)',
+                  fontSize: 'min(4.5vw, 18px)',
                   marginTop: 'min(2vw, 8px)',
                   marginBottom: 'min(3vw, 12px)'
                 }}
@@ -113,7 +113,7 @@ export function TestimonialsV2Screen({
               </p>
               <p 
                 className="text-gray-500"
-                style={{ fontSize: 'min(3vw, 12px)' }}
+                style={{ fontSize: 'min(3.5vw, 14px)' }}
               >
                 by {testimonial.author}
               </p>
