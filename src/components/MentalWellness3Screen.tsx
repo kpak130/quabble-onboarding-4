@@ -86,9 +86,9 @@ export function MentalWellness3Screen({
         {/* Main content */}
         <div className="flex flex-col items-center flex-1" style={{ paddingBottom: '9rem' }}>
           {/* Main text positioned very high from top */}
-          <div className="text-center mb-2 px-4" style={{ marginTop: '8vh' }}>
+          <div className="text-center mb-2 px-4" style={{ marginTop: '-3vh' }}>
             <h1 className="font-medium text-gray-800 leading-normal" style={{ fontSize: '3vh' }}>
-              Build your joyful<br/>mental wellness routine<br/>with <span className="font-medium">Quabble</span>!
+              10M+ mental wellness routines completed
             </h1>
           </div>
           
