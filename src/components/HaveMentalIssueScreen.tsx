@@ -65,8 +65,8 @@ export function HaveMentalIssueScreen({
       <div 
         className="flex justify-center px-5 flex-shrink-0"
         style={{ 
-          paddingTop: '0.25vh', /* 1/400 of viewport height */
-          paddingBottom: '2vh'  /* 1/50 of viewport height */
+          paddingTop: '4vh', /* More padding above */
+          paddingBottom: '5vh'  /* More padding below */
         }}
       >
         <div
