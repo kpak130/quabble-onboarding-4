@@ -211,7 +211,7 @@ export function App() {
     } else if (currentScreen === 'focus') {
       performTransition('gender');
     } else if (currentScreen === 'achievement') {
-      performTransition('confirmation');
+      performTransition('letsfindout');
     } else if (currentScreen === 'confirmation') {
       performTransition('mentalwellness3');
     } else if (currentScreen === 'testimonials') {
