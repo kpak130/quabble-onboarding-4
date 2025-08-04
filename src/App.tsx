@@ -157,10 +157,9 @@ export function App() {
     } else if (currentScreen === 'gender') {
       performTransition('routineintro');
 
-    } else if (currentScreen === 'radar') {
-      performTransition('quabbletools');
+
     } else if (currentScreen === 'routineintro') {
-      performTransition('radar');
+      performTransition('quabbletools');
     } else if (currentScreen === 'quabbletools') {
       performTransition('whatdidyoutry');
     } else if (currentScreen === 'whatdidyoutry') {
@@ -381,7 +380,7 @@ export function App() {
     }
     if (currentScreen === 'radar') {
       return <TransitionWrapper show={!isTransitioning}>
-          <RadarScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <RadarScreen onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'routineintro') {
