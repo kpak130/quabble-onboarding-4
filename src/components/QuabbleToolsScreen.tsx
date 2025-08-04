@@ -65,14 +65,15 @@ export function QuabbleToolsScreen({
       </div>
       
       {/* Tools Grid */}
-      <div 
-        className="flex-1 overflow-y-auto px-5 sm:px-6" 
-        style={{ 
-          paddingBottom: '9rem' // Space for fixed button
-        }}
-      >
-        <div className="max-w-md mx-auto">
-          <div className="grid grid-cols-4 gap-1 sm:gap-2">
+      <div className="flex-1 px-5 sm:px-6 flex justify-center">
+        <div className="max-w-md w-full">
+          <div 
+            className="grid grid-cols-4 gap-1 sm:gap-2 overflow-y-auto"
+            style={{ 
+              height: 'calc(100vh - 20rem)', // Fixed height for scrollable area
+              paddingBottom: '5rem' // More space at bottom of scroll area
+            }}
+          >
             {tools.map((tool, index) => (
               <div key={index} className="flex flex-col items-center h-36">
                 <img
