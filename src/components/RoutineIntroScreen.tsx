@@ -2,15 +2,11 @@ import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface RoutineIntroScreenProps {
-  onBack: () => void;
   onNext: () => void;
-  onSkip: () => void;
 }
 
 export function RoutineIntroScreen({
-  onBack,
-  onNext,
-  onSkip
+  onNext
 }: RoutineIntroScreenProps) {
 
   useEffect(() => {
@@ -31,34 +27,23 @@ export function RoutineIntroScreen({
   ];
 
   return <>
-    <div className="flex flex-col w-full h-screen bg-[#F5F0E8] text-gray-800 relative overflow-hidden">
-      {/* Fixed Header */}
-      <div className="flex items-center justify-between pt-safe-top px-5 sm:px-6 flex-shrink-0" 
-           style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
-        <button className="p-3 touch-target" onClick={onBack} style={{ color: '#7B7968' }}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 sm:w-8 sm:h-8">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <div className="flex-1 flex justify-center">
-          {/* Progress dots */}
-          <div className="flex space-x-2">
-            <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-            <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-            <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-            <div className="w-2 h-2 rounded-full bg-gray-800"></div>
-          </div>
+    <div className="flex flex-col w-full h-screen bg-[#F4DCC9] text-gray-800 relative overflow-hidden">
+      {/* Content Container - starts at 5% from top */}
+      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
+        {/* Progress dots */}
+        <div className="flex space-x-2 mb-8 sm:mb-12">
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-800"></div>
         </div>
-        <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
-          Skip
-        </button>
-      </div>
-      
-      {/* Content Container */}
-      <div className="flex-1 flex flex-col justify-center items-center px-5 sm:px-6">
+        
         {/* Title */}
-        <div className="flex flex-col items-center justify-center mb-8 sm:mb-12 text-center max-w-md">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-tight mb-8" style={{ color: '#4C4A3C' }}>
+        <div className="flex flex-col items-center justify-center mb-20 sm:mb-24 text-center max-w-md">
+          <h1 className="font-medium leading-tight" style={{ 
+            color: '#4C4A3C',
+            fontSize: 'min(6.5vw, 2.25rem)'
+          }}>
             It delivers bite-sized, personalized daily routines to help you build sustainable habits
           </h1>
         </div>
@@ -70,13 +55,17 @@ export function RoutineIntroScreen({
             <br />
             with a positive mindset
           </p>
-          <div className="flex space-x-4 sm:space-x-6">
+          <div className="flex space-x-3 sm:space-x-4">
             {morningIcons.map((icon, index) => (
-              <div key={index} className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
+              <div key={index} className="flex items-center justify-center">
                 <img
                   src={icon.image}
                   alt={icon.alt}
-                  className="w-full h-full object-contain"
+                  className="object-contain"
+                  style={{ 
+                    width: 'min(20vw, 100px)',
+                    height: 'min(20vw, 100px)'
+                  }}
                 />
               </div>
             ))}
@@ -90,13 +79,17 @@ export function RoutineIntroScreen({
             <br />
             with a kind reflection
           </p>
-          <div className="flex space-x-4 sm:space-x-6">
+          <div className="flex space-x-3 sm:space-x-4">
             {eveningIcons.map((icon, index) => (
-              <div key={index} className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
+              <div key={index} className="flex items-center justify-center">
                 <img
                   src={icon.image}
                   alt={icon.alt}
-                  className="w-full h-full object-contain"
+                  className="object-contain"
+                  style={{ 
+                    width: 'min(20vw, 100px)',
+                    height: 'min(20vw, 100px)'
+                  }}
                 />
               </div>
             ))}
@@ -105,7 +98,7 @@ export function RoutineIntroScreen({
       </div>
       
       {/* I'm Ready Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#F5F0E8] z-50" 
+      <div className="fixed bottom-0 left-0 right-0 bg-transparent z-50" 
            style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
         <div className="p-5 sm:p-6">
           <div className="max-w-md mx-auto">

@@ -155,11 +155,10 @@ export function App() {
     } else if (currentScreen === 'duckjar') {
       performTransition('age');
     } else if (currentScreen === 'gender') {
-      performTransition('routineintro');
-
-
-    } else if (currentScreen === 'routineintro') {
       performTransition('quabbletools');
+
+
+
     } else if (currentScreen === 'quabbletools') {
       performTransition('whatdidyoutry');
     } else if (currentScreen === 'whatdidyoutry') {
@@ -385,7 +384,7 @@ export function App() {
     }
     if (currentScreen === 'routineintro') {
       return <TransitionWrapper show={!isTransitioning}>
-          <RoutineIntroScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <RoutineIntroScreen onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'focus') {
