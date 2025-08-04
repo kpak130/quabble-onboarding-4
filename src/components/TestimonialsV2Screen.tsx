@@ -39,9 +39,16 @@ export function TestimonialsV2Screen({
 
   const renderStars = () => {
     return (
-      <div className="flex space-x-1">
+      <div 
+        className="flex"
+        style={{ gap: 'min(1vw, 4px)' }}
+      >
         {[...Array(5)].map((_, index) => (
-          <span key={index} className="text-yellow-400 text-sm">★</span>
+          <span 
+            key={index} 
+            className="text-yellow-400"
+            style={{ fontSize: 'min(3.5vw, 16px)' }}
+          >★</span>
         ))}
       </div>
     );
@@ -57,8 +64,15 @@ export function TestimonialsV2Screen({
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Content Container - starts much lower */}
-      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '70vh' }}>
+      {/* Scrollable Content Container */}
+      <div 
+        className="flex flex-col items-center px-5 sm:px-6 overflow-y-auto"
+        style={{ 
+          height: '100vh',
+          paddingTop: '70vh',
+          paddingBottom: '10vh'
+        }}
+      >
         
         {/* Rating Section */}
         {/* <div className="flex flex-col items-center mb-8 sm:mb-12">
@@ -74,19 +88,33 @@ export function TestimonialsV2Screen({
         
         {/* Testimonials Container */}
         <div 
-          className="w-full max-w-sm space-y-4 overflow-y-auto"
-          style={{ 
-            height: '20vh',
-            paddingBottom: '1rem'
-          }}
+          className="w-full max-w-sm flex flex-col"
+          style={{ gap: 'min(4vw, 16px)' }}
         >
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="bg-white rounded-2xl p-4 shadow-lg">
+            <div 
+              key={index} 
+              className="bg-white shadow-lg"
+              style={{ 
+                padding: 'min(4vw, 16px)',
+                borderRadius: 'min(4vw, 16px)'
+              }}
+            >
               {renderStars()}
-              <p className="text-gray-800 text-sm font-normal leading-relaxed mt-2 mb-3">
+              <p 
+                className="text-gray-800 font-normal leading-relaxed"
+                style={{ 
+                  fontSize: 'min(3.5vw, 14px)',
+                  marginTop: 'min(2vw, 8px)',
+                  marginBottom: 'min(3vw, 12px)'
+                }}
+              >
                 {testimonial.text}
               </p>
-              <p className="text-gray-500 text-xs">
+              <p 
+                className="text-gray-500"
+                style={{ fontSize: 'min(3vw, 12px)' }}
+              >
                 by {testimonial.author}
               </p>
             </div>
@@ -121,23 +149,6 @@ export function TestimonialsV2Screen({
       .touch-target {
         min-height: 48px;
         min-width: 48px;
-      }
-      
-      @media (max-width: 375px) {
-        .text-3xl { font-size: 1.875rem; }
-        .text-lg { font-size: 1.125rem; }
-        .text-sm { font-size: 0.875rem; }
-        .text-xs { font-size: 0.75rem; }
-      }
-      
-      @media (max-height: 667px) {
-        .mb-8 { margin-bottom: 1.5rem; }
-        .mb-12 { margin-bottom: 2rem; }
-      }
-      
-      @media (min-width: 768px) {
-        .text-3xl { font-size: 2.25rem; }
-        .text-lg { font-size: 1.25rem; }
       }
     `}</style>
   </>;
