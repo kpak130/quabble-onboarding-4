@@ -88,7 +88,7 @@ export function SorryToHeartScreen({
       >
         <div
           className="w-full max-w-sm sm:max-w-md lg:max-w-lg"
-          style={{ height: '15vh' }}          /* Smaller image */
+          style={{ height: '20vh' }}          /* Slightly smaller image */
         >
           <img
             src="/images/sorry-to-hear-duck.png"
