@@ -28,10 +28,10 @@ export function RoutineIntroScreen({
 
   return <>
     <div className="flex flex-col w-full h-screen bg-[#F4DCC9] text-gray-800 relative overflow-hidden">
-      {/* Content Container - starts at 8% from top */}
-      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '8vh' }}>
+      {/* Content Container - starts at same position as QuabbleToolsScreen title */}
+      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
         {/* Progress dots */}
-        <div className="flex space-x-2 mb-8 sm:mb-12">
+        <div className="flex space-x-2 mb-8 sm:mb-12 mt-4">
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
