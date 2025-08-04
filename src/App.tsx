@@ -156,10 +156,9 @@ export function App() {
       performTransition('age');
     } else if (currentScreen === 'gender') {
       performTransition('routineintro');
-    } else if (currentScreen === 'therapist') {
-      performTransition('quabbletools');
+
     } else if (currentScreen === 'radar') {
-      performTransition('therapist');
+      performTransition('quabbletools');
     } else if (currentScreen === 'routineintro') {
       performTransition('radar');
     } else if (currentScreen === 'quabbletools') {
@@ -377,7 +376,7 @@ export function App() {
     }
     if (currentScreen === 'therapist') {
       return <TransitionWrapper show={!isTransitioning}>
-          <TherapistScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <TherapistScreen onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'radar') {
