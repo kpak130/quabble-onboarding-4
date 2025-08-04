@@ -14,24 +14,24 @@ export function QuabbleToolsScreen({
 }: QuabbleToolsScreenProps) {
 
   const tools = [
-    { image: '/images/quabble-tool-1.png', name: 'Mood Diary' },
+    { image: '/images/quabble-tool-1.png', name: 'Mood\nDiary' },
     { image: '/images/quabble-tool-2.png', name: 'Meditation' },
-    { image: '/images/quabble-tool-3.png', name: 'Bamboo Forest' },
-    { image: '/images/quabble-tool-4.png', name: '1min Breathing' },
-    { image: '/images/quabble-tool-5.png', name: 'Watermelon Tai Chi' },
-    { image: '/images/quabble-tool-6.png', name: 'Proud Dandelion' },
-    { image: '/images/quabble-tool-7.png', name: 'Gratitude Jar' },
-    { image: '/images/quabble-tool-8.png', name: 'Worry Box' },
-    { image: '/images/quabble-tool-9.png', name: 'Treasure Box' },
-    { image: '/images/quabble-tool-10.png', name: 'Safe Place' },
+    { image: '/images/quabble-tool-3.png', name: 'Bamboo\nForest' },
+    { image: '/images/quabble-tool-4.png', name: '1min\nBreathing' },
+    { image: '/images/quabble-tool-5.png', name: 'Watermelon\nTai Chi' },
+    { image: '/images/quabble-tool-6.png', name: 'Proud\nDandelion' },
+    { image: '/images/quabble-tool-7.png', name: 'Gratitude\nJar' },
+    { image: '/images/quabble-tool-8.png', name: 'Worry\nBox' },
+    { image: '/images/quabble-tool-9.png', name: 'Treasure\nBox' },
+    { image: '/images/quabble-tool-10.png', name: 'Safe\nPlace' },
     { image: '/images/quabble-tool-11.png', name: 'Moonlight' },
-    { image: '/images/quabble-tool-12.png', name: 'Outdoor Walk' },
+    { image: '/images/quabble-tool-12.png', name: 'Outdoor\nWalk' },
     { image: '/images/quabble-tool-13.png', name: '54321' },
-    { image: '/images/quabble-tool-14.png', name: 'Pleasant Activities' },
-    { image: '/images/quabble-tool-15.png', name: 'Thank You' },
-    { image: '/images/quabble-tool-16.png', name: 'Dear Self' },
-    { image: '/images/quabble-tool-17.png', name: 'Smart Goals' },
-    { image: '/images/quabble-tool-18.png', name: 'Mindful Eating' }
+    { image: '/images/quabble-tool-14.png', name: 'Pleasant\nActivities' },
+    { image: '/images/quabble-tool-15.png', name: 'Thank\nYou' },
+    { image: '/images/quabble-tool-16.png', name: 'Dear\nSelf' },
+    { image: '/images/quabble-tool-17.png', name: 'Smart\nGoals' },
+    { image: '/images/quabble-tool-18.png', name: 'Mindful\nEating' }
   ];
 
   useEffect(() => {
@@ -82,15 +82,15 @@ export function QuabbleToolsScreen({
         <div className="max-w-md mx-auto">
           <div className="grid grid-cols-4 gap-2 sm:gap-3">
             {tools.map((tool, index) => (
-              <div key={index} className="flex flex-col items-center">
+              <div key={index} className="flex flex-col items-center h-32">
                 <img
                   src={tool.image}
                   alt={tool.name}
                   className="w-20 h-20 object-contain mb-2"
                 />
                 <span 
-                  className="text-xs text-center leading-tight"
-                  style={{ color: '#7B7968' }}
+                  className="text-xs text-center leading-tight break-words pb-4"
+                  style={{ color: '#7B7968', lineHeight: '1.2', whiteSpace: 'pre-line' }}
                 >
                   {tool.name}
                 </span>
