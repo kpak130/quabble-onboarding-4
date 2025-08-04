@@ -56,8 +56,11 @@ export function QuabbleToolsScreen({
       </div>
       
       {/* Title and Subtitle */}
-      <div className="flex flex-col items-center justify-center mb-6 sm:mb-8 px-5 flex-shrink-0 mt-4">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-center leading-tight mb-3 sm:mb-4" style={{ color: '#4C4A3C' }}>
+      <div className="flex flex-col items-center justify-center mb-20 sm:mb-24 px-5 flex-shrink-0 mt-4">
+        <h1 className="font-medium text-center leading-tight mb-3 sm:mb-4" style={{ 
+          color: '#4C4A3C',
+          fontSize: 'min(6.5vw, 2.25rem)'
+        }}>
           Quabble has the right tools
           <br />
           for everyone

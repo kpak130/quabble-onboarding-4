@@ -25,8 +25,11 @@ export function TherapistScreen({
         </div>
         
         {/* Title and Subtitle */}
-        <div className="flex flex-col items-center justify-center mb-12 sm:mb-16 text-center max-w-sm">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-tight mb-4 sm:mb-6" style={{ color: '#4C4A3C' }}>
+        <div className="flex flex-col items-center justify-center mb-20 sm:mb-24 text-center max-w-sm">
+          <h1 className="font-medium leading-tight mb-4 sm:mb-6" style={{ 
+            color: '#4C4A3C',
+            fontSize: 'min(6.5vw, 2.25rem)'
+          }}>
             It's therapist-recommended
             <br />
             and backed by experts
