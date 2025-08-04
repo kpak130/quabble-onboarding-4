@@ -43,7 +43,7 @@ export function WeCanHelpScreen({
       <div className="flex-1 flex flex-col items-center justify-start px-6 sm:px-8 pt-4 sm:pt-6" style={{ paddingBottom: '9rem' }}>
         {/* Message Text */}
         <div className="text-center">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white">
             While professional care is essential, Quabble is here to offer support and walk alongside you in your mental health journey.
           </h1>
         </div>
