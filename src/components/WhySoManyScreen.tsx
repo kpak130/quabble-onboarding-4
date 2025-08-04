@@ -62,7 +62,7 @@ export function WhySoManyScreen({
           {/* Inner orange circle with text */}
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
-              <p className="text-white text-3xl sm:text-3xl font-medium leading-relaxed">
+              <p className="text-white font-medium leading-relaxed" style={{ fontSize: '1.7rem' }}>
                 So, why do so many<br />
                 people find Quabble<br />
                 so helpful?
