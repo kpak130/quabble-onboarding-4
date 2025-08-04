@@ -22,7 +22,7 @@ export function AreYouReadyScreen({
       <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
         
         {/* Duck Image */}
-        <div className="flex items-center justify-center mb-8 sm:mb-12">
+        <div className="flex items-center justify-center mb-8 sm:mb-12 mt-8 sm:mt-12">
           <img
             src="/images/are-you-ready-duck.png"
             alt="Are You Ready Duck"

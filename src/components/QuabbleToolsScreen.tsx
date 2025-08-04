@@ -2,15 +2,11 @@ import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface QuabbleToolsScreenProps {
-  onBack: () => void;
   onNext: () => void;
-  onSkip: () => void;
 }
 
 export function QuabbleToolsScreen({
-  onBack,
-  onNext,
-  onSkip
+  onNext
 }: QuabbleToolsScreenProps) {
 
   const tools = [
@@ -41,22 +37,19 @@ export function QuabbleToolsScreen({
 
   return <>
     <div className="flex flex-col w-full h-screen bg-[#D2E5D4] text-gray-800 relative overflow-hidden">
-      {/* Fixed Header */}
-      <div className="flex items-center justify-between pt-safe-top px-5 sm:px-6 flex-shrink-0" 
-           style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
-        <button className="p-3 touch-target" onClick={onBack} style={{ color: '#7B7968' }}>
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 sm:w-8 sm:h-8">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <div className="flex-1"></div>
-        <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
-          Skip
-        </button>
-      </div>
-      
-      {/* Title and Subtitle */}
-      <div className="flex flex-col items-center justify-center mb-10 sm:mb-14 px-5 flex-shrink-0 mt-4">
+      {/* Content Container - starts at same position as other screens */}
+      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
+        {/* Progress dots */}
+        <div className="flex space-x-2 mb-6 sm:mb-10 mt-6">
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-800"></div>
+        </div>
+        
+        {/* Title and Subtitle */}
+        <div className="flex flex-col items-center justify-center mb-10 sm:mb-14 flex-shrink-0">
         <h1 className="font-medium text-center leading-tight mb-3 sm:mb-4" style={{ 
           color: '#4C4A3C',
           fontSize: 'min(6.5vw, 2.25rem)'
@@ -98,6 +91,7 @@ export function QuabbleToolsScreen({
             ))}
           </div>
         </div>
+      </div>
       </div>
       
       {/* Next Button - matching FocusScreen layout */}

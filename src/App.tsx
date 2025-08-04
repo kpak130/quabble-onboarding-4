@@ -435,7 +435,7 @@ export function App() {
     }
     if (currentScreen === 'quabbletools') {
       return <TransitionWrapper show={!isTransitioning}>
-          <QuabbleToolsScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <QuabbleToolsScreen onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'therapist') {
