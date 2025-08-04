@@ -37,6 +37,7 @@ import { WhyQuabbleScreen } from './components/WhyQuabbleScreen';
 import { StatsScreen } from './components/StatsScreen';
 import { ImprovedProofScreen } from './components/ImprovedProofScreen';
 import { LetsFindOutScreen } from './components/LetsFindOutScreen';
+import { WhySoManyScreen } from './components/WhySoManyScreen';
 import { QuabbleToolsScreen } from './components/QuabbleToolsScreen';
 import { TherapistScreen } from './components/TherapistScreen';
 import { RadarScreen } from './components/RadarScreen';
@@ -46,7 +47,7 @@ import { AreYouReadyScreen } from './components/AreYouReadyScreen';
 import { AchivementScreen } from './components/AchivementScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'whysomany' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -115,7 +116,9 @@ export function App() {
     } else if (currentScreen === 'stats') {
       performTransition('improvedproof');
     } else if (currentScreen === 'improvedproof') {
-      performTransition('letsfindout');
+      performTransition('whysomany');
+    } else if (currentScreen === 'whysomany') {
+      performTransition('quabbletools');
     } else if (currentScreen === 'letsfindout') {
       performTransition('achievement');
     } else if (currentScreen === 'quabbletools') {
@@ -181,7 +184,9 @@ export function App() {
 
 
     } else if (currentScreen === 'quabbletools') {
-      performTransition('letsfindout');
+      performTransition('whysomany');
+    } else if (currentScreen === 'whysomany') {
+      performTransition('improvedproof');
     } else if (currentScreen === 'letsfindout') {
       performTransition('improvedproof');
     } else if (currentScreen === 'improvedproof') {
@@ -416,6 +421,11 @@ export function App() {
     if (currentScreen === 'improvedproof') {
       return <TransitionWrapper show={!isTransitioning}>
           <ImprovedProofScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'whysomany') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <WhySoManyScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'letsfindout') {
