@@ -57,16 +57,8 @@ export function TestimonialsV2Screen({
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Content Container - starts at 5% from top */}
-      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
-        {/* Progress dots */}
-        <div className="flex space-x-2 mb-8 sm:mb-12">
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-800"></div>
-        </div>
+      {/* Content Container - starts much lower */}
+      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '70vh' }}>
         
         {/* Rating Section */}
         {/* <div className="flex flex-col items-center mb-8 sm:mb-12">
@@ -82,9 +74,10 @@ export function TestimonialsV2Screen({
         
         {/* Testimonials Container */}
         <div 
-          className="flex-1 w-full max-w-sm space-y-4 overflow-y-auto"
+          className="w-full max-w-sm space-y-4 overflow-y-auto"
           style={{ 
-            paddingBottom: '8rem' // Space for fixed button
+            height: '20vh',
+            paddingBottom: '1rem'
           }}
         >
           {testimonials.map((testimonial, index) => (
