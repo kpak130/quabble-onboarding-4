@@ -180,8 +180,6 @@ export function App() {
 
 
 
-    } else if (currentScreen === 'achievement') {
-      performTransition('letsfindout');
     } else if (currentScreen === 'quabbletools') {
       performTransition('letsfindout');
     } else if (currentScreen === 'letsfindout') {
