@@ -25,7 +25,7 @@ export function TherapistScreen({
         </div>
         
         {/* Title and Subtitle */}
-        <div className="flex flex-col items-center justify-center mb-8 sm:mb-12 text-center max-w-sm">
+        <div className="flex flex-col items-center justify-center mb-12 sm:mb-16 text-center max-w-sm">
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium leading-tight mb-4 sm:mb-6" style={{ color: '#4C4A3C' }}>
             It's therapist-recommended
             <br />
@@ -41,8 +41,11 @@ export function TherapistScreen({
           <img
             src="/images/therapist-duck.png"
             alt="Therapist Duck"
-            className="max-w-xs w-full h-auto object-contain"
-            style={{ maxHeight: '40vh' }}
+            className="w-full h-auto object-contain"
+            style={{ 
+              maxWidth: 'min(95vw, 600px)',
+              maxHeight: 'min(65vh, 550px)'
+            }}
           />
         </div>
       </div>
