@@ -19,7 +19,7 @@ export function TherapistScreen({
   }, []); 
 
   return <>
-    <div className="flex flex-col w-full h-screen bg-[#F5F0E8] text-gray-800 relative overflow-hidden">
+    <div className="flex flex-col w-full h-screen bg-[#F2EBC0] text-gray-800 relative overflow-hidden">
       {/* Fixed Header */}
       <div className="flex items-center justify-between pt-safe-top px-5 sm:px-6 flex-shrink-0" 
            style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
@@ -66,7 +66,7 @@ export function TherapistScreen({
       </div>
       
       {/* Next Button */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#F5F0E8] z-50" 
+      <div className="fixed bottom-0 left-0 right-0 bg-[#F2EBC0] z-50" 
            style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
         <div className="p-5 sm:p-6">
           <div className="max-w-md mx-auto">

@@ -1,5 +1,5 @@
 type ScreenType = 
-  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'quabbletools' | 'therapist' | 'radar' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
+  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
@@ -24,6 +24,10 @@ const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   ],
   therapist: ['/images/therapist-duck.png'],
   radar: ['/images/radar.png'],
+  routineintro: [
+    '/images/routine-intro-1.png', '/images/routine-intro-2.png', '/images/routine-intro-3.png',
+    '/images/routine-intro-4.png', '/images/routine-intro-5.png', '/images/routine-intro-6.png'
+  ],
   gender: [],
   focus: ['/images/4-duck.png'],
   confirmation: [],
