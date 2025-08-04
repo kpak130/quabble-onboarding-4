@@ -34,6 +34,9 @@ import { WeCanHelpScreen } from './components/WeCanHelpScreen';
 import { WhatDidYouTryScreen } from './components/WhatDidYouTryScreen';
 import { WhatFeltMissingScreen } from './components/WhatFeltMissingScreen';
 import { WhyQuabbleScreen } from './components/WhyQuabbleScreen';
+import { StatsScreen } from './components/StatsScreen';
+import { ImprovedProofScreen } from './components/ImprovedProofScreen';
+import { LetsFindOutScreen } from './components/LetsFindOutScreen';
 import { QuabbleToolsScreen } from './components/QuabbleToolsScreen';
 import { TherapistScreen } from './components/TherapistScreen';
 import { RadarScreen } from './components/RadarScreen';
@@ -43,7 +46,7 @@ import { AreYouReadyScreen } from './components/AreYouReadyScreen';
 import { AchivementScreen } from './components/AchivementScreen';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -108,7 +111,13 @@ export function App() {
     } else if (currentScreen === 'whatfeltmissing') {
       performTransition('whyquabble');
     } else if (currentScreen === 'whyquabble') {
-      performTransition('quabbletools');
+      performTransition('stats');
+    } else if (currentScreen === 'stats') {
+      performTransition('improvedproof');
+    } else if (currentScreen === 'improvedproof') {
+      performTransition('letsfindout');
+    } else if (currentScreen === 'letsfindout') {
+      performTransition('achievement');
     } else if (currentScreen === 'quabbletools') {
       performTransition('therapist');
     } else if (currentScreen === 'therapist') {
@@ -171,7 +180,15 @@ export function App() {
 
 
 
+    } else if (currentScreen === 'achievement') {
+      performTransition('letsfindout');
     } else if (currentScreen === 'quabbletools') {
+      performTransition('letsfindout');
+    } else if (currentScreen === 'letsfindout') {
+      performTransition('improvedproof');
+    } else if (currentScreen === 'improvedproof') {
+      performTransition('stats');
+    } else if (currentScreen === 'stats') {
       performTransition('whyquabble');
     } else if (currentScreen === 'whyquabble') {
       performTransition('whatfeltmissing');
@@ -391,6 +408,21 @@ export function App() {
     if (currentScreen === 'whyquabble') {
       return <TransitionWrapper show={!isTransitioning}>
           <WhyQuabbleScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'stats') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <StatsScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'improvedproof') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <ImprovedProofScreen onBack={handleBack} onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'letsfindout') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <LetsFindOutScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'quabbletools') {
