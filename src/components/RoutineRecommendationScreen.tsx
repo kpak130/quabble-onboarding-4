@@ -123,7 +123,10 @@ export function RoutineRecommendationScreen({
                 height: '7.5vh', // Slightly bigger button height (same as option buttons)
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
-              onClick={onNext}
+              onClick={() => {
+                sendToFlutter('{"event":"onboarding-complete"}');
+                onNext();
+              }}
             >
               Okay
             </button>
