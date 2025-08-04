@@ -80,13 +80,13 @@ export function QuabbleToolsScreen({
         }}
       >
         <div className="max-w-md mx-auto">
-          <div className="grid grid-cols-4 gap-2 sm:gap-3">
+          <div className="grid grid-cols-4 gap-1 sm:gap-2">
             {tools.map((tool, index) => (
-              <div key={index} className="flex flex-col items-center h-32">
+              <div key={index} className="flex flex-col items-center h-36">
                 <img
                   src={tool.image}
                   alt={tool.name}
-                  className="w-20 h-20 object-contain mb-2"
+                  className="w-24 h-24 object-contain mb-2"
                 />
                 <span 
                   className="text-xs text-center leading-tight break-words pb-4"
