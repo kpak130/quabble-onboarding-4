@@ -23,6 +23,7 @@ export function RadarScreen({
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
           <div className="w-2 h-2 rounded-full bg-gray-800"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
         </div>
         
         {/* Title and Subtitle */}

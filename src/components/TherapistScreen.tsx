@@ -22,6 +22,8 @@ export function TherapistScreen({
         <div className="flex space-x-2 mb-6 sm:mb-10 mt-6">
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
           <div className="w-2 h-2 rounded-full bg-gray-800"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
         </div>
         
         {/* Title and Subtitle */}

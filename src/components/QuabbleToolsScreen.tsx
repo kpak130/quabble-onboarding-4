@@ -41,11 +41,10 @@ export function QuabbleToolsScreen({
       <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
         {/* Progress dots */}
         <div className="flex space-x-2 mb-6 sm:mb-10 mt-6">
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
           <div className="w-2 h-2 rounded-full bg-gray-800"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
+          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
         </div>
         
         {/* Title and Subtitle */}
