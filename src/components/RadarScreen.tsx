@@ -16,8 +16,8 @@ export function RadarScreen({
 
   return <>
     <div className="flex flex-col w-full h-screen bg-[#F5F0E8] text-gray-800 relative overflow-hidden">
-      {/* Content Container - starts at 5% from top */}
-      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
+      {/* Content Container - starts at 8% from top */}
+      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '8vh' }}>
         {/* Progress dots */}
         <div className="flex space-x-2 mb-8 sm:mb-12">
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
@@ -26,7 +26,7 @@ export function RadarScreen({
         </div>
         
         {/* Title and Subtitle */}
-        <div className="flex flex-col items-center justify-center mb-20 sm:mb-24 text-center max-w-sm">
+        <div className="flex flex-col items-center justify-center mb-8 sm:mb-12 text-center max-w-sm">
           <h1 className="font-medium leading-tight mb-4 sm:mb-6" style={{ 
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
@@ -47,8 +47,8 @@ export function RadarScreen({
             alt="Wellness Radar Chart"
             className="w-full h-auto object-contain mb-6"
             style={{ 
-              maxWidth: 'min(85vw, 500px)',
-              maxHeight: 'min(55vh, 450px)'
+              maxWidth: 'min(75vw, 400px)',
+              maxHeight: 'min(45vh, 350px)'
             }}
           />
           <p className="text-base sm:text-lg font-normal text-center leading-relaxed" style={{ color: '#7B7968' }}>

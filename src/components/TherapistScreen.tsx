@@ -16,8 +16,8 @@ export function TherapistScreen({
 
   return <>
     <div className="flex flex-col w-full h-screen bg-[#F2EBC0] text-gray-800 relative overflow-hidden">
-      {/* Content Container - starts at 5% from top */}
-      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
+      {/* Content Container - starts at 8% from top */}
+      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '8vh' }}>
         {/* Progress dots */}
         <div className="flex space-x-2 mb-8 sm:mb-12">
           <div className="w-2 h-2 rounded-full bg-gray-400"></div>
