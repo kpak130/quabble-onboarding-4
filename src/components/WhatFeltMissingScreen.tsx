@@ -68,7 +68,7 @@ export function WhatFeltMissingScreen({
       
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
           If they didn't quite work, what
           <br />
           felt missing?

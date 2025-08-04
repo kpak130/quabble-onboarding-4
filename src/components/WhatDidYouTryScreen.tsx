@@ -66,7 +66,7 @@ export function WhatDidYouTryScreen({
       
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
           What have you tried before to
           <br />
           support your mental health?
@@ -80,13 +80,13 @@ export function WhatDidYouTryScreen({
       <div 
         className="flex justify-center px-5 flex-shrink-0"
         style={{ 
-          paddingTop: '0.25vh', /* 1/400 of viewport height */
+          paddingTop: '0', /* No padding above */
           paddingBottom: '2vh'  /* 1/50 of viewport height */
         }}
       >
         <div
-          className="w-full max-w-sm sm:max-w-md lg:max-w-lg"
-          style={{ height: '15vh' }}          /* Smaller image */
+          className="w-full max-w-md sm:max-w-lg lg:max-w-xl"
+          style={{ height: '18vh' }}          /* Slightly bigger image */
         >
           <img
             src="/images/1-duck.png"

@@ -42,8 +42,8 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
             alt="98% Statistics"
             className="w-full h-auto object-contain"
             style={{ 
-              maxWidth: 'min(120vw, 900px)',
-              maxHeight: 'min(95vh, 850px)'
+              maxWidth: 'min(70vw, 400px)',
+              maxHeight: 'min(50vh, 350px)'
             }}
           />
         </div>
