@@ -3,7 +3,7 @@ import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface AskFeelingV2ScreenProps {
   onBack: () => void;
-  onNext: () => void;
+  onNext: (feelingChoice: 'difficult_recently' | 'ongoing_challenges' | 'doing_okay') => void;
   onSkip: () => void;
 }
 
@@ -139,7 +139,10 @@ export function AskFeelingV2Screen({
                       "feelings": feelings
                     }
                   }));
-                  onNext();
+                  
+                  if (systemName && (systemName === 'difficult_recently' || systemName === 'ongoing_challenges' || systemName === 'doing_okay')) {
+                    onNext(systemName);
+                  }
                 }}
               >
                 Next

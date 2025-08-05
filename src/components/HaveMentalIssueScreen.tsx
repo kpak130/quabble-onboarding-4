@@ -3,7 +3,7 @@ import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface HaveMentalIssueScreenProps {
   onBack: () => void;
-  onNext: () => void;
+  onNext: (hasIssue: 'yes' | 'no') => void;
   onSkip: () => void;
 }
 
@@ -137,7 +137,10 @@ export function HaveMentalIssueScreen({
                     "mentalHealthChallenges": mentalHealthChallenges
                   }
                 }));
-                onNext();
+                
+                if (systemName && (systemName === 'yes' || systemName === 'no')) {
+                  onNext(systemName);
+                }
               }}
             >
               Next

@@ -52,6 +52,9 @@ export function App() {
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [nextScreen, setNextScreen] = useState<typeof currentScreen | null>(null);
+  
+  // Track user's feeling choice for conditional navigation
+  const [userFeelingChoice, setUserFeelingChoice] = useState<'difficult_recently' | 'ongoing_challenges' | 'doing_okay' | null>(null);
 
   // Check URL parameters on component mount and prefetch critical images  
   useEffect(() => {
@@ -80,6 +83,29 @@ export function App() {
       setIsTransitioning(false);
     }, 300);
   };
+
+  // Handle feeling selection and conditional navigation
+  const handleFeelingNext = (feelingChoice: 'difficult_recently' | 'ongoing_challenges' | 'doing_okay') => {
+    setUserFeelingChoice(feelingChoice);
+    
+    if (feelingChoice === 'difficult_recently') {
+      performTransition('sorrytoheart');
+    } else if (feelingChoice === 'ongoing_challenges') {
+      performTransition('whatdealingwith');
+    } else if (feelingChoice === 'doing_okay') {
+      performTransition('wecanhelp');
+    }
+  };
+
+  // Handle mental issue screen response
+  const handleMentalIssueNext = (hasIssue: 'yes' | 'no') => {
+    if (hasIssue === 'yes') {
+      performTransition('wecanhelp');
+    } else {
+      // If No, continue with normal flow (what comes after havementalissue normally)
+      performTransition('whatdealingwith');
+    }
+  };
   const handleNext = () => {
     if (currentScreen === 'referral') {
       performTransition('age');
@@ -97,16 +123,20 @@ export function App() {
       performTransition('mindquote');
     } else if (currentScreen === 'mindquote') {
       performTransition('askfeelingv2');
-    } else if (currentScreen === 'askfeelingv2') {
-      performTransition('sorrytoheart');
     } else if (currentScreen === 'sorrytoheart') {
       performTransition('havementalissue');
-    } else if (currentScreen === 'havementalissue') {
-      performTransition('whatdealingwith');
     } else if (currentScreen === 'whatdealingwith') {
       performTransition('wecanhelp');
     } else if (currentScreen === 'wecanhelp') {
-      performTransition('whatdidyoutry');
+      // Conditional flow based on user's feeling choice
+      if (userFeelingChoice === 'ongoing_challenges') {
+        performTransition('whatdidyoutry');
+      } else if (userFeelingChoice === 'doing_okay' || userFeelingChoice === 'difficult_recently') {
+        performTransition('whyquabble');
+      } else {
+        // Default fallback
+        performTransition('whatdidyoutry');
+      }
     } else if (currentScreen === 'whatdidyoutry') {
       performTransition('whatfeltmissing');
     } else if (currentScreen === 'whatfeltmissing') {
@@ -200,9 +230,19 @@ export function App() {
     } else if (currentScreen === 'whatdidyoutry') {
       performTransition('wecanhelp');
     } else if (currentScreen === 'wecanhelp') {
-      performTransition('whatdealingwith');
+      // Conditional back navigation based on user's feeling choice
+      if (userFeelingChoice === 'ongoing_challenges') {
+        performTransition('whatdealingwith');
+      } else if (userFeelingChoice === 'difficult_recently') {
+        performTransition('havementalissue');
+      } else if (userFeelingChoice === 'doing_okay') {
+        performTransition('askfeelingv2');
+      } else {
+        // Default fallback
+        performTransition('askfeelingv2');
+      }
     } else if (currentScreen === 'whatdealingwith') {
-      performTransition('havementalissue');
+      performTransition('askfeelingv2');
     } else if (currentScreen === 'havementalissue') {
       performTransition('sorrytoheart');
     } else if (currentScreen === 'sorrytoheart') {
@@ -375,7 +415,7 @@ export function App() {
     }
     if (currentScreen === 'askfeelingv2') {
       return <TransitionWrapper show={!isTransitioning}>
-          <AskFeelingV2Screen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <AskFeelingV2Screen onBack={handleBack} onNext={handleFeelingNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'sorrytoheart') {
@@ -385,7 +425,7 @@ export function App() {
     }
     if (currentScreen === 'havementalissue') {
       return <TransitionWrapper show={!isTransitioning}>
-          <HaveMentalIssueScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <HaveMentalIssueScreen onBack={handleBack} onNext={handleMentalIssueNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'whatdealingwith') {
