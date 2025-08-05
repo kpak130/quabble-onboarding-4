@@ -2,10 +2,12 @@ import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface RadarScreenProps {
+  onBack: () => void;
   onNext: () => void;
 }
 
 export function RadarScreen({
+  onBack,
   onNext
 }: RadarScreenProps) {
 
@@ -16,15 +18,19 @@ export function RadarScreen({
 
   return <>
     <div className="flex flex-col w-full h-screen bg-[#F5F0E8] text-gray-800 relative overflow-hidden">
-      {/* Content Container - starts at same position as QuabbleToolsScreen title */}
-      <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
-        {/* Progress dots */}
-        <div className="flex space-x-2 mb-6 sm:mb-10 mt-6">
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-800"></div>
-          <div className="w-2 h-2 rounded-full bg-gray-400"></div>
-        </div>
+      {/* Fixed Header - Back button */}
+      <div className="flex items-center justify-between pt-safe-top px-5 sm:px-6 flex-shrink-0" 
+           style={{ paddingTop: 'max(3.5rem, env(safe-area-inset-top))' }}>
+        <button className="p-3 touch-target" onClick={onBack} style={{ color: '#7B7968' }}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-7 h-7 sm:w-8 sm:h-8">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <div className="flex-1"></div>
+      </div>
+      
+      {/* Content Container */}
+      <div className="flex flex-col items-center px-5 sm:px-6 mt-6">
         
         {/* Title and Subtitle */}
         <div className="flex flex-col items-center justify-center mb-8 sm:mb-12 text-center max-w-sm">

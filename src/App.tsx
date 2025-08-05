@@ -475,22 +475,22 @@ export function App() {
     }
     if (currentScreen === 'quabbletools') {
       return <TransitionWrapper show={!isTransitioning}>
-          <QuabbleToolsScreen onNext={handleNext} />
+          <QuabbleToolsScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'therapist') {
       return <TransitionWrapper show={!isTransitioning}>
-          <TherapistScreen onNext={handleNext} />
+          <TherapistScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'radar') {
       return <TransitionWrapper show={!isTransitioning}>
-          <RadarScreen onNext={handleNext} />
+          <RadarScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'routineintro') {
       return <TransitionWrapper show={!isTransitioning}>
-          <RoutineIntroScreen onNext={handleNext} />
+          <RoutineIntroScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'testimonialsv2') {
