@@ -125,7 +125,6 @@ export function RoutineRecommendationScreen({
               }}
               onClick={() => {
                 sendToFlutter('{"event":"onboarding-complete"}');
-                onNext();
               }}
             >
               Okay
