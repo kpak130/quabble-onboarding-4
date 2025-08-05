@@ -120,36 +120,38 @@ export function AchivementScreen({
         </div>
       </div>
       
-      {/* Next Button - longer width */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
-           style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
-          <div className="max-w-md mx-auto">
-            <button
-              className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
-              style={{ 
-                height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                fontSize: '2.5vh' // 1/40 of viewport height
-              }}
-              onClick={() => {
-                // Get system name for selected focus
-                const systemName = selectedFocus ? toggleSystemNames[selectedFocus] : null;
-                const focuses = systemName ? [systemName] : [];
-                
-                sendToFlutter(JSON.stringify({
-                  "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
-                  "eventProperties": {
-                    "focuses": focuses
-                  }
-                }));
-                onNext();
-              }}
-            >
-              Next
-            </button>
+      {/* Next Button - only show when focus is selected */}
+      {selectedFocus && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+             style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+          <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
+            <div className="max-w-md mx-auto">
+              <button
+                className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
+                style={{ 
+                  height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                  fontSize: '2.5vh' // 1/40 of viewport height
+                }}
+                onClick={() => {
+                  // Get system name for selected focus
+                  const systemName = selectedFocus ? toggleSystemNames[selectedFocus] : null;
+                  const focuses = systemName ? [systemName] : [];
+                  
+                  sendToFlutter(JSON.stringify({
+                    "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
+                    "eventProperties": {
+                      "focuses": focuses
+                    }
+                  }));
+                  onNext();
+                }}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
     
     <style>{`
