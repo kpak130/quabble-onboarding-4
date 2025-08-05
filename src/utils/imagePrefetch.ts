@@ -122,7 +122,11 @@ export function prefetchAllCriticalImages(): void {
     '/images/11-graph.png',
     '/images/14-duck.png',
     '/images/15-background.png',
-    '/images/22-background.png'
+    '/images/22-background.png',
+    // Add the slow-loading background images from the new onboarding flow
+    '/images/mind-quote-background.png',
+    '/images/we-can-help-background.png',
+    '/images/why-quabble-duck.png'
   ];
 
   criticalImages.forEach(imageSrc => {
