@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 interface AchievementScreenProps {
   onBack: () => void;
-  onNext: () => void;
+  onNext: (achievementSelection: string) => void;
   onSkip: () => void;
 }
 export function AchivementScreen({
@@ -143,7 +143,7 @@ export function AchivementScreen({
                       "focuses": focuses
                     }
                   }));
-                  onNext();
+                  onNext(selectedFocus || '');
                 }}
               >
                 Next

@@ -5,12 +5,16 @@ interface WeCanHelpScreenProps {
   onBack: () => void;
   onNext: () => void;
   onSkip: () => void;
+  achievementSelection?: string | null;
+  cameFromYesPath?: boolean;
 }
 
 export function WeCanHelpScreen({
   onBack,
   onNext,
-  onSkip
+  onSkip,
+  achievementSelection,
+  cameFromYesPath
 }: WeCanHelpScreenProps) {
 
   useEffect(() => {
@@ -44,7 +48,11 @@ export function WeCanHelpScreen({
         {/* Message Text */}
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white">
-            While professional care is essential, Quabble is here to offer support and walk alongside you in your mental health journey.
+            {cameFromYesPath && achievementSelection ? (
+              `We're here to help you through this tough time, and "${achievementSelection.toLowerCase()}" is something you can achieve with us.`
+            ) : (
+              "While professional care is essential, Quabble is here to offer support and walk alongside you in your mental health journey."
+            )}
           </h1>
         </div>
       </div>

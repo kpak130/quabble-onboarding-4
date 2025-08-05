@@ -55,6 +55,12 @@ export function App() {
   
   // Track user's feeling choice for conditional navigation
   const [userFeelingChoice, setUserFeelingChoice] = useState<'difficult_recently' | 'ongoing_challenges' | 'doing_okay' | null>(null);
+  
+  // Track user's achievement selection
+  const [userAchievementSelection, setUserAchievementSelection] = useState<string | null>(null);
+  
+  // Track if user came from "Yes" path on mental health challenges
+  const [cameFromYesPath, setCameFromYesPath] = useState<boolean>(false);
 
   // Check URL parameters on component mount and prefetch critical images  
   useEffect(() => {
@@ -93,6 +99,7 @@ export function App() {
     } else if (feelingChoice === 'ongoing_challenges') {
       performTransition('whatdealingwith');
     } else if (feelingChoice === 'doing_okay') {
+      setCameFromYesPath(false);
       performTransition('wecanhelp');
     }
   };
@@ -100,12 +107,21 @@ export function App() {
   // Handle mental issue screen response
   const handleMentalIssueNext = (hasIssue: 'yes' | 'no') => {
     if (hasIssue === 'yes') {
+      setCameFromYesPath(true);
       performTransition('wecanhelp');
     } else {
+      setCameFromYesPath(false);
       // If No, continue with normal flow (what comes after havementalissue normally)
       performTransition('whatdealingwith');
     }
   };
+
+  // Handle achievement screen response
+  const handleAchievementNext = (achievementSelection: string) => {
+    setUserAchievementSelection(achievementSelection);
+    performTransition('mindquote');
+  };
+
   const handleNext = () => {
     if (currentScreen === 'referral') {
       performTransition('age');
@@ -126,6 +142,7 @@ export function App() {
     } else if (currentScreen === 'sorrytoheart') {
       performTransition('havementalissue');
     } else if (currentScreen === 'whatdealingwith') {
+      setCameFromYesPath(false);
       performTransition('wecanhelp');
     } else if (currentScreen === 'wecanhelp') {
       // Conditional flow based on user's feeling choice
@@ -411,7 +428,7 @@ export function App() {
     }
     if (currentScreen === 'achievement') {
       return <TransitionWrapper show={!isTransitioning}>
-          <AchivementScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <AchivementScreen onBack={handleBack} onNext={handleAchievementNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'mindquote') {
@@ -441,7 +458,7 @@ export function App() {
     }
     if (currentScreen === 'wecanhelp') {
       return <TransitionWrapper show={!isTransitioning}>
-          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} achievementSelection={userAchievementSelection} cameFromYesPath={cameFromYesPath} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'whatdidyoutry') {
