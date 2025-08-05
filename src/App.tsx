@@ -215,6 +215,12 @@ export function App() {
 
     } else if (currentScreen === 'quabbletools') {
       performTransition('whysomany');
+    } else if (currentScreen === 'therapist') {
+      performTransition('quabbletools');
+    } else if (currentScreen === 'radar') {
+      performTransition('therapist');
+    } else if (currentScreen === 'routineintro') {
+      performTransition('radar');
     } else if (currentScreen === 'whysomany') {
       performTransition('improvedproof');
     } else if (currentScreen === 'letsfindout') {
