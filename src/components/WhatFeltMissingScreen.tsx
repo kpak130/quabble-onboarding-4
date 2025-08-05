@@ -132,35 +132,37 @@ export function WhatFeltMissingScreen({
         </div>
       </div>
       
-      {/* Next Button - longer width */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
-           style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
-          <div className="max-w-md mx-auto">
-            <button
-              className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
-              style={{ 
-                height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                fontSize: '2.5vh' // 1/40 of viewport height
-              }}
-              onClick={() => {
-                // Get system names for selected options
-                const systemNames = selectedOptions.map(option => toggleSystemNames[option]);
-                
-                sendToFlutter(JSON.stringify({
-                  "event": "v2_5_7_onboarding_A::onboarding:what_felt_missing:click_next",
-                  "eventProperties": {
-                    "missing_aspects": systemNames
-                  }
-                }));
-                onNext();
-              }}
-            >
-              Next
-            </button>
+      {/* Next Button - only show when at least one option is selected */}
+      {selectedOptions.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+             style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+          <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
+            <div className="max-w-md mx-auto">
+              <button
+                className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
+                style={{ 
+                  height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                  fontSize: '2.5vh' // 1/40 of viewport height
+                }}
+                onClick={() => {
+                  // Get system names for selected options
+                  const systemNames = selectedOptions.map(option => toggleSystemNames[option]);
+                  
+                  sendToFlutter(JSON.stringify({
+                    "event": "v2_5_7_onboarding_A::onboarding:what_felt_missing:click_next",
+                    "eventProperties": {
+                      "missing_aspects": systemNames
+                    }
+                  }));
+                  onNext();
+                }}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
     
     <style>{`
