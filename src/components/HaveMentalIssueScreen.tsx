@@ -115,39 +115,41 @@ export function HaveMentalIssueScreen({
         </div>
       </div>
       
-      {/* Next Button - longer width */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
-           style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
-          <div className="max-w-md mx-auto">
-            <button
-              className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
-              style={{ 
-                height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                fontSize: '2.5vh' // 1/40 of viewport height
-              }}
-              onClick={() => {
-                // Get system name for selected option
-                const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
-                const mentalHealthChallenges = systemName ? [systemName] : [];
-                
-                sendToFlutter(JSON.stringify({
-                  "event": "v2_5_7_onboarding_A::onboarding:mental_health_challenges:click_next",
-                  "eventProperties": {
-                    "mentalHealthChallenges": mentalHealthChallenges
+      {/* Next Button - only show when option is selected */}
+      {selectedOption && (
+        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+             style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+          <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
+            <div className="max-w-md mx-auto">
+              <button
+                className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
+                style={{ 
+                  height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                  fontSize: '2.5vh' // 1/40 of viewport height
+                }}
+                onClick={() => {
+                  // Get system name for selected option
+                  const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                  const mentalHealthChallenges = systemName ? [systemName] : [];
+                  
+                  sendToFlutter(JSON.stringify({
+                    "event": "v2_5_7_onboarding_A::onboarding:mental_health_challenges:click_next",
+                    "eventProperties": {
+                      "mentalHealthChallenges": mentalHealthChallenges
+                    }
+                  }));
+                  
+                  if (systemName && (systemName === 'yes' || systemName === 'no')) {
+                    onNext(systemName);
                   }
-                }));
-                
-                if (systemName && (systemName === 'yes' || systemName === 'no')) {
-                  onNext(systemName);
-                }
-              }}
-            >
-              Next
-            </button>
+                }}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
     
     <style>{`

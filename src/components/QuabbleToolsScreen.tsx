@@ -96,13 +96,13 @@ export function QuabbleToolsScreen({
       </div>
       </div>
       
-      {/* Next Button - matching FocusScreen layout */}
+      {/* Next Button - matching WhereDidYouHearAboutUs layout */}
       <div className="fixed bottom-0 left-0 right-0 bg-[#D2E5D4] z-50" 
            style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-        <div className="p-5 sm:p-6">
+        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
           <div className="max-w-md mx-auto">
             <button
-              className="w-4/5 mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
+              className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
               style={{ 
                 height: '7.5vh', // Slightly bigger button height (same as option buttons)
                 fontSize: '2.5vh' // 1/40 of viewport height

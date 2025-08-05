@@ -45,14 +45,14 @@ export function AreYouReadyScreen({
         </div>
       </div>
       
-      {/* Buttons Container */}
+      {/* Buttons Container - Yes button matching WhereDidYouHearAboutUs layout */}
       <div className="fixed bottom-0 left-0 right-0 bg-transparent z-50" 
            style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-        <div className="p-5 sm:p-6">
+        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
           <div className="max-w-md mx-auto flex flex-col items-center space-y-4">
             {/* Yes Button */}
             <button
-              className="w-4/5 mx-auto block px-7 rounded-full text-white text-center font-normal bg-orange-400 hover:bg-orange-500 transition-colors shadow-lg touch-target"
+              className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-orange-400 hover:bg-orange-500 transition-colors shadow-lg touch-target"
               style={{ 
                 height: '7.5vh',
                 fontSize: '2.5vh',
