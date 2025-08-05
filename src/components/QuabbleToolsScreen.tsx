@@ -71,7 +71,9 @@ export function QuabbleToolsScreen({
             className="grid grid-cols-4 gap-1 sm:gap-2 overflow-y-auto"
             style={{ 
               height: 'calc(100vh - 20rem)', // Fixed height for scrollable area
-              paddingBottom: '5rem' // More space at bottom of scroll area
+              paddingBottom: '5rem', // More space at bottom of scroll area
+              scrollbarWidth: 'none', // Firefox
+              msOverflowStyle: 'none' // IE and Edge
             }}
           >
             {tools.map((tool, index) => (
@@ -121,6 +123,10 @@ export function QuabbleToolsScreen({
       .touch-target {
         min-height: 48px;
         min-width: 48px;
+      }
+      
+      .overflow-y-auto::-webkit-scrollbar {
+        display: none;
       }
       
       @media (max-width: 375px) {
