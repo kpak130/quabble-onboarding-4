@@ -127,7 +127,8 @@ export function prefetchAllCriticalImages(): void {
     '/images/mind-quote-background.png',
     '/images/we-can-help-background.png',
     '/images/why-quabble-duck.png',
-    '/images/improved-proof.png'
+    '/images/improved-proof.png',
+    '/images/testimonial-background.png',
   ];
 
   criticalImages.forEach(imageSrc => {
