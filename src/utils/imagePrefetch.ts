@@ -126,7 +126,8 @@ export function prefetchAllCriticalImages(): void {
     // Add the slow-loading background images from the new onboarding flow
     '/images/mind-quote-background.png',
     '/images/we-can-help-background.png',
-    '/images/why-quabble-duck.png'
+    '/images/why-quabble-duck.png',
+    '/images/improved-proof.png'
   ];
 
   criticalImages.forEach(imageSrc => {
