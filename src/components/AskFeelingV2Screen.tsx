@@ -120,7 +120,7 @@ export function AskFeelingV2Screen({
         
         {/* Next Button - only show when feeling is selected */}
         {selectedFeeling && (
-          <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+          <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50 slide-up-animation" 
                style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
             <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
               <div className="max-w-md mx-auto">
@@ -156,3 +156,25 @@ export function AskFeelingV2Screen({
     </>
   );
 }
+
+<style>{`
+  .slide-up-animation {
+    animation: slideUpFromBottom 0.2s ease-out forwards;
+  }
+  
+  @keyframes slideUpFromBottom {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .touch-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+`}</style>
