@@ -76,7 +76,8 @@ export function AreYouReadyScreen({
               }}
               onClick={() => {
                 sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:are_you_ready:click_maybe_later"}');
-                onMaybeLater();
+                sendToFlutter('{"event":"onboarding-complete"}');
+                // Don't call onMaybeLater() - just fire the event and stay on this screen
               }}
             >
               Maybe later
