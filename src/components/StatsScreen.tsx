@@ -14,7 +14,7 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
   return (
     <div className="flex flex-col w-full h-screen bg-[#F5F0E8] text-gray-800 relative overflow-hidden">
       <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
-        <div className="flex items-center justify-between w-full mb-8 sm:mb-12">
+        <div className="flex items-center justify-between w-full mb-12 sm:mb-16">
           <button className="p-2 text-gray-800" onClick={onBack}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
