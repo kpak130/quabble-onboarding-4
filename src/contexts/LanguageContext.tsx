@@ -368,7 +368,14 @@ function getTranslations() {
       "achievement.improveRelationships": "Improve relationships",
       "achievement.betterSleep": "Sleep better",
       "achievement.moreConfident": "Be more confident",
-      "achievement.other": "Other"
+      "achievement.other": "Other",
+      "achievement.titleQuestion": "What do you want to\nachieve with us?",
+      "achievement.takeCare": "Take care of my mental health",
+      "achievement.managingStress": "Managing daily stress",
+      "achievement.positiveMindset": "Cultivating a positive mindset",
+      "achievement.boostingSelfLove": "Boosting self-love",
+      "achievement.connectingOthers": "Connecting with others",
+      "achievement.improvingProductivity": "Improving productivity"
     },
     
     kr: {
@@ -487,6 +494,13 @@ function getTranslations() {
       "achievement.betterSleep": "더 나은 수면",
       "achievement.moreConfident": "더 자신감 있기", 
       "achievement.other": "기타",
+      "achievement.titleQuestion": "저희와 함께\n무엇을 이루고 싶으신가요?",
+      "achievement.takeCare": "정신건강 관리하기",
+      "achievement.managingStress": "일상 스트레스 관리하기",
+      "achievement.positiveMindset": "긍정적인 마음가짐 기르기",
+      "achievement.boostingSelfLove": "자기사랑 키우기",
+      "achievement.connectingOthers": "다른 사람들과 소통하기",
+      "achievement.improvingProductivity": "생산성 향상시키기",
       
       // Let's Find Out Screen
       "letsFindOut.message": "환영합니다!\n저희가 어떻게\n도움을 드릴 수 있는지 알아보겠습니다"
@@ -608,6 +622,13 @@ function getTranslations() {
       "achievement.betterSleep": "より良い睡眠",
       "achievement.moreConfident": "より自信を持つ",
       "achievement.other": "その他",
+      "achievement.titleQuestion": "私たちと一緒に\n何を達成したいですか？",
+      "achievement.takeCare": "メンタルヘルスのケア",
+      "achievement.managingStress": "日常のストレス管理",
+      "achievement.positiveMindset": "ポジティブなマインドセット",
+      "achievement.boostingSelfLove": "自己愛の向上",
+      "achievement.connectingOthers": "他者とのつながり",
+      "achievement.improvingProductivity": "生産性の向上",
       
       // Let's Find Out Screen
       "letsFindOut.message": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう"

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 interface AchievementScreenProps {
   onBack: () => void;
   onNext: (achievementSelection: string) => void;
@@ -10,24 +11,26 @@ export function AchivementScreen({
   onNext,
   onSkip
 }: AchievementScreenProps) {
+  const { t } = useLanguage();
   const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
+  
   const focusOptions = [
-    'Take care of my mental health',
-    'Managing daily stress',
-    'Cultivating a positive mindset',
-    'Boosting self-love',
-    'Connecting with others',
-    'Improving productivity',
+    t('achievement.takeCare'),
+    t('achievement.managingStress'),
+    t('achievement.positiveMindset'),
+    t('achievement.boostingSelfLove'),
+    t('achievement.connectingOthers'),
+    t('achievement.improvingProductivity'),
   ];
   
   // Mapping from display options to system names
   const toggleSystemNames: { [key: string]: string } = {
-    'Take care of my mental health': 'mental',
-    'Managing daily stress': 'stres',
-    'Cultivating a positive mindset': 'selflove',
-    'Boosting self-love': 'selflove', 
-    'Connecting with others': 'connecting',
-    'Improving productivity': 'productivity'
+    [t('achievement.takeCare')]: 'mental',
+    [t('achievement.managingStress')]: 'stres',
+    [t('achievement.positiveMindset')]: 'selflove',
+    [t('achievement.boostingSelfLove')]: 'selflove', 
+    [t('achievement.connectingOthers')]: 'connecting',
+    [t('achievement.improvingProductivity')]: 'productivity'
   };
   const handleFocusClick = (focus: string) => {
     setSelectedFocus(focus);
@@ -62,7 +65,12 @@ export function AchivementScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          What do you want to achieve with us?
+          {t('achievement.titleQuestion').split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < t('achievement.titleQuestion').split('\n').length - 1 && <br />}
+            </span>
+          ))}
         </h1>
       </div>
       
@@ -146,7 +154,7 @@ export function AchivementScreen({
                   onNext(selectedFocus || '');
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>
