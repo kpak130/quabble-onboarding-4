@@ -311,6 +311,8 @@ function getTranslations() {
       
       // What Dealing With Screen
       "dealingWith.title": "What are you dealing with?",
+      "dealingWith.fullTitle": "What have you been\ndealing with?",
+      "dealingWith.subtitle": "Choose the one that affects you most",
       "dealingWith.depression": "Depression",
       "dealingWith.anxiety": "Anxiety", 
       "dealingWith.panicAttacks": "Panic attacks",
@@ -440,6 +442,8 @@ function getTranslations() {
       
       // What Dealing With Screen  
       "dealingWith.title": "현재 어떤 어려움을 겪고 계신가요?",
+      "dealingWith.fullTitle": "어떤 어려움을\n겪고 계신가요?",
+      "dealingWith.subtitle": "가장 영향을 받는 것을 선택해주세요",
       "dealingWith.depression": "우울증",
       "dealingWith.anxiety": "불안장애",
       "dealingWith.panicAttacks": "공황발작", 
@@ -575,6 +579,8 @@ function getTranslations() {
       
       // What Dealing With Screen
       "dealingWith.title": "何に対処していますか？",
+      "dealingWith.fullTitle": "何に対処して\nいますか？",
+      "dealingWith.subtitle": "最も影響を受けているものを選択してください",
       "dealingWith.depression": "うつ病", 
       "dealingWith.anxiety": "不安障害",
       "dealingWith.panicAttacks": "パニック発作",

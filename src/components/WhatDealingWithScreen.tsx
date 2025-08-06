@@ -27,16 +27,10 @@ export function WhatDealingWithScreen({
     { key: 'dealingWith.other', systemName: 'other' }
   ];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Depression': 'depression',
-    'Anxiety': 'anxiety',
-    'Panic attacks': 'panic_attacks',
-    'OCD': 'ocd',
-    'Bipolar disorder': 'bipolar_disorder',
-    'Eating disorder': 'eating_disorder',
-    'PTSD': 'ptsd',
-    'Something else': 'something_else'
+  // Create a mapping from option keys to system names
+  const getSystemName = (optionKey: string): string | null => {
+    const option = options.find(opt => opt.key === optionKey);
+    return option ? option.systemName : null;
   };
 
   const handleOptionClick = (option: string) => {
@@ -72,12 +66,15 @@ export function WhatDealingWithScreen({
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
-          What have you been
-          <br />
-          dealing with?
+          {t('dealingWith.fullTitle').split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < t('dealingWith.fullTitle').split('\n').length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl font-normal text-center" style={{ color: '#7B7968' }}>
-          Choose the one that affects you most
+          {t('dealingWith.subtitle')}
         </p>
       </div>
       
@@ -129,7 +126,7 @@ export function WhatDealingWithScreen({
               }}
               onClick={() => handleOptionClick(option.key)}
             >
-              {option.key}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -149,7 +146,7 @@ export function WhatDealingWithScreen({
                 }}
                 onClick={() => {
                   // Get system name for selected option
-                  const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                  const systemName = selectedOption ? getSystemName(selectedOption) : null;
                   const conditions = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
@@ -161,7 +158,7 @@ export function WhatDealingWithScreen({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>
