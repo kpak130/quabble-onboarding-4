@@ -99,7 +99,7 @@ function getTranslations() {
       "focus.productivity": "Improving productivity",
       
       // Confirmation Screen
-      "confirmation.welcomeMessage": "Welcome! Let's find out how we can help you!",
+      "confirmation.welcomeMessage": "Welcome!\nLet's find out how\nwe can help you!",
       
       // Testimonials Screen
       "testimonials.testimonial1Text": "It's an app I've been looking for all my life.",
@@ -236,7 +236,7 @@ function getTranslations() {
       "improvedProof.title": "87% regular users report their mental health has improved since they started using Quabble",
       
       // Let's Find Out Screen
-      "letsFindOut.message": "Welcome! Let's find out how we can help you",
+      "letsFindOut.message": "Welcome!\nLet's find out how\nwe can help you",
       
       // Why So Many Screen
       "whySoMany.message": "So, why do so many people find Quabble so helpful?",
@@ -402,6 +402,9 @@ function getTranslations() {
       "focus.selfEsteem": "자존감", 
       "focus.relationships": "인간관계",
       
+      // Confirmation Screen
+      "confirmation.welcomeMessage": "환영합니다!\n저희가 어떻게 도움을\n드릴 수 있는지 알아보겠습니다!",
+      
       // Mental Wellness 3 Screen
       "mentalWellness3.proceedButton": "진행",
       "mentalWellness3.statistic": "1천만 회 이상의\n정신건강 루틴 완료",
@@ -483,7 +486,10 @@ function getTranslations() {
       "achievement.improveRelationships": "인간관계 개선",
       "achievement.betterSleep": "더 나은 수면",
       "achievement.moreConfident": "더 자신감 있기", 
-      "achievement.other": "기타"
+      "achievement.other": "기타",
+      
+      // Let's Find Out Screen
+      "letsFindOut.message": "환영합니다!\n저희가 어떻게\n도움을 드릴 수 있는지 알아보겠습니다"
     },
     
     jp: {
@@ -516,6 +522,9 @@ function getTranslations() {
       "focus.sleep": "睡眠改善",
       "focus.selfEsteem": "自尊心",
       "focus.relationships": "人間関係",
+      
+      // Confirmation Screen
+      "confirmation.welcomeMessage": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう！",
       
       // Mental Wellness 3 Screen
       "mentalWellness3.proceedButton": "進む",
@@ -598,7 +607,10 @@ function getTranslations() {
       "achievement.improveRelationships": "人間関係の改善",
       "achievement.betterSleep": "より良い睡眠",
       "achievement.moreConfident": "より自信を持つ",
-      "achievement.other": "その他"
+      "achievement.other": "その他",
+      
+      // Let's Find Out Screen
+      "letsFindOut.message": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう"
     }
   };
 }

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface LetsFindOutScreenProps {
   onBack: () => void;
@@ -10,6 +11,8 @@ export function LetsFindOutScreen({
   onBack,
   onNext
 }: LetsFindOutScreenProps) {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     // Function to be called when the component mounts
     sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:lets_find_out:landing"}');
@@ -63,9 +66,12 @@ export function LetsFindOutScreen({
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
               <p className="text-white text-3xl sm:text-3xl font-medium leading-relaxed">
-                Welcome!<br />
-                Let's find out how<br />
-                we can help you
+                {t('letsFindOut.message').split('\n').map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index < t('letsFindOut.message').split('\n').length - 1 && <br />}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
@@ -86,7 +92,7 @@ export function LetsFindOutScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

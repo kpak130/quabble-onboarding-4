@@ -64,7 +64,12 @@ export function ConfirmationScreen({
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
               <p className="text-white text-3xl sm:text-3xl font-medium leading-relaxed">
-                {t('confirmation.welcomeMessage')}
+                {t('confirmation.welcomeMessage').split('\n').map((line, index) => (
+                  <span key={index}>
+                    {line}
+                    {index < t('confirmation.welcomeMessage').split('\n').length - 1 && <br />}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
