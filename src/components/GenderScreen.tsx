@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 interface GenderScreenProps {
   onBack: () => void;
   onNext: () => void;
@@ -10,18 +11,17 @@ export function GenderScreen({
   onNext,
   onSkip
 }: GenderScreenProps) {
+  const { t } = useLanguage();
   const [selectedGender, setSelectedGender] = useState<string | null>(null);
-  const genderOptions = ['Female', 'Male', 'Non-binary', 'Prefer not to answer'];
+  const genderOptions = [
+    { key: 'gender.female', system: 'female' },
+    { key: 'gender.male', system: 'male' },
+    { key: 'gender.nonBinary', system: 'non_binary' },
+    { key: 'gender.preferNotToSay', system: 'prefer_not_to_answer' }
+  ];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Female': 'female',
-    'Male': 'male',
-    'Non-binary': 'non_binary',
-    'Prefer not to answer': 'prefer_not_to_answer'
-  };
-  const handleGenderClick = (gender: string) => {
-    setSelectedGender(gender);
+  const handleGenderClick = (optionKey: string) => {
+    setSelectedGender(optionKey);
   };
 
   useEffect(() => {
@@ -46,16 +46,14 @@ export function GenderScreen({
         </button>
         <div className="flex-1"></div>
         <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
-          Skip
+          {t('skip')}
         </button>
       </div>
       
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          How do you identify
-          <br />
-          your gender?
+          {t('gender.title')}
         </h1>
       </div>
       
@@ -91,23 +89,23 @@ export function GenderScreen({
         }}
       >
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
-          {genderOptions.map(gender => (
+          {genderOptions.map(option => (
             <button 
-              key={gender} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedGender === gender 
+                selectedGender === option.key 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedGender === gender ? 'white' : '#4C4A3C',
-                borderColor: selectedGender === gender ? 'transparent' : '#E1E0D3',
+                color: selectedGender === option.key ? 'white' : '#4C4A3C',
+                borderColor: selectedGender === option.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
-              onClick={() => handleGenderClick(gender)}
+              onClick={() => handleGenderClick(option.key)}
             >
-              {gender}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -126,8 +124,8 @@ export function GenderScreen({
               }}
               onClick={() => {
                 // Get system name for selected gender
-                const systemName = selectedGender ? toggleSystemNames[selectedGender] : null;
-                const gender = systemName ? [systemName] : [];
+                const selectedOption = genderOptions.find(opt => opt.key === selectedGender);
+                const gender = selectedOption ? [selectedOption.system] : [];
                 
                 sendToFlutter(JSON.stringify({
                   "event": "v2_5_7_onboarding_A::onboarding:page_2_part_4:click_next",
@@ -138,7 +136,7 @@ export function GenderScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface DuckWithJarScreenProps {
   onNext: () => void;
@@ -10,6 +11,7 @@ export function DuckWithJarScreen({
   onNext,
   onSkip
 }: DuckWithJarScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Function to be called when the component mounts
@@ -27,12 +29,10 @@ export function DuckWithJarScreen({
       {/* Header */}
       <div className="flex flex-col items-center justify-center mt-32 mb-3 text-center">
         <h1 className="text-5xl font-medium text-black">
-          Quabble
+          {t('duckWithJar.title')}
         </h1>
         <h2 className="text-xl font-medium text-black mt-2">
-          10M+ mental wellness
-          <br />
-          routines completed
+          {t('duckWithJar.subtitle')}
         </h2>
       </div>
 
@@ -62,7 +62,7 @@ export function DuckWithJarScreen({
               }}
               onClick={onNext}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 interface AgeGroupScreenProps {
   onBack: () => void;
   onNext: () => void;
@@ -11,19 +12,19 @@ export function AgeGroupScreen({
   onSkip
 }: AgeGroupScreenProps) {
 
+  const { t } = useLanguage();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
-  const ageGroups = ['Under 18', '19 - 24', '25 - 34', '35 and over', 'Prefer not to answer'];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Under 18': 'under_18',
-    '19 - 24': '19_24',
-    '25 - 34': '25_34', 
-    '35 and over': '35_and_over',
-    'Prefer not to answer': 'prefer_not_to_answer'
-  };
-  const handleAgeGroupClick = (ageGroup: string) => {
-    setSelectedAgeGroup(ageGroup);
+  const ageGroups = [
+    { key: 'age.under18', systemName: 'under_18' },
+    { key: 'age.19to24', systemName: '19_24' },
+    { key: 'age.25to34', systemName: '25_34' },
+    { key: 'age.35plus', systemName: '35_and_over' },
+    { key: 'age.preferNotToAnswer', systemName: 'prefer_not_to_answer' }
+  ];
+  
+  const handleAgeGroupClick = (ageGroupKey: string) => {
+    setSelectedAgeGroup(ageGroupKey);
   };
 
   useEffect(() => {
@@ -55,9 +56,7 @@ export function AgeGroupScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          To what age group
-          <br />
-          do you belong?
+          {t('age.title')}
         </h1>
       </div>
       
@@ -95,21 +94,21 @@ export function AgeGroupScreen({
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
           {ageGroups.map(ageGroup => (
             <button 
-              key={ageGroup} 
+              key={ageGroup.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedAgeGroup === ageGroup 
+                selectedAgeGroup === ageGroup.key 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedAgeGroup === ageGroup ? 'white' : '#4C4A3C',
-                borderColor: selectedAgeGroup === ageGroup ? 'transparent' : '#E1E0D3',
+                color: selectedAgeGroup === ageGroup.key ? 'white' : '#4C4A3C',
+                borderColor: selectedAgeGroup === ageGroup.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
-              onClick={() => handleAgeGroupClick(ageGroup)}
+              onClick={() => handleAgeGroupClick(ageGroup.key)}
             >
-              {ageGroup}
+              {t(ageGroup.key)}
             </button>
           ))}
         </div>
@@ -129,7 +128,8 @@ export function AgeGroupScreen({
                 }}
                 onClick={() => {
                   // Get system name for selected age group
-                  const systemName = selectedAgeGroup ? toggleSystemNames[selectedAgeGroup] : null;
+                  const selectedAgeGroupData = selectedAgeGroup ? ageGroups.find(ag => ag.key === selectedAgeGroup) : null;
+                  const systemName = selectedAgeGroupData ? selectedAgeGroupData.systemName : null;
                   const ageGroup = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
@@ -141,7 +141,7 @@ export function AgeGroupScreen({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>

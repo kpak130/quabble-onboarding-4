@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ConfirmationScreenProps {
   onBack: () => void;
@@ -9,6 +10,7 @@ export function ConfirmationScreen({
   onBack,
   onNext
 }: ConfirmationScreenProps) {
+  const { t } = useLanguage();
   useEffect(() => {
     // Function to be called when the component mounts
     sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_2_1:landing"}');
@@ -62,9 +64,7 @@ export function ConfirmationScreen({
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
               <p className="text-white text-3xl sm:text-3xl font-medium leading-relaxed">
-                Welcome!<br />
-                Let's find out how<br />
-                we can help you!
+                {t('confirmation.welcomeMessage')}
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ export function ConfirmationScreen({
               }}
               onClick={onNext}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

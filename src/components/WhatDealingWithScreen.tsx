@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WhatDealingWithScreenProps {
   onBack: () => void;
@@ -12,16 +13,18 @@ export function WhatDealingWithScreen({
   onNext,
   onSkip
 }: WhatDealingWithScreenProps) {
+  const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  
   const options = [
-    'Depression',
-    'Anxiety',
-    'Panic attacks',
-    'OCD',
-    'Bipolar disorder',
-    'Eating disorder',
-    'PTSD',
-    'Something else'
+    { key: 'dealingWith.depression', systemName: 'depression' },
+    { key: 'dealingWith.anxiety', systemName: 'anxiety' },
+    { key: 'dealingWith.panicAttacks', systemName: 'panic_attacks' },
+    { key: 'dealingWith.ocd', systemName: 'ocd' },
+    { key: 'dealingWith.bipolar', systemName: 'bipolar_disorder' },
+    { key: 'dealingWith.eatingDisorder', systemName: 'eating_disorder' },
+    { key: 'dealingWith.ptsd', systemName: 'ptsd' },
+    { key: 'dealingWith.other', systemName: 'other' }
   ];
   
   // Mapping from display options to system names
@@ -112,21 +115,21 @@ export function WhatDealingWithScreen({
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
           {options.map(option => (
             <button 
-              key={option} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedOption === option 
+                selectedOption === option.key
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedOption === option ? 'white' : '#4C4A3C',
-                borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
+                color: selectedOption === option.key ? 'white' : '#4C4A3C',
+                borderColor: selectedOption === option.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick(option.key)}
             >
-              {option}
+              {option.key}
             </button>
           ))}
         </div>

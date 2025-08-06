@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface TherapistScreenProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function TherapistScreen({
   onBack,
   onNext
 }: TherapistScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Function to be called when the component mounts
@@ -38,12 +40,10 @@ export function TherapistScreen({
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            It's therapist-recommended
-            <br />
-            and backed by experts
+            {t('therapist.title')}
           </h1>
           <p className="text-base sm:text-lg font-normal leading-relaxed" style={{ color: '#7B7968' }}>
-            Quabble brings real wellness practices to daily life—backed by experts like our advisor, Dr. Jung Kim, Assist. Professor of Psychiatry at Harvard Medical School
+            {t('therapist.subtitle')}
           </p>
         </div>
         

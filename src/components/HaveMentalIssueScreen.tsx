@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface HaveMentalIssueScreenProps {
   onBack: () => void;
@@ -12,18 +13,16 @@ export function HaveMentalIssueScreen({
   onNext,
   onSkip
 }: HaveMentalIssueScreenProps) {
-
+  const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const options = ['Yes', 'No'];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Yes': 'yes',
-    'No': 'no'
-  };
+  const options = [
+    { key: 'mentalIssue.yes', systemName: 'yes' },
+    { key: 'mentalIssue.no', systemName: 'no' }
+  ];
 
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+  const handleOptionClick = (optionKey: string) => {
+    setSelectedOption(optionKey);
   };
 
   useEffect(() => {
@@ -55,9 +54,7 @@ export function HaveMentalIssueScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          Do you have ongoing
-          <br />
-          mental health challenges?
+          {t('mentalIssue.title')}
         </h1>
       </div>
       
@@ -95,21 +92,21 @@ export function HaveMentalIssueScreen({
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
           {options.map(option => (
             <button 
-              key={option} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedOption === option 
+                selectedOption === option.key 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedOption === option ? 'white' : '#4C4A3C',
-                borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
+                color: selectedOption === option.key ? 'white' : '#4C4A3C',
+                borderColor: selectedOption === option.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick(option.key)}
             >
-              {option}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -129,7 +126,8 @@ export function HaveMentalIssueScreen({
                 }}
                 onClick={() => {
                   // Get system name for selected option
-                  const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                  const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
+                  const systemName = selectedOptionData ? selectedOptionData.systemName : null;
                   const mentalHealthChallenges = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
@@ -144,7 +142,7 @@ export function HaveMentalIssueScreen({
                   }
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>

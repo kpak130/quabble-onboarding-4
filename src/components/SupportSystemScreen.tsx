@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface SupportSystemScreenProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function SupportSystemScreen({
   onBack,
   onNext
 }: SupportSystemScreenProps) {
+  const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   useEffect(() => {
@@ -17,10 +19,15 @@ export function SupportSystemScreen({
     sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_11:landing"}');
   }, []);
   
-  const options = ['Excellent', 'Good', 'Limited', 'Poor'];
+  const options = [
+    { key: 'support.excellent', systemName: 'excellent' },
+    { key: 'support.good', systemName: 'good' },
+    { key: 'support.limited', systemName: 'limited' },
+    { key: 'support.poor', systemName: 'poor' }
+  ];
 
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+  const handleOptionClick = (optionKey: string) => {
+    setSelectedOption(optionKey);
   };
 
   return (
@@ -76,15 +83,14 @@ export function SupportSystemScreen({
           {/* Question text */}
           <div className="text-center px-4" style={{ marginBottom: '0.8vh', marginTop: '-2vh' }}>
             <h1 className="font-medium text-gray-800 leading-tight" style={{ fontSize: '3vh' }}>
-              How strong is your<br />
-              support system?
+              {t('support.title')}
             </h1>
           </div>
           
           {/* Subtitle */}
           <div className="text-center px-4" style={{ marginBottom: '2.3vh' }}>
             <p style={{ color: '#7B7968', fontSize: '2vh' }}>
-              Family, friends, teachers, peers, etc.
+              {t('support.subtitle')}
             </p>
           </div>
           
@@ -96,9 +102,9 @@ export function SupportSystemScreen({
             <div className="w-3/4 mx-auto">
               {options.map((option, index) => (
                 <button
-                  key={option}
+                  key={option.key}
                   className={`w-full px-6 md:px-5 rounded-full text-center text-lg font-medium transition-colors ${
-                    selectedOption === option
+                    selectedOption === option.key
                         ? 'bg-[#f2994a] text-white' 
                         : 'bg-white text-black'
                   }`}
@@ -109,9 +115,9 @@ export function SupportSystemScreen({
                     alignItems: 'center',
                     justifyContent: 'center'
                   }}
-                  onClick={() => handleOptionClick(option)}
+                  onClick={() => handleOptionClick(option.key)}
                 >
-                  {option}
+                  {t(option.key)}
                 </button>
               ))}
             </div>
@@ -132,7 +138,7 @@ export function SupportSystemScreen({
                   }}
                   onClick={onNext}
                 >
-                  Done
+                  {t('done')}
                 </button>
               </div>
             </div>

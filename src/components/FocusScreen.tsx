@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 interface FocusScreenProps {
   onBack: () => void;
   onNext: () => void;
@@ -10,19 +11,18 @@ export function FocusScreen({
   onNext,
   onSkip
 }: FocusScreenProps) {
+  const { t } = useLanguage();
   const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
-  const focusOptions = ['Reducing and managing stress', 'Cultivating a positive mindset', 'Boosting self-love', 'Connecting with others', 'Improving productivity'];
+  const focusOptions = [
+    { key: 'focus.stress', system: 'stress' },
+    { key: 'focus.positive', system: 'positive' },
+    { key: 'focus.selfLove', system: 'selflove' },
+    { key: 'focus.connecting', system: 'connecting' },
+    { key: 'focus.productivity', system: 'productivity' }
+  ];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Reducing and managing stress': 'stress',
-    'Cultivating a positive mindset': 'positive',
-    'Boosting self-love': 'selflove',
-    'Connecting with others': 'connecting', 
-    'Improving productivity': 'productivity'
-  };
-  const handleFocusClick = (focus: string) => {
-    setSelectedFocus(focus);
+  const handleFocusClick = (focusKey: string) => {
+    setSelectedFocus(focusKey);
   };
 
   useEffect(() => {
@@ -47,16 +47,14 @@ export function FocusScreen({
         </button>
         <div className="flex-1"></div>
         <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
-          Skip
+          {t('skip')}
         </button>
       </div>
       
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          What has been
-          <br />
-          your focus lately?
+          {t('focus.title')}
         </h1>
       </div>
       
@@ -92,23 +90,23 @@ export function FocusScreen({
         }}
       >
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
-          {focusOptions.map(focus => (
+          {focusOptions.map(option => (
             <button 
-              key={focus} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedFocus === focus 
+                selectedFocus === option.key 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedFocus === focus ? 'white' : '#4C4A3C',
-                borderColor: selectedFocus === focus ? 'transparent' : '#E1E0D3',
+                color: selectedFocus === option.key ? 'white' : '#4C4A3C',
+                borderColor: selectedFocus === option.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
-              onClick={() => handleFocusClick(focus)}
+              onClick={() => handleFocusClick(option.key)}
             >
-              {focus}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -127,8 +125,8 @@ export function FocusScreen({
               }}
               onClick={() => {
                 // Get system name for selected focus
-                const systemName = selectedFocus ? toggleSystemNames[selectedFocus] : null;
-                const focuses = systemName ? [systemName] : [];
+                const selectedOption = focusOptions.find(opt => opt.key === selectedFocus);
+                const focuses = selectedOption ? [selectedOption.system] : [];
                 
                 sendToFlutter(JSON.stringify({
                   "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
@@ -139,7 +137,7 @@ export function FocusScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WhereDidYouHearAboutUsProps {
   onBack?: () => void;
@@ -8,8 +9,15 @@ interface WhereDidYouHearAboutUsProps {
 }
 
 export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip }: WhereDidYouHearAboutUsProps) {
+  const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const options = ['App search', 'Social Media Ad', 'Friend or Family', 'Other'];
+  
+  const options = [
+    t('whereHear.appSearch'),
+    t('whereHear.socialMedia'),
+    t('whereHear.friendFamily'),
+    t('whereHear.other')
+  ];
   
   // Mapping from option index to system names
   const toggleSystemNames: { [key: number]: string } = {
@@ -49,16 +57,19 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip }: WhereDidYouHe
           {!onBack && <div className="w-12 h-12"></div>}
           <div className="flex-1"></div>
           <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
-            Skip
+            {t('skip')}
           </button>
         </div>
         
         {/* Title - with padding */}
         <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-            Where did you
-            <br />
-            first hear about us?
+            {t('whereHear.title').split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < t('whereHear.title').split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h1>
         </div>
         
@@ -143,7 +154,7 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip }: WhereDidYouHe
                     onNext();
                   }}
                 >
-                  Next
+                  {t('next')}
                 </button>
               </div>
             </div>

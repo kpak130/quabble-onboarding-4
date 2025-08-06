@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { LanguageProvider } from './contexts/LanguageContext';
+import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { prefetchImagesForScreen, prefetchAllCriticalImages } from './utils/imagePrefetch';
 import { AgeGroupScreen } from './components/AgeGroupScreen';
 import { GenderScreen } from './components/GenderScreen';
@@ -550,5 +552,12 @@ export function App() {
         <WhereDidYouHearAboutUs onNext={handleNext} onSkip={handleSkip} />
       </TransitionWrapper>;
   };
-  return <div className="relative overflow-hidden">{renderCurrentScreen()}</div>;
+  return (
+    <LanguageProvider>
+      <div className="relative overflow-hidden">
+        <LanguageSwitcher />
+        {renderCurrentScreen()}
+      </div>
+    </LanguageProvider>
+  );
 }

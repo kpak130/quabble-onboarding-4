@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface TestimonialsScreenProps {
   onNext: () => void;
@@ -7,6 +8,7 @@ interface TestimonialsScreenProps {
 export function TestimonialsScreen({
   onNext
 }: TestimonialsScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Function to be called when the component mounts
@@ -15,20 +17,20 @@ export function TestimonialsScreen({
 
   const testimonials = [{
     stars: 5,
-    text: "It's an app I've been looking for all my life.",
-    author: 't.m.s.d7d'
+    textKey: 'testimonials.testimonial1Text',
+    authorKey: 'testimonials.testimonial1Author'
   }, {
     stars: 5,
-    text: 'It has been a game changer for my mental health and mindfulness and brings me so much joy.',
-    author: 'Emma'
+    textKey: 'testimonials.testimonial2Text',
+    authorKey: 'testimonials.testimonial2Author'
   }, {
     stars: 5,
-    text: 'It is a mind blowing way and a different perspective on how you look at mental health as a whole.',
-    author: 'Lucy N'
+    textKey: 'testimonials.testimonial3Text',
+    authorKey: 'testimonials.testimonial3Author'
   }, {
     stars: 5,
-    text: "Y'all should know dis the best wellness app ever.",
-    author: 'Anonymous'
+    textKey: 'testimonials.testimonial4Text',
+    authorKey: 'testimonials.testimonial4Author'
   }];
   return <>
     <style>{`
@@ -122,13 +124,13 @@ export function TestimonialsScreen({
                    marginBottom: '1.5vh'
                  }}
                >
-                {testimonial.text}
+                {t(testimonial.textKey)}
               </p>
               <p 
                 className="text-gray-600"
                 style={{ fontSize: '1.5vh' }}
               >
-                by {testimonial.author}
+                {t('testimonials.authorPrefix')} {t(testimonial.authorKey)}
               </p>
              </div>
           ))}
@@ -147,7 +149,7 @@ export function TestimonialsScreen({
               }}
               onClick={onNext}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>
