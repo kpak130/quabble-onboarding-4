@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AskFeelingV2ScreenProps {
   onBack: () => void;
@@ -12,19 +13,20 @@ export function AskFeelingV2Screen({
   onNext,
   onSkip
 }: AskFeelingV2ScreenProps) {
+  const { t } = useLanguage();
   const [selectedFeeling, setSelectedFeeling] = useState<string | null>(null);
   
   const feelingOptions = [
-    "I've been going through something difficult recently",
-    "I've been living with ongoing mental health challenges",
-    "I'm mostly doing okay"
+    t('askFeelingV2.difficultDetailed'),
+    t('askFeelingV2.ongoingDetailed'),
+    t('askFeelingV2.okayDetailed')
   ];
   
   // Mapping from display options to system names
   const toggleSystemNames: { [key: string]: string } = {
-    "I've been going through something difficult recently": 'difficult_recently',
-    "I've been living with ongoing mental health challenges": 'ongoing_challenges',
-    "I'm mostly doing okay": 'doing_okay'
+    [t('askFeelingV2.difficultDetailed')]: 'difficult_recently',
+    [t('askFeelingV2.ongoingDetailed')]: 'ongoing_challenges',
+    [t('askFeelingV2.okayDetailed')]: 'doing_okay'
   };
 
   const handleFeelingClick = (feeling: string) => {
@@ -56,9 +58,12 @@ export function AskFeelingV2Screen({
         {/* Title - with padding */}
         <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-            How have you been
-            <br />
-            lately?
+            {t('askFeelingV2.title').split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < t('askFeelingV2.title').split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h1>
         </div>
         
@@ -146,7 +151,7 @@ export function AskFeelingV2Screen({
                     }
                   }}
                 >
-                  Next
+                  {t('next')}
                 </button>
               </div>
             </div>

@@ -351,6 +351,10 @@ function getTranslations() {
       "askFeeling.difficult": "It's been difficult recently",
       "askFeeling.ongoing": "I have ongoing challenges", 
       "askFeeling.okay": "I'm doing okay",
+      "askFeelingV2.title": "How have you been\nlately?",
+      "askFeelingV2.difficultDetailed": "I've been going through something difficult recently",
+      "askFeelingV2.ongoingDetailed": "I've been living with ongoing mental health challenges",
+      "askFeelingV2.okayDetailed": "I'm mostly doing okay",
       
       // Sorry To Heart Screen
       "sorry.title": "We're sorry to hear that",
@@ -476,6 +480,10 @@ function getTranslations() {
       "askFeeling.difficult": "최근 힘들었어요",
       "askFeeling.ongoing": "지속적인 어려움이 있어요",
       "askFeeling.okay": "괜찮아요",
+      "askFeelingV2.title": "최근 어떻게\n지내셨나요?",
+      "askFeelingV2.difficultDetailed": "최근에 힘든 일을 겪고 있어요",
+      "askFeelingV2.ongoingDetailed": "지속적인 정신건강 문제를 안고 살고 있어요",
+      "askFeelingV2.okayDetailed": "대체로 괜찮게 지내고 있어요",
       
       // Sorry To Heart Screen
       "sorry.title": "안타깝게 생각합니다",
@@ -607,6 +615,10 @@ function getTranslations() {
       "askFeeling.difficult": "最近つらいです",
       "askFeeling.ongoing": "継続的な困難があります", 
       "askFeeling.okay": "大丈夫です",
+      "askFeelingV2.title": "最近いかが\nお過ごしですか？",
+      "askFeelingV2.difficultDetailed": "最近何か困難なことを経験しています",
+      "askFeelingV2.ongoingDetailed": "継続的なメンタルヘルスの課題を抱えて生活しています",
+      "askFeelingV2.okayDetailed": "大体元気にやっています",
       
       // Sorry To Heart Screen
       "sorry.title": "それは残念です",
