@@ -223,8 +223,8 @@ function getTranslations() {
       "mindQuote.quote": "A healthy mind is the foundation\nof a successful, full,\nand meaningful life.",
       
       // We Can Help Screen
-      "weCanHelp.messageGeneral": "While professional care is essential, Quabble is here to offer support and walk alongside you in your mental health journey.",
-      "weCanHelp.messagePersonalized": "We're here to help you through this tough time, and \"{achievement}\" is something you can achieve with us.",
+      "weCanHelp.messageGeneral": "While professional care is essential,\nQuabble is here to offer support and\nwalk alongside you in your mental health journey.",
+      "weCanHelp.messagePersonalized": "We're here to help you through this tough time,\nand \"{achievement}\" is something\nyou can achieve with us.",
       
       // Why Quabble Screen
       "whyQuabble.title": "Here's why Quabble might be just what you need.",
@@ -518,7 +518,11 @@ function getTranslations() {
       "letsFindOut.message": "환영합니다!\n저희가 어떻게\n도움을 드릴 수 있는지 알아보겠습니다",
       
       // Mind Quote Screen
-      "mindQuote.quote": "건강한 마음은 성공적이고\n풍요로우며 의미 있는\n삶의 기초입니다."
+      "mindQuote.quote": "건강한 마음은 성공적이고\n풍요로우며 의미 있는\n삶의 기초입니다.",
+      
+      // We Can Help Screen
+      "weCanHelp.messageGeneral": "전문적인 치료가 필수적이지만,\nQuabble은 여러분의 정신건강 여정에서\n지원을 제공하고 함께 걸어가고자 합니다.",
+      "weCanHelp.messagePersonalized": "이 힘든 시기에 도움을 드리고자 하며,\n\"{achievement}\"은 저희와 함께\n이루실 수 있습니다."
     },
     
     jp: {
@@ -655,7 +659,11 @@ function getTranslations() {
       "letsFindOut.message": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう",
       
       // Mind Quote Screen
-      "mindQuote.quote": "健康な心は成功した\n充実した意味のある\n人生の基盤です。"
+      "mindQuote.quote": "健康な心は成功した\n充実した意味のある\n人生の基盤です。",
+      
+      // We Can Help Screen
+      "weCanHelp.messageGeneral": "専門的なケアは不可欠ですが、\nQuabbleはあなたのメンタルヘルスの\n旅路でサポートを提供し、寄り添います。",
+      "weCanHelp.messagePersonalized": "この困難な時期にお手伝いします。\n\"{achievement}\"は私たちと一緒に\n達成できることです。"
     }
   };
 }

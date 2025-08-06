@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WeCanHelpScreenProps {
   onBack: () => void;
@@ -16,6 +17,7 @@ export function WeCanHelpScreen({
   achievementSelection,
   cameFromYesPath
 }: WeCanHelpScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Function to be called when the component mounts
@@ -49,9 +51,19 @@ export function WeCanHelpScreen({
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white">
             {cameFromYesPath && achievementSelection ? (
-              `We're here to help you through this tough time, and "${achievementSelection.toLowerCase()}" is something you can achieve with us.`
+              t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').length - 1 && <br />}
+                </span>
+              ))
             ) : (
-              "While professional care is essential, Quabble is here to offer support and walk alongside you in your mental health journey."
+              t('weCanHelp.messageGeneral').split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t('weCanHelp.messageGeneral').split('\n').length - 1 && <br />}
+                </span>
+              ))
             )}
           </h1>
         </div>
@@ -74,7 +86,7 @@ export function WeCanHelpScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>
