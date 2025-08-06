@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface MentalWellness3ScreenProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function MentalWellness3Screen({
   onBack,
   onNext
 }: MentalWellness3ScreenProps) {
+  const { t } = useLanguage();
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -79,7 +81,7 @@ export function MentalWellness3Screen({
             className="px-4 py-2 text-sm font-medium text-gray-700 bg-white/80 backdrop-blur-sm rounded-full border border-gray-300 hover:bg-white/90 transition-all"
             onClick={onNext}
           >
-            Proceed
+            {t('mentalWellness3.proceedButton')}
           </button>
         </div>
 
@@ -88,7 +90,12 @@ export function MentalWellness3Screen({
           {/* Main text positioned very high from top */}
           <div className="text-center mb-2 px-4" style={{ marginTop: '-1vh' }}>
             <h1 className="font-medium text-gray-800 leading-normal" style={{ fontSize: '3vh' }}>
-              10M+ mental wellness routines completed
+              {t('mentalWellness3.statistic').split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t('mentalWellness3.statistic').split('\n').length - 1 && <br />}
+                </span>
+              ))}
             </h1>
           </div>
           
@@ -125,7 +132,7 @@ export function MentalWellness3Screen({
                   }
                 }}
               >
-                {isSigningIn ? 'Signing in...' : 'Next'}
+                {isSigningIn ? t('mentalWellness3.signingInButton') : t('next')}
               </button>
             </div>
           </div>

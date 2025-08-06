@@ -129,7 +129,7 @@ function getTranslations() {
       "mentalWellness2.statistic": "98% of regular users find Quabble helpful for managing their mental health",
       
       "mentalWellness3.proceedButton": "Proceed",
-      "mentalWellness3.statistic": "10M+ mental wellness routines completed",
+      "mentalWellness3.statistic": "10M+ mental wellness\nroutines completed",
       "mentalWellness3.signingInButton": "Signing in...",
       
       // Chart Screen
@@ -402,6 +402,11 @@ function getTranslations() {
       "focus.selfEsteem": "자존감", 
       "focus.relationships": "인간관계",
       
+      // Mental Wellness 3 Screen
+      "mentalWellness3.proceedButton": "진행",
+      "mentalWellness3.statistic": "1천만 회 이상의\n정신건강 루틴 완료",
+      "mentalWellness3.signingInButton": "로그인 중...",
+      
       // Therapist Screen
       "therapist.title": "전문가가 추천하는",
       "therapist.subtitle": "Quabble은 정신건강 전문의와 치료사들이 지지하는 앱입니다",
@@ -511,6 +516,11 @@ function getTranslations() {
       "focus.sleep": "睡眠改善",
       "focus.selfEsteem": "自尊心",
       "focus.relationships": "人間関係",
+      
+      // Mental Wellness 3 Screen
+      "mentalWellness3.proceedButton": "進む",
+      "mentalWellness3.statistic": "1000万回以上の\nメンタルウェルネスルーチンが完了",
+      "mentalWellness3.signingInButton": "サインイン中...",
       
       // Therapist Screen
       "therapist.title": "セラピスト推奨",
