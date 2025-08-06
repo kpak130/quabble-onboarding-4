@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface MindQuoteScreenProps {
   onNext: () => void;
@@ -8,6 +9,7 @@ interface MindQuoteScreenProps {
 export function MindQuoteScreen({
   onNext
 }: MindQuoteScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Function to be called when the component mounts
@@ -25,7 +27,12 @@ export function MindQuoteScreen({
       {/* Title positioned at the top */}
       <div className="flex flex-col items-center justify-start mt-32 mb-8 text-center px-6">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          "A healthy mind is the foundation of a successful, full, and meaningful life."
+          "{t('mindQuote.quote').split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < t('mindQuote.quote').split('\n').length - 1 && <br />}
+            </span>
+          ))}"
         </h1>
       </div>
 
@@ -50,7 +57,7 @@ export function MindQuoteScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

@@ -220,7 +220,7 @@ function getTranslations() {
       "recommendedRoutineIntro.checkItOutButton": "Check it out >>",
       
       // Mind Quote Screen
-      "mindQuote.quote": "A healthy mind is the foundation of a successful, full, and meaningful life.",
+      "mindQuote.quote": "A healthy mind is the foundation\nof a successful, full,\nand meaningful life.",
       
       // We Can Help Screen
       "weCanHelp.messageGeneral": "While professional care is essential, Quabble is here to offer support and walk alongside you in your mental health journey.",
@@ -503,7 +503,10 @@ function getTranslations() {
       "achievement.improvingProductivity": "생산성 향상시키기",
       
       // Let's Find Out Screen
-      "letsFindOut.message": "환영합니다!\n저희가 어떻게\n도움을 드릴 수 있는지 알아보겠습니다"
+      "letsFindOut.message": "환영합니다!\n저희가 어떻게\n도움을 드릴 수 있는지 알아보겠습니다",
+      
+      // Mind Quote Screen
+      "mindQuote.quote": "건강한 마음은 성공적이고\n풍요로우며 의미 있는\n삶의 기초입니다."
     },
     
     jp: {
@@ -631,7 +634,10 @@ function getTranslations() {
       "achievement.improvingProductivity": "生産性の向上",
       
       // Let's Find Out Screen
-      "letsFindOut.message": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう"
+      "letsFindOut.message": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう",
+      
+      // Mind Quote Screen
+      "mindQuote.quote": "健康な心は成功した\n充実した意味のある\n人生の基盤です。"
     }
   };
 }
