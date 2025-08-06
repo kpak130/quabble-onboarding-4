@@ -324,6 +324,8 @@ function getTranslations() {
       
       // What Did You Try Screen
       "whatTry.title": "What have you tried before?",
+      "whatTry.fullTitle": "What have you tried before to\nsupport your mental health?",
+      "whatTry.subtitle": "Choose all that apply",
       "whatTry.therapy": "Therapy",
       "whatTry.medication": "Medication",
       "whatTry.otherApps": "Other apps",
@@ -331,6 +333,13 @@ function getTranslations() {
       "whatTry.meditation": "Meditation", 
       "whatTry.nothing": "Nothing",
       "whatTry.other": "Other",
+      "whatTry.therapyCounseling": "Therapy or counseling",
+      "whatTry.medicationDetailed": "Medication",
+      "whatTry.mentalWellnessApps": "Other mental wellness apps",
+      "whatTry.exerciseDetailed": "Exercise",
+      "whatTry.selfHelpBooks": "Self-help books",
+      "whatTry.talkingToFriendsFamily": "Talking to friends or family",
+      "whatTry.haventTriedAnything": "I haven't tried anything yet",
       
       // What Felt Missing Screen
       "whatMissing.title": "What felt missing?",
@@ -455,6 +464,8 @@ function getTranslations() {
       
       // What Did You Try Screen
       "whatTry.title": "이전에 무엇을 시도해보셨나요?",
+      "whatTry.fullTitle": "정신건강을 위해\n이전에 무엇을 시도해보셨나요?",
+      "whatTry.subtitle": "해당하는 모든 것을 선택해주세요",
       "whatTry.therapy": "심리치료",
       "whatTry.medication": "약물치료",
       "whatTry.otherApps": "다른 앱",
@@ -462,6 +473,13 @@ function getTranslations() {
       "whatTry.meditation": "명상",
       "whatTry.nothing": "없음", 
       "whatTry.other": "기타",
+      "whatTry.therapyCounseling": "심리치료 또는 상담",
+      "whatTry.medicationDetailed": "약물치료",
+      "whatTry.mentalWellnessApps": "다른 정신건강 앱",
+      "whatTry.exerciseDetailed": "운동",
+      "whatTry.selfHelpBooks": "자기계발서",
+      "whatTry.talkingToFriendsFamily": "친구나 가족과 대화",
+      "whatTry.haventTriedAnything": "아직 아무것도 시도해보지 않았어요",
       
       // What Felt Missing Screen
       "whatMissing.title": "무엇이 아쉬웠나요?",
@@ -596,6 +614,8 @@ function getTranslations() {
       
       // What Did You Try Screen
       "whatTry.title": "以前に何を試しましたか？",
+      "whatTry.fullTitle": "メンタルヘルスのために\n以前に何を試しましたか？",
+      "whatTry.subtitle": "該当するものをすべて選択してください",
       "whatTry.therapy": "セラピー",
       "whatTry.medication": "薬物療法", 
       "whatTry.otherApps": "他のアプリ",
@@ -603,6 +623,13 @@ function getTranslations() {
       "whatTry.meditation": "瞑想",
       "whatTry.nothing": "何もしていない",
       "whatTry.other": "その他",
+      "whatTry.therapyCounseling": "セラピーまたはカウンセリング",
+      "whatTry.medicationDetailed": "薬物療法",
+      "whatTry.mentalWellnessApps": "他のメンタルウェルネスアプリ",
+      "whatTry.exerciseDetailed": "運動",
+      "whatTry.selfHelpBooks": "自己啓発書",
+      "whatTry.talkingToFriendsFamily": "友人や家族との会話",
+      "whatTry.haventTriedAnything": "まだ何も試していません",
       
       // What Felt Missing Screen
       "whatMissing.title": "何が足りないと感じましたか？",

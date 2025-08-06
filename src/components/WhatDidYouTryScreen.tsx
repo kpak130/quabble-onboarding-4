@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WhatDidYouTryScreenProps {
   onBack: () => void;
@@ -12,26 +13,23 @@ export function WhatDidYouTryScreen({
   onNext,
   onSkip
 }: WhatDidYouTryScreenProps) {
+  const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  
   const options = [
-    'Therapy or counseling',
-    'Medication',
-    'Other mental wellness apps',
-    'Exercise',
-    'Self-help books',
-    'Talking to friends or family',
-    'I haven\'t tried anything yet'
+    { key: 'whatTry.therapyCounseling', systemName: 'therapy_counseling' },
+    { key: 'whatTry.medicationDetailed', systemName: 'medication' },
+    { key: 'whatTry.mentalWellnessApps', systemName: 'mental_wellness_apps' },
+    { key: 'whatTry.exerciseDetailed', systemName: 'exercise' },
+    { key: 'whatTry.selfHelpBooks', systemName: 'self_help_books' },
+    { key: 'whatTry.talkingToFriendsFamily', systemName: 'talking_to_friends_family' },
+    { key: 'whatTry.haventTriedAnything', systemName: 'havent_tried_anything' }
   ];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Therapy or counseling': 'therapy_counseling',
-    'Medication': 'medication',
-    'Other mental wellness apps': 'mental_wellness_apps',
-    'Exercise': 'exercise',
-    'Self-help books': 'self_help_books',
-    'Talking to friends or family': 'talking_to_friends_family',
-    'I haven\'t tried anything yet': 'havent_tried_anything'
+  // Create a mapping from option keys to system names
+  const getSystemName = (optionKey: string): string | null => {
+    const option = options.find(opt => opt.key === optionKey);
+    return option ? option.systemName : null;
   };
 
   const handleOptionClick = (option: string) => {
@@ -67,12 +65,15 @@ export function WhatDidYouTryScreen({
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
-          What have you tried before to
-          <br />
-          support your mental health?
+          {t('whatTry.fullTitle').split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < t('whatTry.fullTitle').split('\n').length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl font-normal text-center" style={{ color: '#7B7968' }}>
-          Choose all that apply
+          {t('whatTry.subtitle')}
         </p>
       </div>
       
@@ -110,21 +111,21 @@ export function WhatDidYouTryScreen({
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
           {options.map(option => (
             <button 
-              key={option} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedOption === option 
+                selectedOption === option.key 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedOption === option ? 'white' : '#4C4A3C',
-                borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
+                color: selectedOption === option.key ? 'white' : '#4C4A3C',
+                borderColor: selectedOption === option.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick(option.key)}
             >
-              {option}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -144,7 +145,7 @@ export function WhatDidYouTryScreen({
                 }}
                 onClick={() => {
                   // Get system name for selected option
-                  const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                  const systemName = selectedOption ? getSystemName(selectedOption) : null;
                   const methods = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
@@ -156,7 +157,7 @@ export function WhatDidYouTryScreen({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>
