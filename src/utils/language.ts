@@ -1,14 +1,16 @@
-export type SupportedLanguage = 'en' | 'kr' | 'jp';
+export type SupportedLanguage = 'en' | 'kr' | 'ja';
 
 export const getLanguageFromUrl = (): SupportedLanguage => {
   const urlParams = new URLSearchParams(window.location.search);
   const language = urlParams.get('language');
   
-  if (language === 'kr' || language === 'jp') {
-    return language;
+  if (language === 'korean') {
+    return 'kr';
+  } else if (language === 'japanese') {
+    return 'ja';
   }
   
-  return 'en'; // Default to English
+  return 'en';
 };
 
 export const updateUrlLanguage = (language: SupportedLanguage) => {
@@ -21,7 +23,7 @@ export const getLanguageName = (language: SupportedLanguage): string => {
   switch (language) {
     case 'en': return 'English';
     case 'kr': return '한국어';
-    case 'jp': return '日本語';
+    case 'ja': return '日本語';
     default: return 'English';
   }
 };

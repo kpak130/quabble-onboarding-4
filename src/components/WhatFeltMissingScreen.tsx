@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WhatFeltMissingScreenProps {
   onBack: () => void;
@@ -12,24 +13,22 @@ export function WhatFeltMissingScreen({
   onNext,
   onSkip
 }: WhatFeltMissingScreenProps) {
+  const { t } = useLanguage();
   const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  
   const options = [
-    'I couldn\'t stay consistent',
-    'Overwhelming or hard to follow',
-    'Too expensive for what I got',
-    'I didn\'t feel socially supported',
-    'Felt impersonal or generic',
-    'I actually liked some of them'
+    { key: 'whatFeltMissing.couldntStayConsistent', systemName: 'couldnt_stay_consistent' },
+    { key: 'whatFeltMissing.overwhelming', systemName: 'overwhelming_hard_to_follow' },
+    { key: 'whatFeltMissing.tooExpensive', systemName: 'too_expensive' },
+    { key: 'whatFeltMissing.noSocialSupport', systemName: 'no_social_support' },
+    { key: 'whatFeltMissing.feltImpersonal', systemName: 'felt_impersonal_generic' },
+    { key: 'whatFeltMissing.actuallyLiked', systemName: 'actually_liked_some' }
   ];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'I couldn\'t stay consistent': 'couldnt_stay_consistent',
-    'Overwhelming or hard to follow': 'overwhelming_hard_to_follow',
-    'Too expensive for what I got': 'too_expensive',
-    'I didn\'t feel socially supported': 'no_social_support',
-    'Felt impersonal or generic': 'felt_impersonal_generic',
-    'I actually liked some of them': 'actually_liked_some'
+  // Create a mapping from option keys to system names
+  const getSystemName = (optionKey: string): string | null => {
+    const option = options.find(opt => opt.key === optionKey);
+    return option ? option.systemName : null;
   };
 
   const handleOptionClick = (option: string) => {
@@ -69,12 +68,15 @@ export function WhatFeltMissingScreen({
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
-          If they didn't quite work, what
-          <br />
-          felt missing?
+          {t('whatFeltMissing.title').split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < t('whatFeltMissing.title').split('\n').length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl font-normal text-center" style={{ color: '#7B7968' }}>
-          Choose all that apply
+          {t('whatFeltMissing.subtitle')}
         </p>
       </div>
       
@@ -112,21 +114,21 @@ export function WhatFeltMissingScreen({
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
           {options.map(option => (
             <button 
-              key={option} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedOptions.includes(option) 
+                selectedOptions.includes(option.key) 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedOptions.includes(option) ? 'white' : '#4C4A3C',
-                borderColor: selectedOptions.includes(option) ? 'transparent' : '#E1E0D3',
+                color: selectedOptions.includes(option.key) ? 'white' : '#4C4A3C',
+                borderColor: selectedOptions.includes(option.key) ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick(option.key)}
             >
-              {option}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -146,7 +148,7 @@ export function WhatFeltMissingScreen({
                 }}
                 onClick={() => {
                   // Get system names for selected options
-                  const systemNames = selectedOptions.map(option => toggleSystemNames[option]);
+                  const systemNames = selectedOptions.map(option => getSystemName(option)).filter(Boolean);
                   
                   sendToFlutter(JSON.stringify({
                     "event": "v2_5_7_onboarding_A::onboarding:what_felt_missing:click_next",
@@ -157,7 +159,7 @@ export function WhatFeltMissingScreen({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>

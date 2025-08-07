@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { LanguageSwitcher } from './components/LanguageSwitcher';
 import { prefetchImagesForScreen, prefetchAllCriticalImages } from './utils/imagePrefetch';
 import { AgeGroupScreen } from './components/AgeGroupScreen';
 import { GenderScreen } from './components/GenderScreen';
@@ -63,6 +62,9 @@ export function App() {
   
   // Track if user came from "Yes" path on mental health challenges
   const [cameFromYesPath, setCameFromYesPath] = useState<boolean>(false);
+  
+  // Track if user is in the "HaveMentalIssue Yes" extended flow (for navigation logic)
+  const [isHaveMentalIssueYesFlow, setIsHaveMentalIssueYesFlow] = useState<boolean>(false);
 
   // Check URL parameters on component mount and prefetch critical images  
   useEffect(() => {
@@ -110,11 +112,13 @@ export function App() {
   const handleMentalIssueNext = (hasIssue: 'yes' | 'no') => {
     if (hasIssue === 'yes') {
       setCameFromYesPath(true);
+      // If Yes, go through extended flow: wecanhelp → whatdealingwith → whatfeltmissing → whyquabble
+      setIsHaveMentalIssueYesFlow(true);
       performTransition('wecanhelp');
     } else {
       setCameFromYesPath(false);
-      // If No, continue with normal flow (what comes after havementalissue normally)
-      performTransition('whatdealingwith');
+      // If No, go to shorter flow: just wecanhelp → normal flow
+      performTransition('wecanhelp');
     }
   };
 
@@ -144,11 +148,20 @@ export function App() {
     } else if (currentScreen === 'sorrytoheart') {
       performTransition('havementalissue');
     } else if (currentScreen === 'whatdealingwith') {
-      setCameFromYesPath(false);
-      performTransition('wecanhelp');
+      if (isHaveMentalIssueYesFlow) {
+        // In HaveMentalIssue "Yes" flow: whatdealingwith → whatfeltmissing
+        performTransition('whatfeltmissing');
+      } else {
+        // Normal flow: whatdealingwith → wecanhelp
+        setCameFromYesPath(false);
+        performTransition('wecanhelp');
+      }
     } else if (currentScreen === 'wecanhelp') {
-      // Conditional flow based on user's feeling choice
-      if (userFeelingChoice === 'ongoing_challenges') {
+      // Conditional flow based on user's feeling choice or mental issue response
+      if (isHaveMentalIssueYesFlow) {
+        // HaveMentalIssue "Yes" flow: wecanhelp → whatdealingwith → whatfeltmissing → whyquabble
+        performTransition('whatdealingwith');
+      } else if (userFeelingChoice === 'ongoing_challenges') {
         performTransition('whatdidyoutry');
       } else if (userFeelingChoice === 'doing_okay' || userFeelingChoice === 'difficult_recently') {
         performTransition('whyquabble');
@@ -159,7 +172,14 @@ export function App() {
     } else if (currentScreen === 'whatdidyoutry') {
       performTransition('whatfeltmissing');
     } else if (currentScreen === 'whatfeltmissing') {
-      performTransition('whyquabble');
+      if (isHaveMentalIssueYesFlow) {
+        // In HaveMentalIssue "Yes" flow: whatfeltmissing → whyquabble, then reset flag
+        setIsHaveMentalIssueYesFlow(false);
+        performTransition('whyquabble');
+      } else {
+        // Normal flow: whatfeltmissing → whyquabble
+        performTransition('whyquabble');
+      }
     } else if (currentScreen === 'whyquabble') {
       performTransition('stats');
     } else if (currentScreen === 'stats') {
@@ -555,7 +575,6 @@ export function App() {
   return (
     <LanguageProvider>
       <div className="relative overflow-hidden">
-        <LanguageSwitcher />
         {renderCurrentScreen()}
       </div>
     </LanguageProvider>

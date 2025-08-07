@@ -342,12 +342,14 @@ function getTranslations() {
       "whatTry.haventTriedAnything": "I haven't tried anything yet",
       
       // What Felt Missing Screen
-      "whatMissing.title": "What felt missing?",
-      "whatMissing.tooExpensive": "Too expensive",
-      "whatMissing.hardToAccess": "Hard to access",
-      "whatMissing.notPersonalized": "Not personalized",
-      "whatMissing.lackOfProgress": "Lack of progress",
-      "whatMissing.timeConsuming": "Time consuming",
+      "whatFeltMissing.title": "If they didn't quite work, what\nfelt missing?",
+      "whatFeltMissing.subtitle": "Choose all that apply",
+      "whatFeltMissing.couldntStayConsistent": "I couldn't stay consistent",
+      "whatFeltMissing.overwhelming": "Overwhelming or hard to follow",
+      "whatFeltMissing.tooExpensive": "Too expensive for what I got",
+      "whatFeltMissing.noSocialSupport": "I didn't feel socially supported",
+      "whatFeltMissing.feltImpersonal": "Felt impersonal or generic",
+      "whatFeltMissing.actuallyLiked": "I actually liked some of them",
       "whatMissing.other": "Other",
       
       // Where Did You Hear Screen
@@ -492,12 +494,14 @@ function getTranslations() {
       "whatTry.haventTriedAnything": "아직 아무것도 시도해보지 않았어요",
       
       // What Felt Missing Screen
-      "whatMissing.title": "무엇이 아쉬웠나요?",
-      "whatMissing.tooExpensive": "너무 비쌈",
-      "whatMissing.hardToAccess": "접근하기 어려움",
-      "whatMissing.notPersonalized": "개인화되지 않음",
-      "whatMissing.lackOfProgress": "진전 부족",
-      "whatMissing.timeConsuming": "시간이 많이 걸림",
+      "whatFeltMissing.title": "제대로 효과가 없었다면,\n무엇이 아쉬웠나요?",
+      "whatFeltMissing.subtitle": "해당하는 모든 것을 선택해주세요",
+      "whatFeltMissing.couldntStayConsistent": "꾸준히 할 수 없었어요",
+      "whatFeltMissing.overwhelming": "너무 복잡하거나 따라하기 어려웠어요",
+      "whatFeltMissing.tooExpensive": "받은 것에 비해 너무 비쌌어요",
+      "whatFeltMissing.noSocialSupport": "사회적 지지를 받지 못했어요",
+      "whatFeltMissing.feltImpersonal": "개인적이지 않고 일반적으로 느껴졌어요",
+      "whatFeltMissing.actuallyLiked": "사실 일부는 좋았어요",
       "whatMissing.other": "기타",
       
       // Where Did You Hear Screen
@@ -572,7 +576,7 @@ function getTranslations() {
       "weCanHelp.messagePersonalized": "이 힘든 시기에 도움을 드리고자 하며,\n\"{achievement}\"은 저희와 함께\n이루실 수 있습니다."
     },
     
-    jp: {
+    ja: {
       // Common  
       next: "次へ",
       back: "戻る",
@@ -661,12 +665,14 @@ function getTranslations() {
       "whatTry.haventTriedAnything": "まだ何も試していません",
       
       // What Felt Missing Screen
-      "whatMissing.title": "何が足りないと感じましたか？",
-      "whatMissing.tooExpensive": "高すぎる",
-      "whatMissing.hardToAccess": "アクセスが困難",
-      "whatMissing.notPersonalized": "個人化されていない",
-      "whatMissing.lackOfProgress": "進歩の欠如",
-      "whatMissing.timeConsuming": "時間がかかる",
+      "whatFeltMissing.title": "うまくいかなかった場合、\n何が足りないと感じましたか？",
+      "whatFeltMissing.subtitle": "該当するものをすべて選択してください",
+      "whatFeltMissing.couldntStayConsistent": "継続できませんでした",
+      "whatFeltMissing.overwhelming": "圧倒的で従うのが困難でした",
+      "whatFeltMissing.tooExpensive": "得られるものに対して高すぎました",
+      "whatFeltMissing.noSocialSupport": "社会的サポートを感じませんでした",
+      "whatFeltMissing.feltImpersonal": "個人的でなく一般的に感じました",
+      "whatFeltMissing.actuallyLiked": "実際にいくつかは良かったです",
       "whatMissing.other": "その他",
       
       // Where Did You Hear Screen
