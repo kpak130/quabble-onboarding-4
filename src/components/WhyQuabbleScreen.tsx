@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WhyQuabbleScreenProps {
   onBack: () => void;
@@ -7,6 +8,8 @@ interface WhyQuabbleScreenProps {
 }
 
 export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:why_quabble:landing"}');
   }, []);
@@ -28,9 +31,12 @@ export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            Here's why Quabble might
-            <br />
-            be just what you need.
+            {t('whyQuabble.title').split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < t('whyQuabble.title').split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h1>
         </div>
 
@@ -63,7 +69,7 @@ export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

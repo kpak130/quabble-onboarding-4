@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface SorryToHeartScreenProps {
   onBack: () => void;
@@ -12,28 +13,24 @@ export function SorryToHeartScreen({
   onNext,
   onSkip
 }: SorryToHeartScreenProps) {
+  const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  
   const options = [
-    'Breakup or relationship stress',
-    'Career or academic pressure',
-    'Health issues',
-    'Burnout',
-    'Loneliness',
-    'Loss',
-    'Something else',
-    'Nothing specific'
+    { key: 'sorry.breakupRelationship', systemName: 'relationship_stress' },
+    { key: 'sorry.careerAcademic', systemName: 'career_pressure' },
+    { key: 'sorry.healthIssues', systemName: 'health_issues' },
+    { key: 'sorry.burnout', systemName: 'burnout' },
+    { key: 'sorry.loneliness2', systemName: 'loneliness' },
+    { key: 'sorry.loss', systemName: 'loss' },
+    { key: 'sorry.somethingElse', systemName: 'something_else' },
+    { key: 'sorry.nothingSpecific', systemName: 'nothing_specific' }
   ];
   
-  // Mapping from display options to system names
-  const toggleSystemNames: { [key: string]: string } = {
-    'Breakup or relationship stress': 'relationship_stress',
-    'Career or academic pressure': 'career_pressure',
-    'Health issues': 'health_issues',
-    'Burnout': 'burnout',
-    'Loneliness': 'loneliness',
-    'Loss': 'loss',
-    'Something else': 'something_else',
-    'Nothing specific': 'nothing_specific'
+  // Create a mapping from option keys to system names
+  const getSystemName = (optionKey: string): string | null => {
+    const option = options.find(opt => opt.key === optionKey);
+    return option ? option.systemName : null;
   };
 
   const handleOptionClick = (option: string) => {
@@ -69,12 +66,15 @@ export function SorryToHeartScreen({
       {/* Title - with padding */}
       <div className="flex flex-col items-center justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight mb-2 sm:mb-3" style={{ color: '#4C4A3C' }}>
-          Sorry to hear that,
-          <br />
-          What's been going on?
+          {t('sorry.fullTitle').split('\n').map((line, index) => (
+            <span key={index}>
+              {line}
+              {index < t('sorry.fullTitle').split('\n').length - 1 && <br />}
+            </span>
+          ))}
         </h1>
         <p className="text-lg sm:text-xl md:text-2xl font-normal text-center" style={{ color: '#7B7968' }}>
-          Choose the one that affects you most
+          {t('sorry.fullSubtitle')}
         </p>
       </div>
       
@@ -112,21 +112,21 @@ export function SorryToHeartScreen({
         <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
           {options.map(option => (
             <button 
-              key={option} 
+              key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedOption === option 
+                selectedOption === option.key 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedOption === option ? 'white' : '#4C4A3C',
-                borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
+                color: selectedOption === option.key ? 'white' : '#4C4A3C',
+                borderColor: selectedOption === option.key ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
-              onClick={() => handleOptionClick(option)}
+              onClick={() => handleOptionClick(option.key)}
             >
-              {option}
+              {t(option.key)}
             </button>
           ))}
         </div>
@@ -146,7 +146,7 @@ export function SorryToHeartScreen({
                 }}
                 onClick={() => {
                   // Get system name for selected option
-                  const systemName = selectedOption ? toggleSystemNames[selectedOption] : null;
+                  const systemName = selectedOption ? getSystemName(selectedOption) : null;
                   const issues = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
@@ -158,7 +158,7 @@ export function SorryToHeartScreen({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>

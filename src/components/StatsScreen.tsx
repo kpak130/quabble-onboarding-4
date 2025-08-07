@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface StatsScreenProps {
   onBack: () => void;
@@ -7,6 +8,8 @@ interface StatsScreenProps {
 }
 
 export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:stats_screen:landing"}');
   }, []);
@@ -28,11 +31,12 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            98% of our regular users
-            <br />
-            reported Quabble helps
-            <br />
-            managing their mental health
+            {t('stats.title').split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < t('stats.title').split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h1>
         </div>
 
@@ -65,7 +69,7 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

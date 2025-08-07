@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ImprovedProofScreenProps {
   onBack: () => void;
@@ -7,6 +8,8 @@ interface ImprovedProofScreenProps {
 }
 
 export function ImprovedProofScreen({ onBack, onNext }: ImprovedProofScreenProps) {
+  const { t } = useLanguage();
+  
   useEffect(() => {
     sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:improved_proof_screen:landing"}');
   }, []);
@@ -28,13 +31,12 @@ export function ImprovedProofScreen({ onBack, onNext }: ImprovedProofScreenProps
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            87% regular users report their
-            <br />
-            mental health has improved
-            <br />
-            since they started using
-            <br />
-            Quabble
+            {t('improvedProof.title').split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < t('improvedProof.title').split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </h1>
         </div>
 
@@ -67,7 +69,7 @@ export function ImprovedProofScreen({ onBack, onNext }: ImprovedProofScreenProps
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

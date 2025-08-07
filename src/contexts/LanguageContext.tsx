@@ -227,13 +227,13 @@ function getTranslations() {
       "weCanHelp.messagePersonalized": "We're here to help you through this tough time,\nand \"{achievement}\" is something\nyou can achieve with us.",
       
       // Why Quabble Screen
-      "whyQuabble.title": "Here's why Quabble might be just what you need.",
+      "whyQuabble.title": "Here's why Quabble might\nbe just what you need.",
       
       // Stats Screen
-      "stats.title": "98% of our regular users reported Quabble helps managing their mental health",
+      "stats.title": "98% of our regular users\nreported Quabble helps\nmanaging their mental health",
       
       // Improved Proof Screen
-      "improvedProof.title": "87% regular users report their mental health has improved since they started using Quabble",
+      "improvedProof.title": "87% regular users report their\nmental health has improved\nsince they started using\nQuabble",
       
       // Let's Find Out Screen
       "letsFindOut.message": "Welcome!\nLet's find out how\nwe can help you",
@@ -370,11 +370,21 @@ function getTranslations() {
       // Sorry To Heart Screen
       "sorry.title": "We're sorry to hear that",
       "sorry.subtitle": "Let's see what we can do to help",
+      "sorry.fullTitle": "Sorry to hear that,\nWhat's been going on?",
+      "sorry.fullSubtitle": "Choose the one that affects you most",
       "sorry.depression": "Depression",
       "sorry.anxiety": "Anxiety",
       "sorry.stress": "Stress",
       "sorry.loneliness": "Loneliness",
       "sorry.other": "Other",
+      "sorry.breakupRelationship": "Breakup or relationship stress",
+      "sorry.careerAcademic": "Career or academic pressure",
+      "sorry.healthIssues": "Health issues",
+      "sorry.burnout": "Burnout",
+      "sorry.loneliness2": "Loneliness",
+      "sorry.loss": "Loss",
+      "sorry.somethingElse": "Something else",
+      "sorry.nothingSpecific": "Nothing specific",
       
       // Achievement Screen
       "achievement.title": "What would you like to achieve?",
@@ -510,11 +520,21 @@ function getTranslations() {
       // Sorry To Heart Screen
       "sorry.title": "안타깝게 생각합니다",
       "sorry.subtitle": "도움을 드릴 수 있는 방법을 찾아보겠습니다",
+      "sorry.fullTitle": "안타깝게 생각합니다,\n무슨 일이 있으셨나요?",
+      "sorry.fullSubtitle": "가장 영향을 받는 것을 선택해주세요",
       "sorry.depression": "우울감",
       "sorry.anxiety": "불안감", 
       "sorry.stress": "스트레스",
       "sorry.loneliness": "외로움",
       "sorry.other": "기타",
+      "sorry.breakupRelationship": "이별 또는 관계 스트레스",
+      "sorry.careerAcademic": "직업 또는 학업 압박",
+      "sorry.healthIssues": "건강 문제",
+      "sorry.burnout": "번아웃",
+      "sorry.loneliness2": "외로움",
+      "sorry.loss": "상실",
+      "sorry.somethingElse": "기타",
+      "sorry.nothingSpecific": "특별한 것은 없음",
       
       // Achievement Screen
       "achievement.title": "무엇을 이루고 싶으신가요?",
@@ -537,6 +557,15 @@ function getTranslations() {
       
       // Mind Quote Screen
       "mindQuote.quote": "건강한 마음은 성공적이고\n풍요로우며 의미 있는\n삶의 기초입니다.",
+      
+      // Why Quabble Screen
+      "whyQuabble.title": "Quabble이 바로\n당신에게 필요한 것일 수 있는 이유입니다.",
+      
+      // Stats Screen
+      "stats.title": "정기 사용자의 98%가\nQuabble이 정신건강 관리에\n도움이 된다고 보고했습니다",
+      
+      // Improved Proof Screen
+      "improvedProof.title": "정기 사용자의 87%가\n정신건강이 개선되었다고\nQuabble 사용 시작 이후\n보고했습니다",
       
       // We Can Help Screen
       "weCanHelp.messageGeneral": "전문적인 치료가 필수적이지만,\nQuabble은 여러분의 정신건강 여정에서\n지원을 제공하고 함께 걸어가고자 합니다.",
@@ -660,11 +689,21 @@ function getTranslations() {
       // Sorry To Heart Screen
       "sorry.title": "それは残念です",
       "sorry.subtitle": "私たちにできることを見つけましょう",
+      "sorry.fullTitle": "それは残念です、\n何が起こっていますか？",
+      "sorry.fullSubtitle": "最も影響を受けているものを選択してください",
       "sorry.depression": "うつ",
       "sorry.anxiety": "不安",
       "sorry.stress": "ストレス",
       "sorry.loneliness": "孤独感",
       "sorry.other": "その他",
+      "sorry.breakupRelationship": "別れや恋愛関係のストレス",
+      "sorry.careerAcademic": "キャリアや学業のプレッシャー",
+      "sorry.healthIssues": "健康問題",
+      "sorry.burnout": "燃え尽き症候群",
+      "sorry.loneliness2": "孤独感",
+      "sorry.loss": "喪失",
+      "sorry.somethingElse": "その他",
+      "sorry.nothingSpecific": "特に何もない",
       
       // Achievement Screen
       "achievement.title": "何を達成したいですか？",
@@ -687,6 +726,15 @@ function getTranslations() {
       
       // Mind Quote Screen
       "mindQuote.quote": "健康な心は成功した\n充実した意味のある\n人生の基盤です。",
+      
+      // Why Quabble Screen
+      "whyQuabble.title": "Quabbleが\nあなたに必要なものである理由をご紹介します。",
+      
+      // Stats Screen
+      "stats.title": "定期利用者の98%が\nQuabbleがメンタルヘルス管理に\n役立つと報告しています",
+      
+      // Improved Proof Screen
+      "improvedProof.title": "定期利用者の87%が\nQuabbleを使い始めてから\nメンタルヘルスが改善されたと\n報告しています",
       
       // We Can Help Screen
       "weCanHelp.messageGeneral": "専門的なケアは不可欠ですが、\nQuabbleはあなたのメンタルヘルスの\n旅路でサポートを提供し、寄り添います。",
