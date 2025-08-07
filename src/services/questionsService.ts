@@ -15,7 +15,9 @@ export interface QuestionsResponse {
   message: Question[];
 }
 
-const API_ENDPOINT = '/api/quabble/onboardings/v3/questions';
+const API_ENDPOINT = import.meta.env.DEV 
+  ? '/api/quabble/onboardings/v3/questions'  // Use proxy in development
+  : 'https://prod-canary-1-27.muse.live/api/quabble/onboardings/v3/questions'; // Direct URL in production
 
 export const fetchQuestions = async (): Promise<Question[]> => {
   try {
