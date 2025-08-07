@@ -397,7 +397,7 @@ function getTranslations() {
       "achievement.moreConfident": "Be more confident",
       "achievement.other": "Other",
       "achievement.titleQuestion": "What do you want to\nachieve with us?",
-      "achievement.takeCare": "Take care of my mental health",
+      "achievement.takeCare": "Taking care of my mental health",
       "achievement.managingStress": "Managing daily stress",
       "achievement.positiveMindset": "Cultivating a positive mindset",
       "achievement.boostingSelfLove": "Boosting self-love",
