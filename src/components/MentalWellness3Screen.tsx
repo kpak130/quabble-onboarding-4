@@ -78,10 +78,10 @@ export function MentalWellness3Screen({
         <div className="flex items-center justify-between mt-16 mb-8">
           <div className="flex-1"></div>
           <button 
-            className="px-4 py-2 text-sm font-medium text-gray-700 bg-white/80 backdrop-blur-sm rounded-full border border-gray-300 hover:bg-white/90 transition-all"
+            className="w-8 h-8 text-xs font-normal text-gray-400 bg-white/20 backdrop-blur-sm rounded-full border border-gray-200/30 hover:bg-white/30 hover:text-gray-500 transition-all"
             onClick={onNext}
           >
-            {t('mentalWellness3.proceedButton')}
+            P
           </button>
         </div>
 
