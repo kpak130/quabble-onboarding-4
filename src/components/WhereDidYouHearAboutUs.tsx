@@ -1,31 +1,42 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Question } from '../services/questionsService';
 
 interface WhereDidYouHearAboutUsProps {
   onBack?: () => void;
   onNext: () => void;
   onSkip: () => void;
+  questionData?: Question;
+  questionsLoaded: boolean;
 }
 
-export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip }: WhereDidYouHearAboutUsProps) {
+export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, questionsLoaded }: WhereDidYouHearAboutUsProps) {
   const { t } = useLanguage();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   
-  const options = [
-    t('whereHear.appSearch'),
-    t('whereHear.socialMedia'),
-    t('whereHear.friendFamily'),
-    t('whereHear.other')
-  ];
+  // Use dynamic question data if available, otherwise fallback to localized options
+  const options = questionData ? 
+    questionData.options.map(option => option.text) :
+    [
+      t('whereHear.appSearch'),
+      t('whereHear.socialMedia'),
+      t('whereHear.friendFamily'),
+      t('whereHear.other')
+    ];
   
   // Mapping from option index to system names
-  const toggleSystemNames: { [key: number]: string } = {
-    0: 'appsearch',
-    1: 'socialmediaad',
-    2: 'friendfamily',
-    3: 'other'
-  };
+  const toggleSystemNames: { [key: number]: string } = questionData ?
+    questionData.options.reduce((acc, option, index) => {
+      acc[index] = option.text.toLowerCase().replace(/\s+/g, '');
+      return acc;
+    }, {} as { [key: number]: string }) :
+    {
+      0: 'appsearch',
+      1: 'socialmediaad',
+      2: 'friendfamily',
+      3: 'other'
+    };
 
   useEffect(() => {
     // Function to be called when the component mounts
@@ -63,14 +74,20 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip }: WhereDidYouHe
         
         {/* Title - with padding */}
         <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-            {t('whereHear.title').split('\n').map((line, index) => (
-              <span key={index}>
-                {line}
-                {index < t('whereHear.title').split('\n').length - 1 && <br />}
-              </span>
-            ))}
-          </h1>
+          {questionsLoaded ? (
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
+              {(questionData ? questionData.text : t('whereHear.title')).split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < (questionData ? questionData.text : t('whereHear.title')).split('\n').length - 1 && <br />}
+                </span>
+              ))}
+            </h1>
+          ) : (
+            <div className="flex items-center justify-center" style={{ height: '4rem' }}>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2" style={{ borderColor: '#4C4A3C' }}></div>
+            </div>
+          )}
         </div>
         
         {/* Image with viewport-based padding */}
@@ -104,27 +121,35 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip }: WhereDidYouHe
             paddingRight: '8vw' // 1/12.5 of viewport width
           }}
         >
-          <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
-            {options.map(option => (
-              <button
-                key={option}
-                className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                  selectedOption === option
-                    ? 'bg-[#f2994a] text-white'
-                    : 'bg-white border-2'
-                }`}
-                style={{
-                  color: selectedOption === option ? 'white' : '#4C4A3C',
-                  borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
-                  height: '7.5vh', // Slightly bigger button height
-                  fontSize: '2.5vh' // 1/40 of viewport height
-                }}
-                onClick={() => handleOptionClick(option)}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
+          {questionsLoaded ? (
+            <div className="w-full max-w-md mx-auto space-y-3 sm:space-y-4">
+              {options.map(option => (
+                <button
+                  key={option}
+                  className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
+                    selectedOption === option
+                      ? 'bg-[#f2994a] text-white'
+                      : 'bg-white border-2'
+                  }`}
+                  style={{
+                    color: selectedOption === option ? 'white' : '#4C4A3C',
+                    borderColor: selectedOption === option ? 'transparent' : '#E1E0D3',
+                    height: '7.5vh', // Slightly bigger button height
+                    fontSize: '2.5vh' // 1/40 of viewport height
+                  }}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center" style={{ color: '#7B7968' }}>
+                <div className="animate-pulse">Loading options...</div>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Next Button - only show when option is selected */}

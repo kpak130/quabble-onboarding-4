@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { prefetchImagesForScreen, prefetchAllCriticalImages } from './utils/imagePrefetch';
+import { fetchQuestions, defaultQuestions, Question } from './services/questionsService';
 import { AgeGroupScreen } from './components/AgeGroupScreen';
 import { GenderScreen } from './components/GenderScreen';
 import { FocusScreen } from './components/FocusScreen';
@@ -52,7 +53,6 @@ export function App() {
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [nextScreen, setNextScreen] = useState<typeof currentScreen | null>(null);
   
   // Track user's feeling choice for conditional navigation
   const [userFeelingChoice, setUserFeelingChoice] = useState<'difficult_recently' | 'ongoing_challenges' | 'doing_okay' | null>(null);
@@ -65,6 +65,28 @@ export function App() {
   
   // Track if user is in the "HaveMentalIssue Yes" extended flow (for navigation logic)
   const [isHaveMentalIssueYesFlow, setIsHaveMentalIssueYesFlow] = useState<boolean>(false);
+  
+  // Store dynamic questions fetched from API
+  const [questions, setQuestions] = useState<Question[]>(defaultQuestions);
+  const [questionsLoaded, setQuestionsLoaded] = useState<boolean>(false);
+
+  // Fetch questions from API on component mount
+  useEffect(() => {
+    const loadQuestions = async () => {
+      try {
+        const fetchedQuestions = await fetchQuestions();
+        setQuestions(fetchedQuestions);
+        console.log('Questions loaded from API:', fetchedQuestions);
+      } catch (error) {
+        console.error('Failed to load questions from API, using defaults:', error);
+        setQuestions(defaultQuestions);
+      } finally {
+        setQuestionsLoaded(true);
+      }
+    };
+
+    loadQuestions();
+  }, []);
 
   // Check URL parameters on component mount and prefetch critical images  
   useEffect(() => {
@@ -84,9 +106,13 @@ export function App() {
     prefetchImagesForScreen(currentScreen);
   }, [currentScreen]);
 
+  // Helper function to get question by ID
+  const getQuestionById = (id: number): Question | undefined => {
+    return questions.find(q => q.id === id);
+  };
+
   const performTransition = (targetScreen: typeof currentScreen) => {
     setIsTransitioning(true);
-    setNextScreen(targetScreen);
     // Wait for fade out before changing screen
     setTimeout(() => {
       setCurrentScreen(targetScreen);
@@ -450,7 +476,7 @@ export function App() {
     }
     if (currentScreen === 'achievement') {
       return <TransitionWrapper show={!isTransitioning}>
-          <AchivementScreen onBack={handleBack} onNext={handleAchievementNext} onSkip={handleSkip} />
+          <AchivementScreen onBack={handleBack} onNext={handleAchievementNext} onSkip={handleSkip} questionData={getQuestionById(3)} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'mindquote') {
@@ -560,7 +586,7 @@ export function App() {
     }
     if (currentScreen === 'age') {
       return <TransitionWrapper show={!isTransitioning}>
-          <AgeGroupScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <AgeGroupScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} questionData={getQuestionById(2)} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'duckjar') {
@@ -569,7 +595,7 @@ export function App() {
         </TransitionWrapper>;
     }
     return <TransitionWrapper show={!isTransitioning}>
-        <WhereDidYouHearAboutUs onNext={handleNext} onSkip={handleSkip} />
+        <WhereDidYouHearAboutUs onNext={handleNext} onSkip={handleSkip} questionData={getQuestionById(1)} questionsLoaded={questionsLoaded} />
       </TransitionWrapper>;
   };
   return (

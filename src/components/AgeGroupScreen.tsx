@@ -1,27 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Question } from '../services/questionsService';
+
 interface AgeGroupScreenProps {
   onBack: () => void;
   onNext: () => void;
   onSkip: () => void;
+  questionData?: Question;
 }
 export function AgeGroupScreen({
   onBack,
   onNext,
-  onSkip
+  onSkip,
+  questionData
 }: AgeGroupScreenProps) {
 
   const { t } = useLanguage();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
   
-  const ageGroups = [
-    { key: 'age.under18', systemName: 'under_18' },
-    { key: 'age.19to24', systemName: '19_24' },
-    { key: 'age.25to34', systemName: '25_34' },
-    { key: 'age.35plus', systemName: '35_and_over' },
-    { key: 'age.preferNotToAnswer', systemName: 'prefer_not_to_answer' }
-  ];
+  const ageGroups = questionData ? 
+    questionData.options.map(option => ({
+      key: option.text,
+      systemName: option.text.toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, '')
+    })) :
+    [
+      { key: 'age.under18', systemName: 'under_18' },
+      { key: 'age.19to24', systemName: '19_24' },
+      { key: 'age.25to34', systemName: '25_34' },
+      { key: 'age.35plus', systemName: '35_and_over' },
+      { key: 'age.preferNotToAnswer', systemName: 'prefer_not_to_answer' }
+    ];
   
   const handleAgeGroupClick = (ageGroupKey: string) => {
     setSelectedAgeGroup(ageGroupKey);
@@ -56,7 +65,7 @@ export function AgeGroupScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          {t('age.title')}
+          {questionData ? questionData.text : t('age.title')}
         </h1>
       </div>
       
@@ -108,7 +117,7 @@ export function AgeGroupScreen({
               }}
               onClick={() => handleAgeGroupClick(ageGroup.key)}
             >
-              {t(ageGroup.key)}
+              {questionData ? ageGroup.key : t(ageGroup.key)}
             </button>
           ))}
         </div>
