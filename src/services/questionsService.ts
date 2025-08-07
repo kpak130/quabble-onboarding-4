@@ -15,13 +15,19 @@ export interface QuestionsResponse {
   message: Question[];
 }
 
-const API_ENDPOINT = import.meta.env.DEV 
+const API_ENDPOINT = process.env.NODE_ENV === 'development'
   ? '/api/quabble/onboardings/v3/questions'  // Use proxy in development
   : 'https://prod-canary-1-27.muse.live/api/quabble/onboardings/v3/questions'; // Direct URL in production
 
 export const fetchQuestions = async (): Promise<Question[]> => {
   try {
-    const response = await fetch(API_ENDPOINT);
+    const response = await fetch(API_ENDPOINT, {
+      referrerPolicy: 'no-referrer',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    });
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
