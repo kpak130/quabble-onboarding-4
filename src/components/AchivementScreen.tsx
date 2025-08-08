@@ -144,12 +144,12 @@ export function AchivementScreen({
                   // Get system name for selected focus
                   const selectedOption = selectedFocus ? options.find(opt => opt.displayText === selectedFocus) : null;
                   const systemName = selectedOption ? selectedOption.systemName : null;
-                  const focuses = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
+                    "event": "click_next_ob_survey_want_to_achieve",
                     "eventProperties": {
-                      "focuses": focuses
+                      "onboarding_version": 4.0,
+                      "survey_want_to_achieve": systemName || selectedFocus || ""
                     }
                   }));
                   onNext(selectedFocus || '');
