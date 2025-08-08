@@ -26,8 +26,13 @@ export function HaveMentalIssueScreen({
   };
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:mental_health_challenges:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "ob_survey_ongoing_mental_challenge",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

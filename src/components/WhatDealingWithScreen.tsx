@@ -38,8 +38,13 @@ export function WhatDealingWithScreen({
   };
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:what_dealing_with:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_what_dealing_with",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

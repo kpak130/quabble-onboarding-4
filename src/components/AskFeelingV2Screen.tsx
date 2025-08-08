@@ -34,8 +34,13 @@ export function AskFeelingV2Screen({
   };
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:ask_feeling_v2:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "ob_survey_how_have_you_been",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return (

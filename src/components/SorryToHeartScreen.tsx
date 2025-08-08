@@ -38,8 +38,13 @@ export function SorryToHeartScreen({
   };
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:sorry_to_hear:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_what_is_going_on",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

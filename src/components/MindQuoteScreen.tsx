@@ -12,8 +12,13 @@ export function MindQuoteScreen({
   const { t } = useLanguage();
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:mind_quote:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "ob_info_healthy_mind",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return (
