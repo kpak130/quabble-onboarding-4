@@ -146,12 +146,12 @@ export function GoodNightScreen({
                   fontSize: '2.5vh' // 1/40 of viewport height
                 }}
                 onClick={() => {
-                  // Send click next event with formatted sleep time
-                  const formattedDateTime = formatToDateTime(bedTime);
+                  // Send click next event with bed time
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:page_7:click_next",
+                    "event": "click_next_ob_survey_go_to_bed",
                     "eventProperties": {
-                      "sleepTime": formattedDateTime
+                      "onboarding_version": 4.0,
+                      "survey_go_to_bed": bedTime
                     }
                   }));
                   onNext();
