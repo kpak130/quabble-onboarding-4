@@ -14,8 +14,13 @@ export function TherapistScreen({
   const { t } = useLanguage();
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:therapist:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_therapist_recommended",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>
@@ -73,7 +78,6 @@ export function TherapistScreen({
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:therapist:click_next"}');
                 onNext();
               }}
             >

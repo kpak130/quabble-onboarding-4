@@ -87,7 +87,6 @@ export function WeCanHelpScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:we_can_help:click_next"}');
                 onNext();
               }}
             >

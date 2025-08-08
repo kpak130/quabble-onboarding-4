@@ -65,7 +65,6 @@ export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:why_quabble:click_next"}');
                 onNext();
               }}
             >

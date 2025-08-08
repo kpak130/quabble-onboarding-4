@@ -139,7 +139,17 @@ export function AskInterestsPage({
                   height: '7.5vh', // Slightly bigger button height (same as option buttons)
                   fontSize: '2.5vh' // 1/40 of viewport height
                 }}
-                onClick={onNext}
+                onClick={() => {
+                  // Send click next event with selected interests
+                  sendToFlutter(JSON.stringify({
+                    "event": "click_next_ob_survey_interested_activity",
+                    "eventProperties": {
+                      "onboarding_version": 4.0,
+                      "survey_interested_activity": selectedInterests.join(', ') || ""
+                    }
+                  }));
+                  onNext();
+                }}
               >
                 Next
               </button>

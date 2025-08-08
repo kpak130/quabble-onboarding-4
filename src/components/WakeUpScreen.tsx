@@ -35,8 +35,6 @@ export function WakeUpScreen({
     setSelectedPeriod(period);
     setShowTimeModal(true);
     
-    // Send click alarm time event
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_6:click_alarm_time"}');
   };
 
   const handleTimeConfirm = () => {
