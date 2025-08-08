@@ -23,7 +23,9 @@ export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
   return (
     <div className="flex flex-col w-full h-screen bg-[#F5F0E8] text-gray-800 relative overflow-hidden">
       <div className="flex flex-col items-center px-5 sm:px-6" style={{ paddingTop: '5vh' }}>
-        <div className="w-full mb-12 sm:mb-16">
+        <div className="flex items-center justify-between w-full mb-12 sm:mb-16">
+          <div className="p-2 w-10 h-10"></div>
+          <div className="flex-1"></div>
         </div>
 
         <div className="flex flex-col items-center justify-center mb-20 sm:mb-24 text-center max-w-sm">
