@@ -75,6 +75,14 @@ export function WeCanHelpScreen({
                   {index < t('weCanHelp.messageGeneral').split('\n').length - 1 && <br />}
                 </span>
               ))
+            ) : userFeelingChoice === 'doing_okay' ? (
+              // AskFeelingV2Screen "doing_okay" → "So glad to hear that!" message (HIGH PRIORITY)
+              t('weCanHelp.messageDoingOkay').replace('{achievement}', 'your goals').split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t('weCanHelp.messageDoingOkay').replace('{achievement}', 'your goals').split('\n').length - 1 && <br />}
+                </span>
+              ))
             ) : fromHaveMentalIssueYes === false && achievementSelection ? (
               // HaveMentalIssueScreen "No" with achievement → "We're here to help you..." message
               t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
@@ -92,7 +100,7 @@ export function WeCanHelpScreen({
                 </span>
               ))
             ) : achievementSelection ? (
-              // AskFeelingV2Screen "doing_okay" with achievement → "So glad to hear that!" message
+              // Other paths with achievement → "So glad to hear that!" message
               t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
                 <span key={index}>
                   {line}
