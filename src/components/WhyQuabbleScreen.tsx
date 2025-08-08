@@ -11,7 +11,13 @@ export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
   const { t } = useLanguage();
   
   useEffect(() => {
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:why_quabble:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_quabble_just_what_you_need",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
 
   return (

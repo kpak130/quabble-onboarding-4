@@ -28,7 +28,7 @@ export function HaveMentalIssueScreen({
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
-      "event": "ob_survey_ongoing_mental_challenge",
+      "event": "view_ob_survey_ongoing_mental_challenge",
       "eventProperties": {
         "onboarding_version": 4.0
       }

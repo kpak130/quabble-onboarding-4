@@ -14,7 +14,7 @@ export function MindQuoteScreen({
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
-      "event": "ob_info_healthy_mind",
+      "event": "view_ob_info_healthy_mind",
       "eventProperties": {
         "onboarding_version": 4.0
       }
