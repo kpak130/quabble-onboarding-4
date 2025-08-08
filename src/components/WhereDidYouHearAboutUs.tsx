@@ -39,8 +39,12 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
     };
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_2_part_1:landing"}');
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_first_hear_us",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   const handleOptionClick = (option: string) => {
