@@ -51,7 +51,7 @@ export function QuabbleToolsScreen({
       </div>
       
       {/* Content Container */}
-      <div className="flex flex-col items-center px-5 sm:px-6 mt-6">
+      <div className="flex flex-col items-center px-3 sm:px-4 mt-6">
         
         {/* Title and Subtitle */}
         <div className="flex flex-col items-center justify-center mb-10 sm:mb-14 flex-shrink-0">
@@ -71,7 +71,7 @@ export function QuabbleToolsScreen({
       </div>
       
       {/* Tools Grid */}
-      <div className="flex-1 px-5 sm:px-6 flex justify-center">
+      <div className="flex-1 px-3 sm:px-4 flex justify-center">
         <div className="max-w-md w-full">
           <div 
             className="grid grid-cols-4 gap-1 sm:gap-2 overflow-y-auto"
@@ -87,11 +87,17 @@ export function QuabbleToolsScreen({
                 <img
                   src={tool.image}
                   alt={tool.name}
-                  className="w-24 h-24 object-contain mb-2"
+                  className="w-24 h-24 object-contain"
+                  style={{ marginBottom: '0.25vh' }}
                 />
                 <span 
-                  className="text-xs text-center leading-tight break-words pb-4"
-                  style={{ color: '#7B7968', lineHeight: '1.2', whiteSpace: 'pre-line' }}
+                  className="text-xs text-center leading-tight break-words"
+                  style={{ 
+                    color: '#7B7968', 
+                    lineHeight: '1.2', 
+                    whiteSpace: 'pre-line',
+                    paddingBottom: '1vh'
+                  }}
                 >
                   {tool.name}
                 </span>
