@@ -16,7 +16,7 @@ export function WhatDidYouTryScreen({
 }: WhatDidYouTryScreenProps) {
   const { t } = useLanguage();
   const { addSelection } = useSelections();
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
   
   const options = [
     { key: 'whatTry.therapyCounseling', systemName: 'therapy_counseling' },
@@ -35,7 +35,11 @@ export function WhatDidYouTryScreen({
   };
 
   const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+    setSelectedOptions(prev => 
+      prev.includes(option) 
+        ? prev.filter(o => o !== option)
+        : [...prev, option]
+    );
   };
 
   useEffect(() => {
@@ -120,13 +124,13 @@ export function WhatDidYouTryScreen({
             <button 
               key={option.key} 
               className={`w-full px-6 sm:px-7 rounded-full text-center font-normal transition-colors touch-target ${
-                selectedOption === option.key 
+                selectedOptions.includes(option.key) 
                   ? 'bg-[#f2994a] text-white' 
                   : 'bg-white border-2'
               }`}
               style={{ 
-                color: selectedOption === option.key ? 'white' : '#4C4A3C',
-                borderColor: selectedOption === option.key ? 'transparent' : '#E1E0D3',
+                color: selectedOptions.includes(option.key) ? 'white' : '#4C4A3C',
+                borderColor: selectedOptions.includes(option.key) ? 'transparent' : '#E1E0D3',
                 height: '7.5vh', // Slightly bigger button height
                 fontSize: '2.2vh' // Slightly smaller text
               }}
@@ -138,8 +142,8 @@ export function WhatDidYouTryScreen({
         </div>
       </div>
       
-      {/* Next Button - only show when option is selected */}
-      {selectedOption && (
+      {/* Next Button - only show when at least one option is selected */}
+      {selectedOptions.length > 0 && (
         <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50 slide-up-animation" 
              style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
           <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
@@ -151,8 +155,8 @@ export function WhatDidYouTryScreen({
                   fontSize: '2.5vh' // 1/40 of viewport height
                 }}
                 onClick={() => {
-                  // Get system name for selected option
-                  const systemName = selectedOption ? getSystemName(selectedOption) : null;
+                  // Get system names for selected options
+                  const systemNames = selectedOptions.map(option => getSystemName(option)).filter(Boolean);
                   
                   // Note: This screen doesn't correspond to a specific question in questionsService.ts
                   // Selection tracking would need to be added if a corresponding question is created
@@ -161,10 +165,13 @@ export function WhatDidYouTryScreen({
                     "event": "click_next_ob_survey_tried_before",
                     "eventProperties": {
                       "onboarding_version": 4.0,
-                      "survey_tried_before": systemName || selectedOption || ""
+                      "survey_tried_before": systemNames.join(', ') || selectedOptions.join(', ') || ""
                     }
                   }));
-                  onNext(systemName || selectedOption || '');
+                  
+                  // Check if mental_wellness_apps is selected for navigation logic
+                  const hasMentalWellnessApps = systemNames.includes('mental_wellness_apps');
+                  onNext(hasMentalWellnessApps ? 'mental_wellness_apps' : 'other');
                 }}
               >
                 {t('next')}
