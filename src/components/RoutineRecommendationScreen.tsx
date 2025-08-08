@@ -11,8 +11,13 @@ export function RoutineRecommendationScreen({
   onNext
 }: RoutineRecommendationScreenProps) {
   useEffect(() => {
-    // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_13_1:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_ask_recommended_routine",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
 
   return (

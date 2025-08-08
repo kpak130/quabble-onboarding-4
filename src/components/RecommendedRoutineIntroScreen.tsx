@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 
 interface RecommendedRoutineIntroScreenProps {
   onBack: () => void;
@@ -9,6 +10,15 @@ export function RecommendedRoutineIntroScreen({
   onBack,
   onNext
 }: RecommendedRoutineIntroScreenProps) {
+  useEffect(() => {
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_check_out_routine",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
+  }, []);
   return (
     <div className="flex flex-col w-full min-h-screen bg-[#faf7f0] relative">
       {/* Main content - positioned at balanced location */}

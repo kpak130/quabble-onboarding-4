@@ -15,8 +15,13 @@ export function SupportSystemScreen({
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   useEffect(() => {
-    // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_11:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_support_system",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
   
   const options = [

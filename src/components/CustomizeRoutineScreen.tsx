@@ -13,8 +13,13 @@ export function CustomizeRoutineScreen({
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_12:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "ob_info_customizing_routine",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
 
   useEffect(() => {
