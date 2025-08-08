@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useAuth } from '../contexts/AuthContext';
 
 interface MentalWellness3ScreenProps {
   onBack: () => void;
@@ -12,6 +13,7 @@ export function MentalWellness3Screen({
   onNext
 }: MentalWellness3ScreenProps) {
   const { t } = useLanguage();
+  const { setAuthData } = useAuth();
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
@@ -22,31 +24,35 @@ export function MentalWellness3Screen({
     // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4:landing"}');
     
     // Event listener for 'sign-in-complete' event from Flutter
-    const handleSignInComplete = (event: any) => {
-      // console.log('Sign-in complete event received from Flutter');
-      // console.log('Event payload:', event.detail); // Log the payload
+    const handleSignInComplete = (event: Event) => {
+      console.log('Sign-in complete event received from Flutter');
+      
+      // Cast to CustomEvent to access detail property
+      const customEvent = event as CustomEvent;
+      console.log('Event payload:', customEvent.detail); // Log the payload
       
       // Access the payload data
-      const payload = event.detail;
-      const userId = payload.userid;
+      const payload = customEvent.detail;
+      const userId = payload.userId || payload.userid; // Handle both possible field names
       const token = payload.accessToken;
+      
       /*
-      Future<void> _sendSignInCompleteEventToWeb() async {
-        final authProvider = context.read<AuthProvider>();
-        final userProvider = context.read<UserProvider>();
-        final data = {
-          'userId': userProvider.me.id,
-          'accessToken': authProvider.getAccessToken(),
-        };
-        final String jsCode = """
-          const event = new CustomEvent('sign-in-complete', {
-            detail: ${jsonEncode(data)}
-          });
-          window.dispatchEvent(event);
-          console.log('Flutter dispatched sign-in-complete event with data');
-        """;
+      Flutter sends data in this format:
+      {
+        'userId': userProvider.me.id,
+        'accessToken': authProvider.getAccessToken(),
       }
       */
+
+      if (userId && token) {
+        console.log('🔐 Storing auth data from Flutter sign-in');
+        setAuthData(userId, token);
+      } else {
+        console.error('❌ Missing userId or accessToken in sign-in payload:', payload);
+        setError('Sign-in data incomplete. Please try again.');
+        setIsSigningIn(false);
+        return;
+      }
 
       setIsSigningIn(false);
       setError(null);
@@ -60,7 +66,7 @@ export function MentalWellness3Screen({
     return () => {
       window.removeEventListener('sign-in-complete', handleSignInComplete);
     };
-  }, [onNext]); 
+  }, [onNext, setAuthData]); 
 
   return (
     <>
