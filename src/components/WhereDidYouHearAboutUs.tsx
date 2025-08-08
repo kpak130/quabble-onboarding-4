@@ -172,12 +172,11 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
                     // Get system name for selected option using index
                     const optionIndex = selectedOption ? options.indexOf(selectedOption) : -1;
                     const systemName = optionIndex >= 0 ? toggleSystemNames[optionIndex] : null;
-                    const sources = systemName ? [systemName] : [];
-                    
                     sendToFlutter(JSON.stringify({
-                      "event": "v2_5_7_onboarding_A::onboarding:page_2_part_1:click_next",
+                      "event": "click_next_ob_survey_first_hear_us",
                       "eventProperties": {
-                        "sources": sources
+                        "onboarding_version": 4.0,
+                        "survey_first_hear_us": systemName || selectedOption || ""
                       }
                     }));
                     onNext();
