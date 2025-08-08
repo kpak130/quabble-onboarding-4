@@ -14,6 +14,9 @@ export function MentalWellness3Screen({
   const { t } = useLanguage();
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  // Check if debug mode is enabled via query parameter
+  const isDebugMode = new URLSearchParams(window.location.search).get('debug') === 'true';
 
   useEffect(() => {
     // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4:landing"}');
@@ -77,12 +80,14 @@ export function MentalWellness3Screen({
         {/* Header */}
         <div className="flex items-center justify-between mt-16 mb-8">
           <div className="flex-1"></div>
-          <button 
-            className="w-8 h-8 text-xs font-normal text-gray-400 bg-white/20 backdrop-blur-sm rounded-full border border-gray-200/30 hover:bg-white/30 hover:text-gray-500 transition-all"
-            onClick={onNext}
-          >
-            P
-          </button>
+          {isDebugMode && (
+            <button 
+              className="w-8 h-8 text-xs font-normal text-gray-400 bg-white/20 backdrop-blur-sm rounded-full border border-gray-200/30 hover:bg-white/30 hover:text-gray-500 transition-all"
+              onClick={onNext}
+            >
+              P
+            </button>
+          )}
         </div>
 
         {/* Main content */}

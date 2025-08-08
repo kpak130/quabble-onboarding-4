@@ -5,7 +5,7 @@ import { SupportedLanguage, getLanguageName } from '../utils/language';
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage();
   
-  const languages: SupportedLanguage[] = ['en', 'kr', 'jp'];
+  const languages: SupportedLanguage[] = ['en', 'kr', 'ja'];
   
   return (
     <div className="fixed top-4 right-4 z-50 bg-white/80 backdrop-blur-sm rounded-lg p-2 shadow-lg">
