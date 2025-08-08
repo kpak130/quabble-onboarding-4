@@ -11,8 +11,13 @@ export function WhySoManyScreen({
   onNext
 }: WhySoManyScreenProps) {
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:why_so_many:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_why_quable_help",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

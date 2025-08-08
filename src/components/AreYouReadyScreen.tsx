@@ -12,8 +12,13 @@ export function AreYouReadyScreen({
 }: AreYouReadyScreenProps) {
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:are_you_ready:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_ask_routine_set_up",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

@@ -10,8 +10,13 @@ export function TestimonialsV2Screen({
 }: TestimonialsV2ScreenProps) {
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:testimonials_v2:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "ob_info_review",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   const testimonials = [
