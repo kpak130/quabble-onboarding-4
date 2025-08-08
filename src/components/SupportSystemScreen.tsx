@@ -141,7 +141,20 @@ export function SupportSystemScreen({
                     height: '7.5vh', // Slightly bigger button height (same as option buttons)
                     fontSize: '2.5vh' // 1/40 of viewport height
                   }}
-                  onClick={onNext}
+                  onClick={() => {
+                    // Get system name for selected option
+                    const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
+                    const systemName = selectedOptionData ? selectedOptionData.systemName : null;
+                    
+                    sendToFlutter(JSON.stringify({
+                      "event": "click_next_ob_survey_support_system",
+                      "eventProperties": {
+                        "onboarding_version": 4.0,
+                        "survey_support_system": systemName || selectedOption || ""
+                      }
+                    }));
+                    onNext();
+                  }}
                 >
                   {t('done')}
                 </button>

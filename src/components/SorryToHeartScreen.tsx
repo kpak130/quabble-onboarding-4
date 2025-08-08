@@ -152,12 +152,12 @@ export function SorryToHeartScreen({
                 onClick={() => {
                   // Get system name for selected option
                   const systemName = selectedOption ? getSystemName(selectedOption) : null;
-                  const issues = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:sorry_to_hear:click_next",
+                    "event": "click_next_ob_survey_what_is_going_on",
                     "eventProperties": {
-                      "issues": issues
+                      "onboarding_version": 4.0,
+                      "survey_what_is_going_on": systemName || selectedOption || ""
                     }
                   }));
                   onNext();

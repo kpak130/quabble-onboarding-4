@@ -36,7 +36,7 @@ export function AskFeelingV2Screen({
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
-      "event": "ob_survey_how_have_you_been",
+      "event": "view_ob_survey_how_have_you_been",
       "eventProperties": {
         "onboarding_version": 4.0
       }
@@ -142,12 +142,12 @@ export function AskFeelingV2Screen({
                    }}
                   onClick={() => {
                     const systemName = selectedFeeling ? toggleSystemNames[selectedFeeling] : null;
-                    const feelings = systemName ? [systemName] : [];
                     
                     sendToFlutter(JSON.stringify({
-                      "event": "v2_5_7_onboarding_A::onboarding:ask_feeling_v2:click_next",
+                      "event": "click_next_ob_survey_how_have_you_been",
                       "eventProperties": {
-                        "feelings": feelings
+                        "onboarding_version": 4.0,
+                        "survey_how_have_you_been": systemName || selectedFeeling || ""
                       }
                     }));
                     
