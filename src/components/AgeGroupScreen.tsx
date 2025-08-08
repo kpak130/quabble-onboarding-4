@@ -144,12 +144,12 @@ export function AgeGroupScreen({
                   // Get system name for selected age group
                   const selectedAgeGroupData = selectedAgeGroup ? ageGroups.find(ag => ag.key === selectedAgeGroup) : null;
                   const systemName = selectedAgeGroupData ? selectedAgeGroupData.systemName : null;
-                  const ageGroup = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:page_2_part_3:click_next",
+                    "event": "click_next_ob_survey_age_group",
                     "eventProperties": {
-                      "ageGroup": ageGroup
+                      "onboarding_version": 4.0,
+                      "survey_age_group": systemName || selectedAgeGroup || ""
                     }
                   }));
                   onNext();
