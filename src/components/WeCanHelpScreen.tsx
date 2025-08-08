@@ -77,10 +77,10 @@ export function WeCanHelpScreen({
               ))
             ) : userFeelingChoice === 'doing_okay' ? (
               // AskFeelingV2Screen "doing_okay" → "So glad to hear that!" message (HIGH PRIORITY)
-              t('weCanHelp.messageDoingOkay').replace('{achievement}', 'your goals').split('\n').map((line, index) => (
+              t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection?.toLowerCase() || 'your goals').split('\n').map((line, index) => (
                 <span key={index}>
                   {line}
-                  {index < t('weCanHelp.messageDoingOkay').replace('{achievement}', 'your goals').split('\n').length - 1 && <br />}
+                  {index < t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection?.toLowerCase() || 'your goals').split('\n').length - 1 && <br />}
                 </span>
               ))
             ) : fromHaveMentalIssueYes === false && achievementSelection ? (
