@@ -8,6 +8,7 @@ interface WeCanHelpScreenProps {
   onSkip: () => void;
   achievementSelection?: string | null;
   cameFromYesPath?: boolean;
+  fromHaveMentalIssueYes?: boolean;
 }
 
 export function WeCanHelpScreen({
@@ -15,7 +16,8 @@ export function WeCanHelpScreen({
   onNext,
   onSkip,
   achievementSelection,
-  cameFromYesPath
+  cameFromYesPath,
+  fromHaveMentalIssueYes
 }: WeCanHelpScreenProps) {
   const { t } = useLanguage();
 
@@ -55,7 +57,16 @@ export function WeCanHelpScreen({
         {/* Message Text */}
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white">
-            {cameFromYesPath && achievementSelection ? (
+            {fromHaveMentalIssueYes ? (
+              // HaveMentalIssueScreen "Yes" → "While professional care..." message
+              t('weCanHelp.messageGeneral').split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t('weCanHelp.messageGeneral').split('\n').length - 1 && <br />}
+                </span>
+              ))
+            ) : cameFromYesPath && achievementSelection ? (
+              // HaveMentalIssueScreen "No" or other paths with achievement → "We're here to help you..." message
               t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
                 <span key={index}>
                   {line}
@@ -63,6 +74,7 @@ export function WeCanHelpScreen({
                 </span>
               ))
             ) : (
+              // Default fallback
               t('weCanHelp.messageGeneral').split('\n').map((line, index) => (
                 <span key={index}>
                   {line}

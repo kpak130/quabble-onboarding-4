@@ -69,6 +69,12 @@ export function App() {
   // Track if user is in the "HaveMentalIssue Yes" extended flow (for navigation logic)
   const [isHaveMentalIssueYesFlow, setIsHaveMentalIssueYesFlow] = useState<boolean>(false);
   
+  // Track if user came from HaveMentalIssueScreen with "Yes" (for WeCanHelpScreen message)
+  const [fromHaveMentalIssueYes, setFromHaveMentalIssueYes] = useState<boolean>(false);
+  
+  // Track if user came from HaveMentalIssueScreen with "No" (for navigation)
+  const [fromHaveMentalIssueNo, setFromHaveMentalIssueNo] = useState<boolean>(false);
+  
   // Store dynamic questions fetched from API
   const [questions, setQuestions] = useState<Question[]>(defaultQuestions);
   const [questionsLoaded, setQuestionsLoaded] = useState<boolean>(false);
@@ -126,6 +132,8 @@ export function App() {
   // Handle feeling selection and conditional navigation
   const handleFeelingNext = (feelingChoice: 'difficult_recently' | 'ongoing_challenges' | 'doing_okay') => {
     setUserFeelingChoice(feelingChoice);
+    setFromHaveMentalIssueYes(false); // Clear flags as this is not from HaveMentalIssueScreen
+    setFromHaveMentalIssueNo(false);
     
     if (feelingChoice === 'difficult_recently') {
       performTransition('sorrytoheart');
@@ -141,12 +149,16 @@ export function App() {
   const handleMentalIssueNext = (hasIssue: 'yes' | 'no') => {
     if (hasIssue === 'yes') {
       setCameFromYesPath(true);
+      setFromHaveMentalIssueYes(true);
+      setFromHaveMentalIssueNo(false);
       // If Yes, go through extended flow: whatdealingwith → wecanhelp → whatdidyoutry → whatfeltmissing → whyquabble
       setIsHaveMentalIssueYesFlow(true);
       performTransition('whatdealingwith');
     } else {
       setCameFromYesPath(false);
-      // If No, go to shorter flow: just wecanhelp → normal flow
+      setFromHaveMentalIssueYes(false);
+      setFromHaveMentalIssueNo(true);
+      // If No, go to shorter flow: wecanhelp → whyquabble
       performTransition('wecanhelp');
     }
   };
@@ -189,6 +201,10 @@ export function App() {
       if (isHaveMentalIssueYesFlow) {
         // HaveMentalIssue "Yes" flow: whatdealingwith → wecanhelp → whatdidyoutry → whatfeltmissing → whyquabble
         performTransition('whatdidyoutry');
+      } else if (fromHaveMentalIssueNo) {
+        // HaveMentalIssueScreen "No" flow: wecanhelp → whyquabble (skip extended flow)
+        setFromHaveMentalIssueNo(false); // Reset flag
+        performTransition('whyquabble');
       } else if (userFeelingChoice === 'difficult_recently' || userFeelingChoice === 'ongoing_challenges') {
         // From AskFeelingV2 with challenges: wecanhelp → whatdidyoutry
         performTransition('whatdidyoutry');
@@ -203,8 +219,9 @@ export function App() {
       performTransition('whatfeltmissing');
     } else if (currentScreen === 'whatfeltmissing') {
       if (isHaveMentalIssueYesFlow) {
-        // In HaveMentalIssue "Yes" flow: whatfeltmissing → whyquabble, then reset flag
+        // In HaveMentalIssue "Yes" flow: whatfeltmissing → whyquabble, then reset flags
         setIsHaveMentalIssueYesFlow(false);
+        setFromHaveMentalIssueYes(false);
         performTransition('whyquabble');
       } else {
         // Normal flow: whatfeltmissing → whyquabble
@@ -510,7 +527,7 @@ export function App() {
     }
     if (currentScreen === 'wecanhelp') {
       return <TransitionWrapper show={!isTransitioning}>
-          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} achievementSelection={userAchievementSelection} cameFromYesPath={cameFromYesPath} />
+          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} achievementSelection={userAchievementSelection} cameFromYesPath={cameFromYesPath} fromHaveMentalIssueYes={fromHaveMentalIssueYes} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'whatdidyoutry') {
