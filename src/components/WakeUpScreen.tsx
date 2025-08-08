@@ -17,8 +17,13 @@ export function WakeUpScreen({
   const [selectedPeriod, setSelectedPeriod] = useState('AM');
 
   useEffect(() => {
-    // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_6:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_wake_up",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
 
   const handleOpenTimeModal = () => {

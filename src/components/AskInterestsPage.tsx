@@ -13,8 +13,13 @@ export function AskInterestsPage({
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
   useEffect(() => {
-    // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_10:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_interested_activity",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
   
   const interestOptions = [

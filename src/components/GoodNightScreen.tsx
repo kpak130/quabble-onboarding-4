@@ -17,8 +17,13 @@ export function GoodNightScreen({
   const [selectedPeriod, setSelectedPeriod] = useState('PM');
 
   useEffect(() => {
-    // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_7:landing"}');
+    // Send the new event for onboarding survey
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_survey_go_to_bed",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []);
 
   const handleOpenTimeModal = () => {
