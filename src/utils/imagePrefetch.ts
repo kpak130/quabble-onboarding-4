@@ -1,5 +1,5 @@
 type ScreenType = 
-  | 'referral' | 'age' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'whysomany' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
+  | 'referral' | 'age' | 'tooyoung' | 'duckjar' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'whysomany' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'gender' | 'duckjar' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'testimonials' 
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
@@ -8,6 +8,7 @@ type ScreenType =
 const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   referral: [],
   age: ['/images/2-duck.png'],
+  tooyoung: ['/images/too-young-duck.png'],
   duckjar: ['/images/8-duck.png'],
   askfeelingv2: ['/images/1-duck.png'],
   sorrytoheart: ['/images/sorry-to-hear-duck.png'],
@@ -110,7 +111,7 @@ export function prefetchImagesForScreen(currentScreen: ScreenType): void {
   screensToPreload.forEach(screenType => {
     const images = SCREEN_IMAGES[screenType];
     images.forEach(imageSrc => {
-      preloadImage(imageSrc).catch(() => {});
+      preloadImage(imageSrc).catch(() => { /* Ignore preload errors */ });
     });
   });
 }
@@ -132,6 +133,6 @@ export function prefetchAllCriticalImages(): void {
   ];
 
   criticalImages.forEach(imageSrc => {
-    preloadImage(imageSrc).catch(() => {});
+    preloadImage(imageSrc).catch(() => { /* Ignore preload errors */ });
   });
 }

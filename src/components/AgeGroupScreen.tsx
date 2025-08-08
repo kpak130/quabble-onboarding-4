@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Question } from '../services/questionsService';
@@ -8,16 +8,31 @@ interface AgeGroupScreenProps {
   onNext: () => void;
   onSkip: () => void;
   questionData?: Question;
+  onTooYoung?: () => void;
 }
 export function AgeGroupScreen({
   onBack,
   onNext,
   onSkip,
-  questionData
+  questionData,
+  onTooYoung
 }: AgeGroupScreenProps) {
 
   const { t } = useLanguage();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
+  const [showBirthdayModal, setShowBirthdayModal] = useState(false);
+  const [selectedDay, setSelectedDay] = useState<number>(26);
+  const [selectedMonth, setSelectedMonth] = useState<string>('Jun');
+  const [selectedYear, setSelectedYear] = useState<number>(2000);
+
+  const months = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+  ];
+
+  const currentYear = new Date().getFullYear();
+  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
+  const days = Array.from({ length: 31 }, (_, i) => i + 1);
   
   const ageGroups = questionData ? 
     questionData.options.map(option => ({
@@ -34,6 +49,40 @@ export function AgeGroupScreen({
   
   const handleAgeGroupClick = (ageGroupKey: string) => {
     setSelectedAgeGroup(ageGroupKey);
+  };
+
+  const calculateAge = (day: number, month: string, year: number) => {
+    const monthIndex = months.indexOf(month);
+    const birthDate = new Date(year, monthIndex, day);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  const handleBirthdayNext = () => {
+    const age = calculateAge(selectedDay, selectedMonth, selectedYear);
+    sendToFlutter(JSON.stringify({
+      "event": "click_next_ob_birthday_selection",
+      "eventProperties": {
+        "onboarding_version": 4.0,
+        "user_age": age,
+        "birth_day": selectedDay,
+        "birth_month": selectedMonth,
+        "birth_year": selectedYear
+      }
+    }));
+    
+    setShowBirthdayModal(false);
+    
+    if (age < 13 && onTooYoung) {
+      onTooYoung();
+    } else {
+      onNext();
+    }
   };
 
   useEffect(() => {
@@ -70,7 +119,13 @@ export function AgeGroupScreen({
       {/* Title - with padding */}
       <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-          {questionData ? questionData.text : t('age.title')}
+          {(questionData ? questionData.text : t('age.title')).split(/[\n\s]+/).reduce((acc, word, index, words) => {
+            const midpoint = Math.ceil(words.length / 2);
+            if (index === midpoint) acc.push(<br key={`br-${index}`} />);
+            acc.push(word);
+            if (index < words.length - 1 && index !== midpoint - 1) acc.push(' ');
+            return acc;
+          }, [] as (string | JSX.Element)[])}
         </h1>
       </div>
       
@@ -152,10 +207,97 @@ export function AgeGroupScreen({
                       "survey_age_group": systemName || selectedAgeGroup || ""
                     }
                   }));
-                  onNext();
+                  
+                  // Check if user selected "Under 18" and show birthday modal
+                  const isUnder18 = selectedAgeGroup === 'age.under18' || 
+                                   (questionData && selectedAgeGroupData?.systemName === 'under_18') ||
+                                   (selectedAgeGroup && selectedAgeGroup.toLowerCase().includes('under 18'));
+                  
+                  if (isUnder18) {
+                    setShowBirthdayModal(true);
+                  } else {
+                    onNext();
+                  }
                 }}
               >
                 {t('next')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Birthday Modal */}
+      {showBirthdayModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
+          {/* Modal container */}
+          <div className="bg-white rounded-3xl shadow-2xl w-full max-w-md mx-4 max-h-[80vh] overflow-hidden">
+            {/* Close button */}
+            <div className="flex justify-end p-4">
+              <button
+                onClick={() => setShowBirthdayModal(false)}
+                className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* Main content container */}
+            <div className="flex flex-col items-center justify-center px-6 pb-6">
+              {/* Title */}
+              <div className="flex justify-center items-center mb-8">
+                <h3 className="text-xl font-semibold text-gray-800">When is your birthday?</h3>
+              </div>
+
+              {/* Date picker */}
+              <div className="flex justify-center items-center gap-2 mb-8">
+                {/* Day Selector */}
+                <select
+                  value={selectedDay}
+                  onChange={(e) => setSelectedDay(Number(e.target.value))}
+                  className="text-3xl font-medium bg-gray-100 rounded-2xl p-4 text-center min-w-[80px] border-0 outline-none appearance-none"
+                  style={{ backgroundColor: '#F5F5F5' }}
+                >
+                  {days.map(day => (
+                    <option key={day} value={day}>{String(day).padStart(2, '0')}</option>
+                  ))}
+                </select>
+                
+                {/* Month Selector */}
+                <select
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(e.target.value)}
+                  className="text-3xl font-medium bg-gray-100 rounded-2xl p-4 text-center min-w-[80px] border-0 outline-none appearance-none"
+                  style={{ backgroundColor: '#F5F5F5' }}
+                >
+                  {months.map(month => (
+                    <option key={month} value={month}>{month}</option>
+                  ))}
+                </select>
+                
+                {/* Year Selector */}
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(Number(e.target.value))}
+                  className="text-3xl font-medium bg-gray-100 rounded-2xl p-4 text-center min-w-[80px] border-0 outline-none appearance-none"
+                  style={{ backgroundColor: '#F5F5F5' }}
+                >
+                  {years.map(year => (
+                    <option key={year} value={year}>{year}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            {/* Done Button */}
+            <div className="p-6 pt-4">
+              <button
+                className="w-full bg-black text-white rounded-3xl py-4 text-lg font-medium hover:bg-gray-800 transition-colors"
+                onClick={handleBirthdayNext}
+              >
+                Done
               </button>
             </div>
           </div>

@@ -79,12 +79,13 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
         {/* Title - with padding */}
         <div className="flex justify-center mb-4 sm:mb-5 px-5 flex-shrink-0 mt-4">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-center leading-tight" style={{ color: '#4C4A3C' }}>
-            {(questionData ? questionData.text : t('whereHear.title')).split('\n').map((line, index) => (
-              <span key={index}>
-                {line}
-                {index < (questionData ? questionData.text : t('whereHear.title')).split('\n').length - 1 && <br />}
-              </span>
-            ))}
+            {(questionData ? questionData.text : t('whereHear.title')).split(/[\n\s]+/).reduce((acc, word, index, words) => {
+              const midpoint = Math.ceil(words.length / 2);
+              if (index === midpoint) acc.push(<br key={`br-${index}`} />);
+              acc.push(word);
+              if (index < words.length - 1 && index !== midpoint - 1) acc.push(' ');
+              return acc;
+            }, [] as (string | JSX.Element)[])}
           </h1>
         </div>
         
