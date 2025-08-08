@@ -156,9 +156,10 @@ export function WhatFeltMissingScreen({
                   const systemNames = selectedOptions.map(option => getSystemName(option)).filter(Boolean);
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:what_felt_missing:click_next",
+                    "event": "click_next_ob_survey_tried_not_working",
                     "eventProperties": {
-                      "missing_aspects": systemNames
+                      "onboarding_version": 4.0,
+                      "survey_tried_not_working": systemNames.join(', ') || selectedOptions.join(', ') || ""
                     }
                   }));
                   onNext();
