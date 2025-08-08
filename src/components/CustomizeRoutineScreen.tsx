@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useSelections } from '../contexts/SelectionsContext';
 
 interface CustomizeRoutineScreenProps {
   onBack: () => void;
@@ -11,6 +12,7 @@ export function CustomizeRoutineScreen({
   onNext
 }: CustomizeRoutineScreenProps) {
   const [progress, setProgress] = useState(0);
+  const { submitSelections } = useSelections();
 
   useEffect(() => {
     // Send the new event for onboarding survey
@@ -20,7 +22,10 @@ export function CustomizeRoutineScreen({
         "onboarding_version": 4.0
       }
     }));
-  }, []);
+    
+    // Submit user selections to API - only run once when component mounts
+    submitSelections();
+  }, []); // Empty dependency array to run only once
 
   useEffect(() => {
     const duration = 3000; // 3 seconds

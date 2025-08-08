@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useSelections } from '../contexts/SelectionsContext';
 import { Question } from '../services/questionsService';
 
 interface WhereDidYouHearAboutUsProps {
@@ -13,6 +14,7 @@ interface WhereDidYouHearAboutUsProps {
 
 export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, questionsLoaded }: WhereDidYouHearAboutUsProps) {
   const { t } = useLanguage();
+  const { addSelection } = useSelections();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   
   // Use dynamic question data if available, otherwise fallback to localized options
@@ -159,6 +161,13 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
                     // Get system name for selected option using index
                     const optionIndex = selectedOption ? options.indexOf(selectedOption) : -1;
                     const systemName = optionIndex >= 0 ? toggleSystemNames[optionIndex] : null;
+                    
+                    // Add selection to context if we have question data with option IDs
+                    if (questionData && optionIndex >= 0) {
+                      const selectedOptionId = questionData.options[optionIndex].id;
+                      addSelection(selectedOptionId);
+                    }
+                    
                     sendToFlutter(JSON.stringify({
                       "event": "click_next_ob_survey_first_hear_us",
                       "eventProperties": {

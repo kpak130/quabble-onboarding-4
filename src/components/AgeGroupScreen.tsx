@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useSelections } from '../contexts/SelectionsContext';
 import { Question } from '../services/questionsService';
 
 interface AgeGroupScreenProps {
@@ -19,6 +20,7 @@ export function AgeGroupScreen({
 }: AgeGroupScreenProps) {
 
   const { t } = useLanguage();
+  const { addSelection } = useSelections();
   const [selectedAgeGroup, setSelectedAgeGroup] = useState<string | null>(null);
   const [showBirthdayModal, setShowBirthdayModal] = useState(false);
   const [selectedDay, setSelectedDay] = useState<number>(26);
@@ -199,6 +201,16 @@ export function AgeGroupScreen({
                   // Get system name for selected age group
                   const selectedAgeGroupData = selectedAgeGroup ? ageGroups.find(ag => ag.key === selectedAgeGroup) : null;
                   const systemName = selectedAgeGroupData ? selectedAgeGroupData.systemName : null;
+                  
+                  // Add selection to context if we have question data
+                  if (questionData && selectedAgeGroupData) {
+                    const selectedOptionId = questionData.options.find(opt => 
+                      opt.text.toLowerCase().replace(/\s+/g, '_').replace(/[^\w]/g, '') === selectedAgeGroupData.systemName
+                    )?.id;
+                    if (selectedOptionId) {
+                      addSelection(selectedOptionId);
+                    }
+                  }
                   
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_age_group",
