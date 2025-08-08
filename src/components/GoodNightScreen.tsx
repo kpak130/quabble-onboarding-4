@@ -168,22 +168,17 @@ export function GoodNightScreen({
       {showTimeModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
           <div className="bg-white max-w-sm w-full mx-4 rounded-3xl p-6">
-            <div className="flex justify-between items-center mb-6">
-              <button onClick={handleTimeCancel} className="text-gray-500 font-medium">
-                Cancel
-              </button>
-              <h3 className="text-lg font-medium text-gray-800">Select Time</h3>
-              <button onClick={handleTimeConfirm} className="text-blue-500 font-medium">
-                Done
-              </button>
+            <div className="flex justify-center items-center mb-8">
+              <h3 className="text-xl font-semibold text-gray-800">Select Time</h3>
             </div>
             
-            <div className="flex justify-center items-center gap-4">
+            <div className="flex justify-center items-center gap-2 mb-8">
               {/* Hour Selector */}
               <select
                 value={selectedHour}
                 onChange={(e) => setSelectedHour(e.target.value)}
-                className="text-2xl font-medium bg-gray-100 rounded-lg p-3 text-center min-w-[80px]"
+                className="text-3xl font-medium bg-gray-100 rounded-2xl p-4 text-center min-w-[80px] border-0 outline-none appearance-none"
+                style={{ backgroundColor: '#F5F5F5' }}
               >
                 {Array.from({length: 12}, (_, i) => {
                   const hour = String(i + 1).padStart(2, '0');
@@ -191,13 +186,14 @@ export function GoodNightScreen({
                 })}
               </select>
               
-              <span className="text-2xl font-medium text-gray-800">:</span>
+              <span className="text-3xl font-medium text-gray-800 px-2">:</span>
               
               {/* Minute Selector */}
               <select
                 value={selectedMinute}
                 onChange={(e) => setSelectedMinute(e.target.value)}
-                className="text-2xl font-medium bg-gray-100 rounded-lg p-3 text-center min-w-[80px]"
+                className="text-3xl font-medium bg-gray-100 rounded-2xl p-4 text-center min-w-[80px] border-0 outline-none appearance-none"
+                style={{ backgroundColor: '#F5F5F5' }}
               >
                 {Array.from({length: 60}, (_, i) => {
                   const minute = String(i).padStart(2, '0');
@@ -209,11 +205,22 @@ export function GoodNightScreen({
               <select
                 value={selectedPeriod}
                 onChange={(e) => setSelectedPeriod(e.target.value)}
-                className="text-2xl font-medium bg-gray-100 rounded-lg p-3 text-center min-w-[80px]"
+                className="text-3xl font-medium bg-gray-100 rounded-2xl p-4 text-center min-w-[80px] border-0 outline-none appearance-none"
+                style={{ backgroundColor: '#F5F5F5' }}
               >
                 <option value="AM">AM</option>
                 <option value="PM">PM</option>
               </select>
+            </div>
+
+            {/* Done Button */}
+            <div className="flex justify-center">
+              <button
+                onClick={handleTimeConfirm}
+                className="w-full bg-black text-white rounded-3xl py-4 px-8 text-lg font-medium hover:bg-gray-800 transition-colors"
+              >
+                Done
+              </button>
             </div>
           </div>
         </div>
