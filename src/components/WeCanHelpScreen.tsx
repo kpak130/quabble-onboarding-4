@@ -73,6 +73,14 @@ export function WeCanHelpScreen({
                   {index < t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').length - 1 && <br />}
                 </span>
               ))
+            ) : achievementSelection ? (
+              // AskFeelingV2Screen "doing_okay" with achievement → "So glad to hear that!" message
+              t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
+                <span key={index}>
+                  {line}
+                  {index < t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').length - 1 && <br />}
+                </span>
+              ))
             ) : (
               // Default fallback
               t('weCanHelp.messageGeneral').split('\n').map((line, index) => (

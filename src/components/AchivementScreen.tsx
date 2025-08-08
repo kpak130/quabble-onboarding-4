@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useSelections } from '../contexts/SelectionsContext';
 import { Question } from '../services/questionsService';
 import { convertQuestionOptions, getQuestionTitle, renderTextWithLineBreaks } from '../utils/questionHelpers';
 
@@ -17,6 +18,7 @@ export function AchivementScreen({
   questionData
 }: AchievementScreenProps) {
   const { t } = useLanguage();
+  const { addSelection } = useSelections();
   const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
   
   // Convert question data to standardized format
@@ -144,6 +146,17 @@ export function AchivementScreen({
                   // Get system name for selected focus
                   const selectedOption = selectedFocus ? options.find(opt => opt.displayText === selectedFocus) : null;
                   const systemName = selectedOption ? selectedOption.systemName : null;
+                  
+                  // Add selection to context if we have question data with option IDs
+                  if (questionData && selectedOption) {
+                    const selectedOptionId = questionData.options.find(opt => 
+                      opt.text.toLowerCase().includes(selectedOption.displayText.toLowerCase()) ||
+                      selectedOption.displayText.toLowerCase().includes(opt.text.toLowerCase())
+                    )?.id;
+                    if (selectedOptionId) {
+                      addSelection(selectedOptionId);
+                    }
+                  }
                   
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_want_to_achieve",

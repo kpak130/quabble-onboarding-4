@@ -225,6 +225,7 @@ function getTranslations() {
       // We Can Help Screen
       "weCanHelp.messageGeneral": "While professional care is essential,\nQuabble is here to offer support and\nwalk alongside you in your mental health journey.",
       "weCanHelp.messagePersonalized": "We're here to help you through this tough time,\nand \"{achievement}\" is something\nyou can achieve with us.",
+      "weCanHelp.messageDoingOkay": "So glad to hear that!\n\"{achievement}\" is something we can\nabsolutely help with.",
       
       // Why Quabble Screen
       "whyQuabble.title": "Here's why Quabble might\nbe just what you need.",
