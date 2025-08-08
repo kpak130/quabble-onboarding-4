@@ -146,12 +146,12 @@ export function WakeUpScreen({
                   fontSize: '2.5vh' // 1/40 of viewport height
                 }}
                 onClick={() => {
-                  // Send click next event with formatted wake up time
-                  const formattedDateTime = formatToDateTime(wakeUpTime);
+                  // Send click next event with wake up time
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:page_6:click_next",
+                    "event": "click_next_ob_survey_wake_up",
                     "eventProperties": {
-                      "wakeupTime": formattedDateTime
+                      "onboarding_version": 4.0,
+                      "survey_wake_up": wakeUpTime
                     }
                   }));
                   onNext();
