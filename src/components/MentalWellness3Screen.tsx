@@ -16,12 +16,12 @@ export function MentalWellness3Screen({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4:landing"}');
     
     // Event listener for 'sign-in-complete' event from Flutter
     const handleSignInComplete = (event: any) => {
-      console.log('Sign-in complete event received from Flutter');
-      console.log('Event payload:', event.detail); // Log the payload
+      // console.log('Sign-in complete event received from Flutter');
+      // console.log('Event payload:', event.detail); // Log the payload
       
       // Access the payload data
       const payload = event.detail;

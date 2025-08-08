@@ -64,7 +64,7 @@ export function AreYouReadyScreen({
                 backgroundColor: '#E67E22'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:are_you_ready:click_yes"}');
+                // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:are_you_ready:click_yes"}');
                 onYes();
               }}
             >

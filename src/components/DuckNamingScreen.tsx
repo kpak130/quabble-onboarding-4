@@ -18,7 +18,7 @@ export function DuckNamingScreen({
 
   useEffect(() => {
     // Send landing event when component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_3:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_3:landing"}');
   }, []);
 
   const handleSkip = () => {
@@ -110,12 +110,12 @@ export function DuckNamingScreen({
                 }}
                 onClick={() => {
                   // Send event with duck name
-                  sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:page_2_part_4:click_next",
-                    "eventProperties": {
-                      "duckname": duckName
-                    }
-                  }));
+                  // sendToFlutter(JSON.stringify({
+                  //   "event": "v2_5_7_onboarding_A::onboarding:page_2_part_4:click_next",
+                  //   "eventProperties": {
+                  //     "duckname": duckName
+                  //   }
+                  // }));
                   onNext();
                 }}
               >

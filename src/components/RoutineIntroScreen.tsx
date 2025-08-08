@@ -13,7 +13,7 @@ export function RoutineIntroScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:routine_intro:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:routine_intro:landing"}');
   }, []); 
 
   const morningIcons = [
@@ -115,7 +115,6 @@ export function RoutineIntroScreen({
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:routine_intro:click_ready"}');
                 onNext();
               }}
             >

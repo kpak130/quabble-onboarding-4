@@ -11,7 +11,7 @@ export function TellUsIntroScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_5:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_5:landing"}');
   }, []);
 
   return (
@@ -40,8 +40,6 @@ export function TellUsIntroScreen({
           className="py-6 px-12 font-medium text-2xl hover:text-gray-900 transition-colors"
           style={{ color: '#2d2b2a' }}
           onClick={() => {
-            // Send tap to start event
-            sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_5:tap_anywhere_to_start"}');
             onNext();
           }}
         >

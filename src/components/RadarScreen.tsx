@@ -13,7 +13,7 @@ export function RadarScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:radar:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:radar:landing"}');
   }, []); 
 
   return <>
@@ -78,7 +78,6 @@ export function RadarScreen({
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:radar:click_next"}');
                 onNext();
               }}
             >

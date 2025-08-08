@@ -34,7 +34,7 @@ export function QuabbleToolsScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:quabble_tools:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:quabble_tools:landing"}');
   }, []); 
 
   return <>
@@ -114,7 +114,6 @@ export function QuabbleToolsScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:quabble_tools:click_next"}');
                 onNext();
               }}
             >

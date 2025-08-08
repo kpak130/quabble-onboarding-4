@@ -12,7 +12,7 @@ export function TestimonialsV2Screen({
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
-      "event": "ob_info_review",
+      "event": "view_ob_info_review",
       "eventProperties": {
         "onboarding_version": 4.0
       }
@@ -139,7 +139,6 @@ export function TestimonialsV2Screen({
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:testimonials_v2:click_next"}');
                 onNext();
               }}
             >

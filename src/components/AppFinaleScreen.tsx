@@ -13,7 +13,7 @@ export function AppFinaleScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:app_finale:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:app_finale:landing"}');
   }, []);
 
   const handleComplete = () => {

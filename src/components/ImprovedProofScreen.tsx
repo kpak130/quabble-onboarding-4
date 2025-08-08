@@ -71,7 +71,7 @@ export function ImprovedProofScreen({ onBack, onNext }: ImprovedProofScreenProps
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:improved_proof_screen:click_next"}');
+                // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:improved_proof_screen:click_next"}');
                 onNext();
               }}
             >

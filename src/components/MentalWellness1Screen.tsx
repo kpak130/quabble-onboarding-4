@@ -16,7 +16,7 @@ export function MentalWellness1Screen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4_1:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4_1:landing"}');
   }, []); 
 
   useEffect(() => {

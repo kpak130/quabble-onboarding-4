@@ -12,7 +12,7 @@ export function TestimonialsScreen({
 
   useEffect(() => {
     // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_1_4:landing"}');
+    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_1_4:landing"}');
   }, []); 
 
   const testimonials = [{

@@ -71,7 +71,6 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:stats_screen:click_next"}');
                 onNext();
               }}
             >

@@ -58,7 +58,6 @@ export function MindQuoteScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:mind_quote:click_next"}');
                 onNext();
               }}
             >
