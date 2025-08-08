@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Lottie from 'lottie-react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -9,6 +10,8 @@ interface StatsScreenProps {
 
 export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
   const { t } = useLanguage();
+  const [animationData, setAnimationData] = useState(null);
+  const [loadingError, setLoadingError] = useState(false);
   
   useEffect(() => {
     // Send the new event for onboarding survey
@@ -18,6 +21,24 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
         "onboarding_version": 4.0
       }
     }));
+
+    // Try to load the Lottie animation data
+    const loadLottieData = async () => {
+      try {
+        const response = await fetch('/images/98-lottie.json');
+        if (response.ok) {
+          const data = await response.json();
+          setAnimationData(data);
+        } else {
+          setLoadingError(true);
+        }
+      } catch (error) {
+        console.log('Lottie file not found, falling back to PNG');
+        setLoadingError(true);
+      }
+    };
+
+    loadLottieData();
   }, []);
 
   return (
@@ -47,15 +68,35 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
         </div>
 
         <div className="flex items-center justify-center mb-8">
-          <img
-            src="/images/98stat.png"
-            alt="98% Statistics"
-            className="w-full h-auto object-contain"
+          <div
+            className="w-full h-auto"
             style={{ 
               maxWidth: 'min(70vw, 400px)',
               maxHeight: 'min(50vh, 350px)'
             }}
-          />
+          >
+            {animationData && !loadingError ? (
+              <Lottie
+                animationData={animationData}
+                loop={false}
+                autoplay={true}
+                style={{
+                  width: '100%',
+                  height: '100%'
+                }}
+              />
+            ) : (
+              <img
+                src="/images/98stat.png"
+                alt="98% Statistics"
+                className="w-full h-auto object-contain"
+                style={{ 
+                  width: '100%',
+                  height: '100%'
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
 
