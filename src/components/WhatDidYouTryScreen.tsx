@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
+import { useSelections } from '../contexts/SelectionsContext';
 
 interface WhatDidYouTryScreenProps {
   onBack: () => void;
-  onNext: () => void;
+  onNext: (selection: string) => void;
   onSkip: () => void;
 }
 
@@ -14,6 +15,7 @@ export function WhatDidYouTryScreen({
   onSkip
 }: WhatDidYouTryScreenProps) {
   const { t } = useLanguage();
+  const { addSelection } = useSelections();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   
   const options = [
@@ -152,6 +154,9 @@ export function WhatDidYouTryScreen({
                   // Get system name for selected option
                   const systemName = selectedOption ? getSystemName(selectedOption) : null;
                   
+                  // Note: This screen doesn't correspond to a specific question in questionsService.ts
+                  // Selection tracking would need to be added if a corresponding question is created
+                  
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_tried_before",
                     "eventProperties": {
@@ -159,7 +164,7 @@ export function WhatDidYouTryScreen({
                       "survey_tried_before": systemName || selectedOption || ""
                     }
                   }));
-                  onNext();
+                  onNext(systemName || selectedOption || '');
                 }}
               >
                 {t('next')}

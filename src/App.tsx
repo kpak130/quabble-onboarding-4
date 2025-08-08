@@ -75,6 +75,9 @@ export function App() {
   // Track if user came from HaveMentalIssueScreen with "No" (for navigation)
   const [fromHaveMentalIssueNo, setFromHaveMentalIssueNo] = useState<boolean>(false);
   
+  // Track what user selected on WhatDidYouTryScreen
+  const [whatDidYouTrySelection, setWhatDidYouTrySelection] = useState<string | null>(null);
+  
   // Store dynamic questions fetched from API
   const [questions, setQuestions] = useState<Question[]>(defaultQuestions);
   const [questionsLoaded, setQuestionsLoaded] = useState<boolean>(false);
@@ -169,6 +172,19 @@ export function App() {
     performTransition('mindquote');
   };
 
+  // Handle what did you try screen response
+  const handleWhatDidYouTryNext = (selection: string) => {
+    setWhatDidYouTrySelection(selection);
+    
+    // If user selected mental wellness apps, go to WhatFeltMissingScreen
+    // Otherwise, go directly to WhyQuabbleScreen
+    if (selection === 'mental_wellness_apps') {
+      performTransition('whatfeltmissing');
+    } else {
+      performTransition('whyquabble');
+    }
+  };
+
   const handleNext = () => {
     if (currentScreen === 'referral') {
       performTransition('age');
@@ -215,8 +231,6 @@ export function App() {
         // Default fallback
         performTransition('whatdidyoutry');
       }
-    } else if (currentScreen === 'whatdidyoutry') {
-      performTransition('whatfeltmissing');
     } else if (currentScreen === 'whatfeltmissing') {
       if (isHaveMentalIssueYesFlow) {
         // In HaveMentalIssue "Yes" flow: whatfeltmissing → whyquabble, then reset flags
@@ -527,12 +541,12 @@ export function App() {
     }
     if (currentScreen === 'wecanhelp') {
       return <TransitionWrapper show={!isTransitioning}>
-          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} achievementSelection={userAchievementSelection} cameFromYesPath={cameFromYesPath} fromHaveMentalIssueYes={fromHaveMentalIssueYes} />
+          <WeCanHelpScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} achievementSelection={userAchievementSelection} cameFromYesPath={cameFromYesPath} fromHaveMentalIssueYes={fromHaveMentalIssueYes} userFeelingChoice={userFeelingChoice} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'whatdidyoutry') {
       return <TransitionWrapper show={!isTransitioning}>
-          <WhatDidYouTryScreen onBack={handleBack} onNext={handleNext} onSkip={handleSkip} />
+          <WhatDidYouTryScreen onBack={handleBack} onNext={handleWhatDidYouTryNext} onSkip={handleSkip} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'whatfeltmissing') {
