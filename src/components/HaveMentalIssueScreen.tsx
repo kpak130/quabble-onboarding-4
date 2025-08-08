@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -133,6 +133,9 @@ export function HaveMentalIssueScreen({
                   // Get system name for selected option
                   const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
                   const systemName = selectedOptionData ? selectedOptionData.systemName : null;
+                  
+                  // Note: This screen doesn't correspond to a specific question in questionsService.ts
+                  // Selection tracking would need to be added if a corresponding question is created
                   
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_ongoing_mental_challenge",

@@ -99,7 +99,7 @@ function getTranslations() {
       "focus.productivity": "Improving productivity",
       
       // Confirmation Screen
-      "confirmation.welcomeMessage": "Welcome!\nLet's find out how\nwe can help you!",
+      "confirmation.welcomeMessage": "Welcome!\nLet's find out how\nwe can help you",
       
       // Testimonials Screen
       "testimonials.testimonial1Text": "It's an app I've been looking for all my life.",

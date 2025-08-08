@@ -141,9 +141,9 @@ export function App() {
   const handleMentalIssueNext = (hasIssue: 'yes' | 'no') => {
     if (hasIssue === 'yes') {
       setCameFromYesPath(true);
-      // If Yes, go through extended flow: wecanhelp → whatdealingwith → whatfeltmissing → whyquabble
+      // If Yes, go through extended flow: whatdealingwith → wecanhelp → whatdidyoutry → whatfeltmissing → whyquabble
       setIsHaveMentalIssueYesFlow(true);
-      performTransition('wecanhelp');
+      performTransition('whatdealingwith');
     } else {
       setCameFromYesPath(false);
       // If No, go to shorter flow: just wecanhelp → normal flow
@@ -178,21 +178,22 @@ export function App() {
       performTransition('havementalissue');
     } else if (currentScreen === 'whatdealingwith') {
       if (isHaveMentalIssueYesFlow) {
-        // In HaveMentalIssue "Yes" flow: whatdealingwith → whatfeltmissing
-        performTransition('whatfeltmissing');
+        // In HaveMentalIssue "Yes" flow: whatdealingwith → wecanhelp
+        performTransition('wecanhelp');
       } else {
-        // Normal flow: whatdealingwith → wecanhelp
-        setCameFromYesPath(false);
+        // From AskFeelingV2 "difficult_recently" or "ongoing_challenges" flow: whatdealingwith → wecanhelp
         performTransition('wecanhelp');
       }
     } else if (currentScreen === 'wecanhelp') {
       // Conditional flow based on user's feeling choice or mental issue response
       if (isHaveMentalIssueYesFlow) {
-        // HaveMentalIssue "Yes" flow: wecanhelp → whatdealingwith → whatfeltmissing → whyquabble
-        performTransition('whatdealingwith');
-      } else if (userFeelingChoice === 'ongoing_challenges') {
+        // HaveMentalIssue "Yes" flow: whatdealingwith → wecanhelp → whatdidyoutry → whatfeltmissing → whyquabble
         performTransition('whatdidyoutry');
-      } else if (userFeelingChoice === 'doing_okay' || userFeelingChoice === 'difficult_recently') {
+      } else if (userFeelingChoice === 'difficult_recently' || userFeelingChoice === 'ongoing_challenges') {
+        // From AskFeelingV2 with challenges: wecanhelp → whatdidyoutry
+        performTransition('whatdidyoutry');
+      } else if (userFeelingChoice === 'doing_okay') {
+        // From AskFeelingV2 "doing_okay": wecanhelp → whyquabble (skip the extended flow)
         performTransition('whyquabble');
       } else {
         // Default fallback
