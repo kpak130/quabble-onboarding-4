@@ -152,12 +152,12 @@ export function WhatDealingWithScreen({
                 onClick={() => {
                   // Get system name for selected option
                   const systemName = selectedOption ? getSystemName(selectedOption) : null;
-                  const conditions = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:what_dealing_with:click_next",
+                    "event": "click_next_ob_survey_what_dealing_with",
                     "eventProperties": {
-                      "conditions": conditions
+                      "onboarding_version": 4.0,
+                      "survey_what_dealing_with": systemName || selectedOption || ""
                     }
                   }));
                   onNext();

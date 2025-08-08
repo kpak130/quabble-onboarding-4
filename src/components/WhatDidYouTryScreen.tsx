@@ -151,12 +151,12 @@ export function WhatDidYouTryScreen({
                 onClick={() => {
                   // Get system name for selected option
                   const systemName = selectedOption ? getSystemName(selectedOption) : null;
-                  const methods = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:what_did_you_try:click_next",
+                    "event": "click_next_ob_survey_tried_before",
                     "eventProperties": {
-                      "methods": methods
+                      "onboarding_version": 4.0,
+                      "survey_tried_before": systemName || selectedOption || ""
                     }
                   }));
                   onNext();

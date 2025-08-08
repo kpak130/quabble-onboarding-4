@@ -133,12 +133,12 @@ export function HaveMentalIssueScreen({
                   // Get system name for selected option
                   const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
                   const systemName = selectedOptionData ? selectedOptionData.systemName : null;
-                  const mentalHealthChallenges = systemName ? [systemName] : [];
                   
                   sendToFlutter(JSON.stringify({
-                    "event": "v2_5_7_onboarding_A::onboarding:mental_health_challenges:click_next",
+                    "event": "click_next_ob_survey_ongoing_mental_challenge",
                     "eventProperties": {
-                      "mentalHealthChallenges": mentalHealthChallenges
+                      "onboarding_version": 4.0,
+                      "survey_ongoing_mental_challenge": systemName || selectedOption || ""
                     }
                   }));
                   
