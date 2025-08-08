@@ -50,7 +50,7 @@ export const defaultQuestions: Question[] = [
   {
     id: 1,
     name: "Q1",
-    text: "Where did you hear about us?",
+    text: "How did you hear about us?",
     tag: "onboarding4",
     options: [
       { id: 1, text: "App search" },
