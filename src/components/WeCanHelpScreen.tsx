@@ -23,6 +23,12 @@ export function WeCanHelpScreen({
 }: WeCanHelpScreenProps) {
   const { t } = useLanguage();
 
+  // Helper function to render text without manual line breaks
+  const renderMessage = (text: string) => {
+    // Remove manual line breaks and let CSS handle the wrapping
+    return text.replace(/\n/g, ' ');
+  };
+
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
@@ -58,63 +64,28 @@ export function WeCanHelpScreen({
       <div className="flex-1 flex flex-col items-center justify-start px-6 sm:px-8 pt-4 sm:pt-6" style={{ paddingBottom: '9rem' }}>
         {/* Message Text */}
         <div className="text-center">
-          <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl font-medium leading-relaxed text-white proper-line-breaks">
             {fromHaveMentalIssueYes ? (
               // HaveMentalIssueScreen "Yes" → "While professional care..." message
-              t('weCanHelp.messageGeneral').split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messageGeneral').split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messageGeneral'))
             ) : userFeelingChoice === 'ongoing_challenges' ? (
               // AskFeelingV2Screen "ongoing_challenges" (2nd option) → "While professional care..." message
-              t('weCanHelp.messageGeneral').split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messageGeneral').split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messageGeneral'))
             ) : userFeelingChoice === 'doing_okay' ? (
               // AskFeelingV2Screen "doing_okay" → "So glad to hear that!" message (HIGH PRIORITY)
-              t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection?.toLowerCase() || 'your goals').split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection?.toLowerCase() || 'your goals').split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection?.toLowerCase() || 'your goals'))
             ) : fromHaveMentalIssueYes === false && achievementSelection ? (
               // HaveMentalIssueScreen "No" with achievement → "We're here to help you..." message
-              t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()))
             ) : cameFromYesPath && achievementSelection ? (
               // Other difficult paths with achievement → "We're here to help you..." message
-              t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messagePersonalized').replace('{achievement}', achievementSelection.toLowerCase()))
             ) : achievementSelection ? (
               // Other paths with achievement → "So glad to hear that!" message
-              t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection.toLowerCase()).split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messageDoingOkay').replace('{achievement}', achievementSelection.toLowerCase()))
             ) : (
               // Default fallback
-              t('weCanHelp.messageGeneral').split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  {index < t('weCanHelp.messageGeneral').split('\n').length - 1 && <br />}
-                </span>
-              ))
+              renderMessage(t('weCanHelp.messageGeneral'))
             )}
           </h1>
         </div>
@@ -147,6 +118,34 @@ export function WeCanHelpScreen({
       .touch-target {
         min-height: 48px;
         min-width: 48px;
+      }
+      
+      .proper-line-breaks {
+        word-break: keep-all;
+        overflow-wrap: normal;
+        hyphens: none;
+        text-wrap: pretty;
+      }
+      
+      /* Ensure better line breaking for different languages */
+      .proper-line-breaks:lang(en) {
+        word-break: normal;
+        overflow-wrap: normal;
+        hyphens: none;
+      }
+      
+      .proper-line-breaks:lang(ko) {
+        word-break: keep-all;
+        line-break: strict;
+        overflow-wrap: normal;
+        hyphens: none;
+      }
+      
+      .proper-line-breaks:lang(ja) {
+        word-break: keep-all;
+        line-break: strict;
+        overflow-wrap: normal;
+        hyphens: none;
       }
     `}</style>
   </>;
