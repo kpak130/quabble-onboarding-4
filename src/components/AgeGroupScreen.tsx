@@ -113,7 +113,15 @@ export function AgeGroupScreen({
           </svg>
         </button>
         <div className="flex-1"></div>
-        <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
+        <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={() => {
+          sendToFlutter(JSON.stringify({
+            "event": "click_skip_ob_survey_age_group",
+            "eventProperties": {
+              "onboarding_version": 4.0
+            }
+          }));
+          onSkip();
+        }} style={{ color: '#7B7968' }}>
           Skip
         </button>
       </div>
