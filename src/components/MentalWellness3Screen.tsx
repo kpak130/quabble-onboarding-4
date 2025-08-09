@@ -21,6 +21,15 @@ export function MentalWellness3Screen({
   const isDebugMode = new URLSearchParams(window.location.search).get('debug') === 'true';
 
   useEffect(() => {
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_how_many_workout_done",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
+  }, []); 
+
+  useEffect(() => {
     // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_4:landing"}');
     
     // Event listener for 'sign-in-complete' event from Flutter
