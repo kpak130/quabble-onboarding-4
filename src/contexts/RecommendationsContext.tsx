@@ -31,6 +31,10 @@ interface RecommendationsProviderProps {
   children: ReactNode;
 }
 
+const API_ENDPOINT = process.env.NODE_ENV === 'development'
+  ? '/api/quabble/onboardings/v3/recommendations/routines'  // Use proxy in development
+  : 'https://prod-canary-1-27.muse.live/api/quabble/onboardings/v3/recommendations/routines'; // Direct URL in production
+
 export const RecommendationsProvider: React.FC<RecommendationsProviderProps> = ({ children }) => {
   const [recommendations, setRecommendations] = useState<Recommendation[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -49,7 +53,7 @@ export const RecommendationsProvider: React.FC<RecommendationsProviderProps> = (
 
     try {
       const currentLanguage = getLanguageFromUrl();
-      const response = await fetch('/onboardings/v3/recommendations/routines', {
+      const response = await fetch(API_ENDPOINT, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
