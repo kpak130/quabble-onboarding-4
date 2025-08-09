@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useRecommendations } from '../contexts/RecommendationsContext';
 
@@ -12,6 +12,7 @@ export function RoutineRecommendationScreen({
   onNext
 }: RoutineRecommendationScreenProps) {
   const { recommendations, loading } = useRecommendations();
+  const [showDebugModal, setShowDebugModal] = useState(false);
 
   useEffect(() => {
     // Send the new event for onboarding survey
@@ -26,17 +27,6 @@ export function RoutineRecommendationScreen({
   // Get morning and evening routines (1st and 2nd elements)
   const morningRoutine = recommendations?.[0];
   const eveningRoutine = recommendations?.[1];
-
-  // Debug logging
-  console.log('🔍 RoutineRecommendationScreen Debug:');
-  console.log('loading:', loading);
-  console.log('recommendations:', recommendations);
-  console.log('recommendations type:', typeof recommendations);
-  console.log('recommendations length:', recommendations?.length);
-  console.log('morningRoutine:', morningRoutine);
-  console.log('morningRoutine type:', typeof morningRoutine);
-  console.log('eveningRoutine:', eveningRoutine);
-  console.log('eveningRoutine type:', typeof eveningRoutine);
 
   // Default fallback data
   const defaultMorning = {
@@ -60,8 +50,19 @@ export function RoutineRecommendationScreen({
           </svg>
         </button>
         <div className="flex-1"></div>
+        
+        {/* Debug Button */}
+        <button
+          className="w-8 h-8 rounded-full bg-transparent text-transparent text-xs font-medium hover:bg-gray-300 hover:bg-opacity-20 hover:text-gray-500 transition-all"
+          onClick={() => setShowDebugModal(true)}
+          style={{ fontSize: '10px' }}
+        >
+          D
+        </button>
       </div>
 
+
+      
       {/* Main content */}
       <div className="flex flex-col flex-1 max-w-xs mx-auto w-full" style={{ paddingBottom: '9rem', paddingTop: '5vh' }}>
         {/* Morning Routine */}
@@ -97,7 +98,6 @@ export function RoutineRecommendationScreen({
               </div>
               <span className="text-sm text-gray-700">
                 {morningRoutine?.displayName || defaultMorning.displayName}
-                {!morningRoutine && <span className="text-xs text-red-500 block">(fallback)</span>}
               </span>
             </div>
           </div>
@@ -136,7 +136,6 @@ export function RoutineRecommendationScreen({
               </div>
               <span className="text-sm text-white">
                 {eveningRoutine?.displayName || defaultEvening.displayName}
-                {!eveningRoutine && <span className="text-xs text-red-300 block">(fallback)</span>}
               </span>
             </div>
           </div>
@@ -171,6 +170,102 @@ export function RoutineRecommendationScreen({
         </div>
       </div>
     </div>
+
+    {/* Debug Modal */}
+    {showDebugModal && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[100] p-4">
+        <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold">Recommendations Debug Info</h2>
+              <button
+                onClick={() => setShowDebugModal(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="space-y-4">
+              {/* Loading Status */}
+              <div className="bg-gray-50 p-4 rounded">
+                <h3 className="font-medium mb-2">Loading Status</h3>
+                <p className="text-sm">Loading: <span className={loading ? 'text-orange-500' : 'text-green-500'}>{loading ? 'Yes' : 'No'}</span></p>
+              </div>
+
+              {/* Recommendations Array Info */}
+              <div className="bg-gray-50 p-4 rounded">
+                <h3 className="font-medium mb-2">Recommendations Array</h3>
+                <p className="text-sm">Type: <code className="bg-gray-200 px-1 rounded">{typeof recommendations}</code></p>
+                <p className="text-sm">Is Array: <span className={Array.isArray(recommendations) ? 'text-green-500' : 'text-red-500'}>{Array.isArray(recommendations) ? 'Yes' : 'No'}</span></p>
+                <p className="text-sm">Length: <code className="bg-gray-200 px-1 rounded">{recommendations?.length || 'null'}</code></p>
+                <p className="text-sm">Has Data: <span className={recommendations && recommendations.length > 0 ? 'text-green-500' : 'text-red-500'}>{recommendations && recommendations.length > 0 ? 'Yes' : 'No'}</span></p>
+              </div>
+
+              {/* Morning Routine (Index 0) */}
+              <div className="bg-blue-50 p-4 rounded">
+                <h3 className="font-medium mb-2">Morning Routine (recommendations[0])</h3>
+                {morningRoutine ? (
+                  <div className="space-y-2">
+                    <p className="text-sm"><strong>Available:</strong> <span className="text-green-500">Yes</span></p>
+                    <div className="bg-white p-2 rounded text-xs">
+                      <pre>{JSON.stringify(morningRoutine, null, 2)}</pre>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div><strong>displayName:</strong> {morningRoutine.displayName || 'N/A'}</div>
+                      <div><strong>smallThumbnailUrl:</strong> {morningRoutine.smallThumbnailUrl ? 'Present' : 'Missing'}</div>
+                      <div><strong>id:</strong> {morningRoutine.id || 'N/A'}</div>
+                      <div><strong>name:</strong> {(morningRoutine as { name?: string }).name || 'N/A'}</div>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-red-500">Not available - using fallback</p>
+                )}
+              </div>
+
+              {/* Evening Routine (Index 1) */}
+              <div className="bg-purple-50 p-4 rounded">
+                <h3 className="font-medium mb-2">Evening Routine (recommendations[1])</h3>
+                {eveningRoutine ? (
+                  <div className="space-y-2">
+                    <p className="text-sm"><strong>Available:</strong> <span className="text-green-500">Yes</span></p>
+                    <div className="bg-white p-2 rounded text-xs">
+                      <pre>{JSON.stringify(eveningRoutine, null, 2)}</pre>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div><strong>displayName:</strong> {eveningRoutine.displayName || 'N/A'}</div>
+                      <div><strong>smallThumbnailUrl:</strong> {eveningRoutine.smallThumbnailUrl ? 'Present' : 'Missing'}</div>
+                      <div><strong>id:</strong> {eveningRoutine.id || 'N/A'}</div>
+                      <div><strong>name:</strong> {(eveningRoutine as { name?: string }).name || 'N/A'}</div>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-sm text-red-500">Not available - using fallback</p>
+                )}
+              </div>
+
+              {/* All Recommendations */}
+              {recommendations && recommendations.length > 0 && (
+                <div className="bg-gray-50 p-4 rounded">
+                  <h3 className="font-medium mb-2">All Recommendations ({recommendations.length} items)</h3>
+                  <div className="bg-white p-2 rounded text-xs max-h-40 overflow-y-auto">
+                    <pre>{JSON.stringify(recommendations, null, 2)}</pre>
+                  </div>
+                </div>
+              )}
+
+              {/* Raw Recommendations Object */}
+              <div className="bg-yellow-50 p-4 rounded">
+                <h3 className="font-medium mb-2">Raw Recommendations Object</h3>
+                <div className="bg-white p-2 rounded text-xs max-h-32 overflow-y-auto">
+                  <pre>{JSON.stringify(recommendations, null, 2)}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
     
     <style>{`
       .touch-target {
