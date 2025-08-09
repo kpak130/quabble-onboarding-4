@@ -50,16 +50,16 @@ export function RoutineRecommendationScreen({
           </svg>
         </button>
         <div className="flex-1"></div>
-        
-        {/* Debug Button */}
-        <button
-          className="w-8 h-8 rounded-full bg-transparent text-transparent text-xs font-medium hover:bg-gray-300 hover:bg-opacity-20 hover:text-gray-500 transition-all"
-          onClick={() => setShowDebugModal(true)}
-          style={{ fontSize: '10px' }}
-        >
-          D
-        </button>
       </div>
+
+      {/* Debug Button - Fixed to right side */}
+      <button
+        className="fixed top-16 right-4 w-8 h-8 rounded-full bg-transparent text-transparent text-xs font-medium hover:bg-gray-300 hover:bg-opacity-20 hover:text-gray-500 transition-all z-50"
+        onClick={() => setShowDebugModal(true)}
+        style={{ fontSize: '10px' }}
+      >
+        D
+      </button>
 
 
       
