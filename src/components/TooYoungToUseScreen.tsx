@@ -5,7 +5,7 @@ export function TooYoungToUseScreen() {
 
   useEffect(() => {
     sendToFlutter(JSON.stringify({
-      "event": "view_ob_too_young_screen",
+      "event": "view_ob_info_12_under",
       "eventProperties": {
         "onboarding_version": 4.0
       }

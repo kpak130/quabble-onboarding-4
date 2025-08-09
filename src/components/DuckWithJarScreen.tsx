@@ -15,11 +15,12 @@ export function DuckWithJarScreen({
 
   useEffect(() => {
     // Send the new event for onboarding survey
-    sendToFlutter("view_ob_info_how_many_workout_done", {
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_how_many_workout_done",
       "eventProperties": {
         "onboarding_version": 4.0
       }
-    });
+    }));
   }, []); 
 
   return (
