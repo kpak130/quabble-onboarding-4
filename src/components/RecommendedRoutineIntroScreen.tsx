@@ -110,7 +110,7 @@ export function RecommendedRoutineIntroScreen({
               <div className="bg-gray-50 p-3 rounded">
                 <h3 className="font-medium text-gray-800 mb-2">API Request</h3>
                 <div className="text-sm text-gray-600 space-y-1">
-                  <p><span className="font-medium">URL:</span> /onboardings/v3/recommendations/routines</p>
+                  <p><span className="font-medium">URL:</span> {process.env.NODE_ENV === 'development' ? '/api/quabble/onboardings/v3/recommendations/routines' : 'https://prod-canary-1-27.muse.live/api/quabble/onboardings/v3/recommendations/routines'}</p>
                   <p><span className="font-medium">Method:</span> GET</p>
                   <p><span className="font-medium">Headers:</span> Authorization, Content-Type, lang</p>
                 </div>

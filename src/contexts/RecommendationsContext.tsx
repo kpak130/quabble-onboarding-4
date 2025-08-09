@@ -68,9 +68,21 @@ export const RecommendationsProvider: React.FC<RecommendationsProviderProps> = (
 
       const data = await response.json();
       console.log('✅ Recommendations fetched successfully:', data);
+      console.log('✅ Data type:', typeof data);
+      console.log('✅ Data is array:', Array.isArray(data));
       
-      // Assuming the API returns an array of recommendations
-      setRecommendations(data);
+      // Handle API response format: { message: { workouts: [...] } }
+      let recommendationsArray: Recommendation[] | null = null;
+      
+      if (data && data.message && Array.isArray(data.message.workouts)) {
+        recommendationsArray = data.message.workouts;
+        console.log('📋 Using data.message.workouts array');
+      } else {
+        console.log('❓ Unexpected response format:', data);
+      }
+      
+      console.log('📊 Final recommendations array:', recommendationsArray);
+      setRecommendations(recommendationsArray);
       setError(null);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error occurred';

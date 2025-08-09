@@ -29,9 +29,14 @@ export function RoutineRecommendationScreen({
 
   // Debug logging
   console.log('🔍 RoutineRecommendationScreen Debug:');
+  console.log('loading:', loading);
   console.log('recommendations:', recommendations);
+  console.log('recommendations type:', typeof recommendations);
+  console.log('recommendations length:', recommendations?.length);
   console.log('morningRoutine:', morningRoutine);
+  console.log('morningRoutine type:', typeof morningRoutine);
   console.log('eveningRoutine:', eveningRoutine);
+  console.log('eveningRoutine type:', typeof eveningRoutine);
 
   // Default fallback data
   const defaultMorning = {
@@ -92,6 +97,7 @@ export function RoutineRecommendationScreen({
               </div>
               <span className="text-sm text-gray-700">
                 {morningRoutine?.displayName || defaultMorning.displayName}
+                {!morningRoutine && <span className="text-xs text-red-500 block">(fallback)</span>}
               </span>
             </div>
           </div>
@@ -130,6 +136,7 @@ export function RoutineRecommendationScreen({
               </div>
               <span className="text-sm text-white">
                 {eveningRoutine?.displayName || defaultEvening.displayName}
+                {!eveningRoutine && <span className="text-xs text-red-300 block">(fallback)</span>}
               </span>
             </div>
           </div>
