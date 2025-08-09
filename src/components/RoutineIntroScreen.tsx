@@ -118,7 +118,7 @@ export function RoutineIntroScreen({
                 onNext();
               }}
             >
-              I'm Ready
+              Next
             </button>
           </div>
         </div>
