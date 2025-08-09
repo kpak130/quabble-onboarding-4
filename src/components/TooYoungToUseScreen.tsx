@@ -52,7 +52,7 @@ export function TooYoungToUseScreen() {
             color: '#4C4A3C',
             fontSize: 'min(3.5vw, 0.875rem)'
           }}>
-            Do you need a support? <span className="underline">Contact us</span>
+            Do you need a support? Contact us at quabble@muse.live
           </p>
         </div>
       </div>
