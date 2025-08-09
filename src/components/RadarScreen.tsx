@@ -12,8 +12,12 @@ export function RadarScreen({
 }: RadarScreenProps) {
 
   useEffect(() => {
-    // Function to be called when the component mounts
-    // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:radar:landing"}');
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_holistic_approach",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

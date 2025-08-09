@@ -32,7 +32,7 @@ export function WeCanHelpScreen({
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
-      "event": "view_ob_info_quabble_here_to_help",
+      "event": "view_ob_info_quabble_offer_support",
       "eventProperties": {
         "onboarding_version": 4.0
       }
