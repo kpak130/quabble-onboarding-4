@@ -12,8 +12,12 @@ export function ConfirmationScreen({
 }: ConfirmationScreenProps) {
   const { t } = useLanguage();
   useEffect(() => {
-    // Function to be called when the component mounts
-    sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:page_2_1:landing"}');
+    sendToFlutter(JSON.stringify({
+      "event": "view_ob_info_welcome",
+      "eventProperties": {
+        "onboarding_version": 4.0
+      }
+    }));
   }, []); 
 
   return <>

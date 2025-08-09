@@ -16,6 +16,7 @@ export interface QuabbleFlutterChannel {
     event: string,
     payload: Record<string, unknown> = {}
   ) {
+    console.log('sendToFlutter', event, payload);
     const channel = window.QuabbleFlutterChannel;
     if (channel && typeof channel.postMessage === 'function') {
       channel.postMessage(JSON.stringify({ event, ...payload }));
