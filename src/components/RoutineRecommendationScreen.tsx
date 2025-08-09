@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useRecommendations } from '../contexts/RecommendationsContext';
 
 interface RoutineRecommendationScreenProps {
   onBack: () => void;
@@ -10,6 +11,8 @@ export function RoutineRecommendationScreen({
   onBack,
   onNext
 }: RoutineRecommendationScreenProps) {
+  const { recommendations, loading } = useRecommendations();
+
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
@@ -19,6 +22,27 @@ export function RoutineRecommendationScreen({
       }
     }));
   }, []);
+
+  // Get morning and evening routines (1st and 2nd elements)
+  const morningRoutine = recommendations?.[0];
+  const eveningRoutine = recommendations?.[1];
+
+  // Debug logging
+  console.log('🔍 RoutineRecommendationScreen Debug:');
+  console.log('recommendations:', recommendations);
+  console.log('morningRoutine:', morningRoutine);
+  console.log('eveningRoutine:', eveningRoutine);
+
+  // Default fallback data
+  const defaultMorning = {
+    displayName: "Mood Diary",
+    smallThumbnailUrl: "/images/24-smoothie.png"
+  };
+  
+  const defaultEvening = {
+    displayName: "Gratitude Jar", 
+    smallThumbnailUrl: "/images/24-jar.png"
+  };
 
   return (
     <>
@@ -57,16 +81,18 @@ export function RoutineRecommendationScreen({
               <span className="text-sm text-gray-700">Check-in</span>
             </div>
             
-            {/* Mood Diary */}
+            {/* Morning Routine - Dynamic */}
             <div className="flex flex-col items-center relative z-10 ml-16">
               <div className="w-16 h-16 mb-2">
                 <img 
-                  src="/images/24-smoothie.png" 
-                  alt="Mood Diary" 
+                  src={morningRoutine?.smallThumbnailUrl || defaultMorning.smallThumbnailUrl} 
+                  alt={morningRoutine?.displayName || defaultMorning.displayName}
                   className="w-full h-full object-contain" 
                 />
               </div>
-              <span className="text-sm text-gray-700">Mood Diary</span>
+              <span className="text-sm text-gray-700">
+                {morningRoutine?.displayName || defaultMorning.displayName}
+              </span>
             </div>
           </div>
         </div>
@@ -93,16 +119,18 @@ export function RoutineRecommendationScreen({
               <span className="text-sm text-white">Check-in</span>
             </div>
             
-            {/* Gratitude Jar */}
+            {/* Evening Routine - Dynamic */}
             <div className="flex flex-col items-center relative z-10 ml-16">
               <div className="w-16 h-16 mb-2">
                 <img 
-                  src="/images/24-jar.png" 
-                  alt="Gratitude Jar" 
+                  src={eveningRoutine?.smallThumbnailUrl || defaultEvening.smallThumbnailUrl} 
+                  alt={eveningRoutine?.displayName || defaultEvening.displayName}
                   className="w-full h-full object-contain" 
                 />
               </div>
-              <span className="text-sm text-white">Gratitude Jar</span>
+              <span className="text-sm text-white">
+                {eveningRoutine?.displayName || defaultEvening.displayName}
+              </span>
             </div>
           </div>
         </div>
@@ -128,9 +156,7 @@ export function RoutineRecommendationScreen({
                 height: '7.5vh', // Slightly bigger button height (same as option buttons)
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
-              onClick={() => {
-                sendToFlutter('{"event":"onboarding-complete"}');
-              }}
+              onClick={onNext}
             >
               Okay
             </button>

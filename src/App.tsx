@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { SelectionsProvider } from './contexts/SelectionsContext';
+import { RecommendationsProvider } from './contexts/RecommendationsContext';
 import { prefetchImagesForScreen, prefetchAllCriticalImages } from './utils/imagePrefetch';
 import { fetchQuestions, defaultQuestions, Question } from './services/questionsService';
 import { AgeGroupScreen } from './components/AgeGroupScreen';
@@ -648,9 +649,11 @@ export function App() {
     <LanguageProvider>
       <AuthProvider>
         <SelectionsProvider>
-          <div className="relative overflow-hidden">
-            {renderCurrentScreen()}
-          </div>
+          <RecommendationsProvider>
+            <div className="relative overflow-hidden">
+              {renderCurrentScreen()}
+            </div>
+          </RecommendationsProvider>
         </SelectionsProvider>
       </AuthProvider>
     </LanguageProvider>
