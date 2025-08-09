@@ -295,7 +295,7 @@ function getTranslations() {
       
       // Therapist Screen
       "therapist.title": "It's therapist-recommended",
-      "therapist.subtitle": "Quabble is backed by licensed therapists and mental health professionals",
+      "therapist.subtitle": "Quabble brings real wellness practices to daily life—backed by experts like our advisor, Dr. Jung Kim, Assist. Professor of Psychiatry at Harvard Medical School",
       
       // Support System Screen
       "support.title": "How strong is your support system?",
@@ -447,7 +447,7 @@ function getTranslations() {
       
       // Therapist Screen
       "therapist.title": "전문가가 추천하는",
-      "therapist.subtitle": "Quabble은 정신건강 전문의와 치료사들이 지지하는 앱입니다",
+      "therapist.subtitle": "Quabble은 실제 웰니스 실천법을 일상에 적용합니다—하버드 의과대학 정신의학과 조교수인 Dr. Jung Kim과 같은 전문가들의 지원을 받습니다",
       
       // Support System Screen
       "support.title": "지지체계가 얼마나 튼튼한가요?",
@@ -618,7 +618,7 @@ function getTranslations() {
       
       // Therapist Screen
       "therapist.title": "セラピスト推奨",
-      "therapist.subtitle": "Quabbleは認定セラピストとメンタルヘルス専門家によってサポートされています",
+      "therapist.subtitle": "Quabbleは実際のウェルネス実践を日常生活に取り入れます—ハーバード医学部精神医学科助教授のDr. Jung Kimなどの専門家によってサポートされています",
       
       // Support System Screen
       "support.title": "サポートシステムはどの程度強いですか？",
