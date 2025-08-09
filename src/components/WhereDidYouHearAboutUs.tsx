@@ -73,7 +73,15 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
           )}
           {!onBack && <div className="w-12 h-12"></div>}
           <div className="flex-1"></div>
-          <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={onSkip} style={{ color: '#7B7968' }}>
+          <button className="p-3 text-lg sm:text-xl font-normal touch-target" onClick={() => {
+            sendToFlutter(JSON.stringify({
+              "event": "click_skip_ob_survey_first_hear_us",
+              "eventProperties": {
+                "onboarding_version": 4.0
+              }
+            }));
+            onSkip();
+          }} style={{ color: '#7B7968' }}>
             {t('skip')}
           </button>
         </div>
