@@ -223,7 +223,9 @@ export function AgeGroupScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_age_group",
                     "eventProperties": {
-                      "onboarding_version": 4.0,
+                      "onboarding_version": 4.0
+                    },
+                    "userProperties": {
                       "survey_age_group": systemName || selectedAgeGroup || ""
                     }
                   }));

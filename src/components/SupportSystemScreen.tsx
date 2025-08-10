@@ -149,7 +149,9 @@ export function SupportSystemScreen({
                     sendToFlutter(JSON.stringify({
                       "event": "click_next_ob_survey_support_system",
                       "eventProperties": {
-                        "onboarding_version": 4.0,
+                        "onboarding_version": 4.0
+                      },
+                      "userProperties": {
                         "survey_support_system": systemName || selectedOption || ""
                       }
                     }));

@@ -146,7 +146,9 @@ export function AskFeelingV2Screen({
                     sendToFlutter(JSON.stringify({
                       "event": "click_next_ob_survey_how_have_you_been",
                       "eventProperties": {
-                        "onboarding_version": 4.0,
+                        "onboarding_version": 4.0
+                      },
+                      "userProperties": {
                         "survey_how_have_you_been": systemName || selectedFeeling || ""
                       }
                     }));

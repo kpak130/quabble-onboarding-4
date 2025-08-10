@@ -164,7 +164,9 @@ export function WhatDidYouTryScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_tried_before",
                     "eventProperties": {
-                      "onboarding_version": 4.0,
+                      "onboarding_version": 4.0
+                    },
+                    "userProperties": {
                       "survey_tried_before": systemNames.join(', ') || selectedOptions.join(', ') || ""
                     }
                   }));

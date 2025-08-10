@@ -150,7 +150,9 @@ export function GoodNightScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_go_to_bed",
                     "eventProperties": {
-                      "onboarding_version": 4.0,
+                      "onboarding_version": 4.0
+                    },
+                    "userProperties": {
                       "survey_go_to_bed": bedTime
                     }
                   }));

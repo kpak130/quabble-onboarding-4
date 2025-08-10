@@ -158,7 +158,9 @@ export function WhatFeltMissingScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_tried_not_working",
                     "eventProperties": {
-                      "onboarding_version": 4.0,
+                      "onboarding_version": 4.0
+                    },
+                    "userProperties": {
                       "survey_tried_not_working": systemNames.join(', ') || selectedOptions.join(', ') || ""
                     }
                   }));
