@@ -45,6 +45,9 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
       "event": "view_ob_survey_first_hear_us",
       "eventProperties": {
         "onboarding_version": 4.0
+      },
+      "userProperties": {
+        "onboarding_version": 4.0
       }
     }));
   }, []); 
