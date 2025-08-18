@@ -60,7 +60,7 @@ export function useLanguage(): LanguageContextType {
 function getTranslation(key: string, language: SupportedLanguage): string {
   const translations = getTranslations();
   // Type assertion to tell TypeScript that we know the structure
-  const typedTranslations = translations as Record<SupportedLanguage, Record<string, string>>;
+  const typedTranslations = translations as unknown as Record<SupportedLanguage, Record<string, string>>;
   return typedTranslations[language]?.[key] || typedTranslations.en[key] || key;
 }
 

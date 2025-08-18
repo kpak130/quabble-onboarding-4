@@ -22,8 +22,8 @@ const API_ENDPOINT = process.env.NODE_ENV === 'development'
 export const fetchQuestions = async (): Promise<Question[]> => {
   try {
     // Import the language utility
-    const { getLanguageFromUrl } = await import('../utils/language');
-    const currentLanguage = getLanguageFromUrl();
+    const { getLanguageFromUrlForQuestionsRequest } = await import('../utils/language');
+    const currentLanguage = getLanguageFromUrlForQuestionsRequest();
     const response = await fetch(API_ENDPOINT, {
       referrerPolicy: 'no-referrer',
       headers: {

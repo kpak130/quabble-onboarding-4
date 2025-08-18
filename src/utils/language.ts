@@ -1,4 +1,4 @@
-export type SupportedLanguage = 'en' | 'kr' | 'ja';
+export type SupportedLanguage = 'en' | 'kr' | 'ko' | 'ja';
 
 export const getLanguageFromUrl = (): SupportedLanguage => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -6,6 +6,19 @@ export const getLanguageFromUrl = (): SupportedLanguage => {
   
   if (language === 'korean') {
     return 'kr';
+  } else if (language === 'japanese') {
+    return 'ja';
+  }
+  
+  return 'en';
+};
+
+export const getLanguageFromUrlForQuestionsRequest = (): SupportedLanguage => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const language = urlParams.get('language');
+  
+  if (language === 'korean') {
+    return 'ko';
   } else if (language === 'japanese') {
     return 'ja';
   }
