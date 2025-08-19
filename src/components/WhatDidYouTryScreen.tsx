@@ -142,64 +142,51 @@ export function WhatDidYouTryScreen({
         </div>
       </div>
       
-      {/* Next Button - only show when at least one option is selected */}
-      {selectedOptions.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50 slide-up-animation" 
-             style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-          <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
-            <div className="max-w-md mx-auto">
-              <button
-                className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
-                style={{ 
-                  height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                  fontSize: '2.5vh' // 1/40 of viewport height
-                }}
-                onClick={() => {
-                  // Get system names for selected options
-                  const systemNames = selectedOptions.map(option => getSystemName(option)).filter(Boolean);
-                  
-                  // Note: This screen doesn't correspond to a specific question in questionsService.ts
-                  // Selection tracking would need to be added if a corresponding question is created
-                  
-                  sendToFlutter(JSON.stringify({
-                    "event": "click_next_ob_survey_tried_before",
-                    "eventProperties": {
-                      "onboarding_version": 4.0
-                    },
-                    "userProperties": {
-                      "survey_tried_before": systemNames.join(', ') || selectedOptions.join(', ') || ""
-                    }
-                  }));
-                  
-                  // Check if mental_wellness_apps is selected for navigation logic
-                  const hasMentalWellnessApps = systemNames.includes('mental_wellness_apps');
-                  onNext(hasMentalWellnessApps ? 'mental_wellness_apps' : 'other');
-                }}
-              >
-                {t('next')}
-              </button>
-            </div>
+      {/* Next Button - always visible */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+           style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
+          <div className="max-w-md mx-auto">
+            <button
+              className={`w-full mx-auto block px-7 rounded-full text-center font-normal transition-colors shadow-lg touch-target ${
+                selectedOptions.length > 0 ? 'bg-black hover:bg-gray-800 text-white' : 'text-white'
+              }`}
+              style={{ 
+                height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                fontSize: '2.5vh', // 1/40 of viewport height
+                backgroundColor: selectedOptions.length > 0 ? undefined : '#BBB8A5'
+              }}
+              disabled={selectedOptions.length === 0}
+              onClick={() => {
+                // Get system names for selected options
+                const systemNames = selectedOptions.map(option => getSystemName(option)).filter(Boolean);
+                
+                // Note: This screen doesn't correspond to a specific question in questionsService.ts
+                // Selection tracking would need to be added if a corresponding question is created
+                
+                sendToFlutter(JSON.stringify({
+                  "event": "click_next_ob_survey_tried_before",
+                  "eventProperties": {
+                    "onboarding_version": 4.0
+                  },
+                  "userProperties": {
+                    "survey_tried_before": systemNames.join(', ') || selectedOptions.join(', ') || ""
+                  }
+                }));
+                
+                // Check if mental_wellness_apps is selected for navigation logic
+                const hasMentalWellnessApps = systemNames.includes('mental_wellness_apps');
+                onNext(hasMentalWellnessApps ? 'mental_wellness_apps' : 'other');
+              }}
+            >
+              {t('next')}
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </div>
     
     <style>{`
-      .slide-up-animation {
-        animation: slideUpFromBottom 0.2s ease-out forwards;
-      }
-      
-      @keyframes slideUpFromBottom {
-        from {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-      
       .touch-target {
         min-height: 48px;
         min-width: 48px;

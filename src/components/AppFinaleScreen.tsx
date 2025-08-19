@@ -57,7 +57,7 @@ export function AppFinaleScreen({
         {/* Statistics text */}
         <div className="text-center mb-8">
           <h1 className="text-xl font-medium text-gray-800 leading-relaxed">
-            80% of regular users report they improved their mental health since they started using Quabble
+            87% of regular users report they improved their mental health since they started using Quabble
           </h1>
         </div>
 

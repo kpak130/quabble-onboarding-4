@@ -160,7 +160,7 @@ function getTranslations() {
       "routineRecommendation.okayButton": "Okay",
       
       // App Finale Screen
-      "appFinale.statistic": "80% of regular users report they improved their mental health since they started using Quabble",
+      "appFinale.statistic": "87% of regular users report they improved their mental health since they started using Quabble",
       "appFinale.testimonialAuthor": "Nat",
       "appFinale.testimonialText": "I really love Quabble, my therapist suggested it and it keeps me afloat during the week.",
       "appFinale.therapistRecommendedTitle": "Therapist-recommended",

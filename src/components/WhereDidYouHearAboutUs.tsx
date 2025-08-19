@@ -156,65 +156,52 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
           </div>
         </div>
         
-        {/* Next Button - only show when option is selected */}
-        {selectedOption && (
-          <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50 slide-up-animation" 
-               style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-            <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
-              <div className="max-w-md mx-auto">
-                <button
-                  className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
-                                   style={{ 
-                     height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                     fontSize: '2.5vh' // 1/40 of viewport height
-                   }}
-                  onClick={() => {
-                    // Get system name for selected option using index
-                    const optionIndex = selectedOption ? options.indexOf(selectedOption) : -1;
-                    const systemName = optionIndex >= 0 ? toggleSystemNames[optionIndex] : null;
-                    
-                    // Add selection to context if we have question data with option IDs
-                    if (questionData && optionIndex >= 0) {
-                      const selectedOptionId = questionData.options[optionIndex].id;
-                      addSelection(selectedOptionId);
+        {/* Next Button - always visible */}
+        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+             style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+          <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
+            <div className="max-w-md mx-auto">
+              <button
+                className={`w-full mx-auto block px-7 rounded-full text-center font-normal transition-colors shadow-lg touch-target ${
+                  selectedOption ? 'bg-black hover:bg-gray-800 text-white' : 'text-white'
+                }`}
+                style={{ 
+                  height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                  fontSize: '2.5vh', // 1/40 of viewport height
+                  backgroundColor: selectedOption ? undefined : '#BBB8A5'
+                }}
+                disabled={!selectedOption}
+                onClick={() => {
+                  // Get system name for selected option using index
+                  const optionIndex = selectedOption ? options.indexOf(selectedOption) : -1;
+                  const systemName = optionIndex >= 0 ? toggleSystemNames[optionIndex] : null;
+                  
+                  // Add selection to context if we have question data with option IDs
+                  if (questionData && optionIndex >= 0) {
+                    const selectedOptionId = questionData.options[optionIndex].id;
+                    addSelection(selectedOptionId);
+                  }
+                  
+                  sendToFlutter(JSON.stringify({
+                    "event": "click_next_ob_survey_first_hear_us",
+                    "eventProperties": {
+                      "onboarding_version": 4.0
+                    },
+                    "userProperties": {
+                      "survey_first_hear_us": systemName || selectedOption || ""
                     }
-                    
-                    sendToFlutter(JSON.stringify({
-                      "event": "click_next_ob_survey_first_hear_us",
-                      "eventProperties": {
-                        "onboarding_version": 4.0
-                      },
-                      "userProperties": {
-                        "survey_first_hear_us": systemName || selectedOption || ""
-                      }
-                    }));
-                    onNext();
-                  }}
-                >
-                  {t('next')}
-                </button>
-              </div>
+                  }));
+                  onNext();
+                }}
+              >
+                {t('next')}
+              </button>
             </div>
           </div>
-        )}
+        </div>
       </div>
       
       <style>{`
-        .slide-up-animation {
-          animation: slideUpFromBottom 0.2s ease-out forwards;
-        }
-        
-        @keyframes slideUpFromBottom {
-          from {
-            transform: translateY(100%);
-            opacity: 0;
-          }
-          to {
-            transform: translateY(0);
-            opacity: 1;
-          }
-        }
-        
         .touch-target {
           min-height: 48px;
           min-width: 48px;

@@ -130,18 +130,21 @@ export function AchivementScreen({
         </div>
       </div>
       
-      {/* Next Button - only show when focus is selected */}
-      {selectedFocus && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50 slide-up-animation" 
+      {/* Next Button - always visible, disabled when no selection */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
              style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
           <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
             <div className="max-w-md mx-auto">
               <button
-                className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
+                className={`w-full mx-auto block px-7 rounded-full text-white text-center font-normal transition-colors shadow-lg touch-target ${
+                  selectedFocus ? 'bg-black hover:bg-gray-800' : 'cursor-not-allowed'
+                }`}
                 style={{ 
                   height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                  fontSize: '2.5vh' // 1/40 of viewport height
+                  fontSize: '2.5vh', // 1/40 of viewport height
+                  backgroundColor: selectedFocus ? undefined : '#BBB8A5'
                 }}
+                disabled={!selectedFocus}
                 onClick={() => {
                   // Get system name for selected focus
                   const selectedOption = selectedFocus ? options.find(opt => opt.displayText === selectedFocus) : null;
@@ -175,25 +178,9 @@ export function AchivementScreen({
             </div>
           </div>
         </div>
-      )}
     </div>
     
     <style>{`
-      .slide-up-animation {
-        animation: slideUpFromBottom 0.2s ease-out forwards;
-      }
-      
-      @keyframes slideUpFromBottom {
-        from {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-      
       .touch-target {
         min-height: 48px;
         min-width: 48px;

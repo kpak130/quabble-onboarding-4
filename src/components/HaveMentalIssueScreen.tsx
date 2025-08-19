@@ -117,65 +117,52 @@ export function HaveMentalIssueScreen({
         </div>
       </div>
       
-      {/* Next Button - only show when option is selected */}
-      {selectedOption && (
-        <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50 slide-up-animation" 
-             style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
-          <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
-            <div className="max-w-md mx-auto">
-              <button
-                className="w-full mx-auto block px-7 rounded-full text-white text-center font-normal bg-black hover:bg-gray-800 transition-colors shadow-lg touch-target"
-                style={{ 
-                  height: '7.5vh', // Slightly bigger button height (same as option buttons)
-                  fontSize: '2.5vh' // 1/40 of viewport height
-                }}
-                onClick={() => {
-                  // Get system name for selected option
-                  const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
-                  const systemName = selectedOptionData ? selectedOptionData.systemName : null;
-                  
-                  // Note: This screen doesn't correspond to a specific question in questionsService.ts
-                  // Selection tracking would need to be added if a corresponding question is created
-                  
-                  sendToFlutter(JSON.stringify({
-                    "event": "click_next_ob_survey_ongoing_mental_challenge",
-                    "eventProperties": {
-                      "onboarding_version": 4.0
-                    },
-                    "userProperties": {
-                      "survey_ongoing_mental_challenge": systemName || selectedOption || ""
-                    }
-                  }));
-                  
-                  if (systemName && (systemName === 'yes' || systemName === 'no')) {
-                    onNext(systemName);
+      {/* Next Button - always visible */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#faf7f0] z-50" 
+           style={{ paddingBottom: 'max(1rem, env(safe-area-inset-bottom))' }}>
+        <div className="p-5 sm:p-6" style={{ paddingLeft: '8vw', paddingRight: '8vw' }}>
+          <div className="max-w-md mx-auto">
+            <button
+              className={`w-full mx-auto block px-7 rounded-full text-center font-normal transition-colors shadow-lg touch-target ${
+                selectedOption ? 'bg-black hover:bg-gray-800 text-white' : 'text-white'
+              }`}
+              style={{ 
+                height: '7.5vh', // Slightly bigger button height (same as option buttons)
+                fontSize: '2.5vh', // 1/40 of viewport height
+                backgroundColor: selectedOption ? undefined : '#BBB8A5'
+              }}
+              disabled={!selectedOption}
+              onClick={() => {
+                // Get system name for selected option
+                const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
+                const systemName = selectedOptionData ? selectedOptionData.systemName : null;
+                
+                // Note: This screen doesn't correspond to a specific question in questionsService.ts
+                // Selection tracking would need to be added if a corresponding question is created
+                
+                sendToFlutter(JSON.stringify({
+                  "event": "click_next_ob_survey_ongoing_mental_challenge",
+                  "eventProperties": {
+                    "onboarding_version": 4.0
+                  },
+                  "userProperties": {
+                    "survey_ongoing_mental_challenge": systemName || selectedOption || ""
                   }
-                }}
-              >
-                {t('next')}
-              </button>
-            </div>
+                }));
+                
+                if (systemName && (systemName === 'yes' || systemName === 'no')) {
+                  onNext(systemName);
+                }
+              }}
+            >
+              {t('next')}
+            </button>
           </div>
         </div>
-      )}
+      </div>
     </div>
     
     <style>{`
-      .slide-up-animation {
-        animation: slideUpFromBottom 0.2s ease-out forwards;
-      }
-      
-      @keyframes slideUpFromBottom {
-        from {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-      
       .touch-target {
         min-height: 48px;
         min-width: 48px;
