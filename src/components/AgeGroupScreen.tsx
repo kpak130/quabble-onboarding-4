@@ -232,17 +232,17 @@ export function AgeGroupScreen({
                       "survey_age_group": systemName || selectedAgeGroup || ""
                     }
                   }));
-                  
+                  onNext();
                   // Check if user selected "Under 18" and show birthday modal
-                  const isUnder18 = selectedAgeGroup === 'age.under18' || 
-                                   (questionData && selectedAgeGroupData?.systemName === 'under_18') ||
-                                   (selectedAgeGroup && selectedAgeGroup.toLowerCase().includes('under 18'));
+                  // const isUnder18 = selectedAgeGroup === 'age.under18' || 
+                  //                  (questionData && selectedAgeGroupData?.systemName === 'under_18') ||
+                  //                  (selectedAgeGroup && selectedAgeGroup.toLowerCase().includes('under 18'));
                   
-                  if (isUnder18) {
-                    setShowBirthdayModal(true);
-                  } else {
-                    onNext();
-                  }
+                  // if (isUnder18) {
+                  //   setShowBirthdayModal(true);
+                  // } else {
+                  //   onNext();
+                  // }
                 }}
               >
                 {t('next')}
