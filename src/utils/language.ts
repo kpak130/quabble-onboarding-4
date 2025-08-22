@@ -3,13 +3,22 @@ export type SupportedLanguage = 'en' | 'kr' | 'ko' | 'ja';
 export const getLanguageFromUrl = (): SupportedLanguage => {
   const urlParams = new URLSearchParams(window.location.search);
   const language = urlParams.get('language');
-  
+    const localization = urlParams.get('localization');
+
   if (language === 'korean') {
     return 'kr';
   } else if (language === 'japanese') {
     return 'ja';
   }
   
+  if (localization) {
+    if (localization === 'ko') {
+      return 'kr';
+    } else if (localization === 'ja') {
+      return 'ja';
+    }
+    return 'en';
+  }
   return 'en';
 };
 
