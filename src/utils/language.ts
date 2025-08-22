@@ -25,11 +25,16 @@ export const getLanguageFromUrl = (): SupportedLanguage => {
 export const getLanguageFromUrlForQuestionsRequest = (): SupportedLanguage => {
   const urlParams = new URLSearchParams(window.location.search);
   const language = urlParams.get('language');
-  
+  const localization = urlParams.get('localization') as SupportedLanguage;
+
   if (language === 'korean') {
     return 'ko';
   } else if (language === 'japanese') {
     return 'ja';
+  }
+
+  if (localization) {
+    return localization
   }
   
   return 'en';
