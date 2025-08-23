@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface QuabbleToolsScreenProps {
   onBack: () => void;
@@ -10,26 +11,27 @@ export function QuabbleToolsScreen({
   onBack,
   onNext
 }: QuabbleToolsScreenProps) {
+  const { t } = useLanguage();
 
   const tools = [
-    { image: '/images/quabble-tool-1.png', name: 'Mood\nDiary' },
-    { image: '/images/quabble-tool-2.png', name: 'Meditation' },
-    { image: '/images/quabble-tool-3.png', name: 'Bamboo\nForest' },
-    { image: '/images/quabble-tool-4.png', name: '1min\nBreathing' },
-    { image: '/images/quabble-tool-5.png', name: 'Watermelon\nTai Chi' },
-    { image: '/images/quabble-tool-6.png', name: 'Proud\nDandelion' },
-    { image: '/images/quabble-tool-7.png', name: 'Gratitude\nJar' },
-    { image: '/images/quabble-tool-8.png', name: 'Worry\nBox' },
-    { image: '/images/quabble-tool-9.png', name: 'Treasure\nBox' },
-    { image: '/images/quabble-tool-10.png', name: 'Safe\nPlace' },
-    { image: '/images/quabble-tool-11.png', name: 'Moonlight' },
-    { image: '/images/quabble-tool-12.png', name: 'Outdoor\nWalk' },
-    { image: '/images/quabble-tool-13.png', name: '54321' },
-    { image: '/images/quabble-tool-14.png', name: 'Pleasant\nActivities' },
-    { image: '/images/quabble-tool-15.png', name: 'Thank\nYou' },
-    { image: '/images/quabble-tool-16.png', name: 'Dear\nSelf' },
-    { image: '/images/quabble-tool-17.png', name: 'Smart\nGoals' },
-    { image: '/images/quabble-tool-18.png', name: 'Mindful\nEating' }
+    { image: '/images/quabble-tool-1.png', nameKey: 'quabbleTools.moodDiary' },
+    { image: '/images/quabble-tool-2.png', nameKey: 'quabbleTools.meditation' },
+    { image: '/images/quabble-tool-3.png', nameKey: 'quabbleTools.bambooForest' },
+    { image: '/images/quabble-tool-4.png', nameKey: 'quabbleTools.oneMinBreathing' },
+    { image: '/images/quabble-tool-5.png', nameKey: 'quabbleTools.watermelonTaiChi' },
+    { image: '/images/quabble-tool-6.png', nameKey: 'quabbleTools.proudDandelion' },
+    { image: '/images/quabble-tool-7.png', nameKey: 'quabbleTools.gratitudeJar' },
+    { image: '/images/quabble-tool-8.png', nameKey: 'quabbleTools.worryBox' },
+    { image: '/images/quabble-tool-9.png', nameKey: 'quabbleTools.treasureBox' },
+    { image: '/images/quabble-tool-10.png', nameKey: 'quabbleTools.safePlace' },
+    { image: '/images/quabble-tool-11.png', nameKey: 'quabbleTools.moonlight' },
+    { image: '/images/quabble-tool-12.png', nameKey: 'quabbleTools.outdoorWalk' },
+    { image: '/images/quabble-tool-13.png', nameKey: 'quabbleTools.fiveFourThreeTwoOne' },
+    { image: '/images/quabble-tool-14.png', nameKey: 'quabbleTools.pleasantActivities' },
+    { image: '/images/quabble-tool-15.png', nameKey: 'quabbleTools.thankYou' },
+    { image: '/images/quabble-tool-16.png', nameKey: 'quabbleTools.dearSelf' },
+    { image: '/images/quabble-tool-17.png', nameKey: 'quabbleTools.smartGoals' },
+    { image: '/images/quabble-tool-18.png', nameKey: 'quabbleTools.mindfulEating' }
   ];
 
   useEffect(() => {
@@ -63,14 +65,38 @@ export function QuabbleToolsScreen({
           color: '#4C4A3C',
           fontSize: 'min(6.5vw, 2.25rem)'
         }}>
-          Quabble has the right tools
-          <br />
-          for everyone
+          {(() => {
+            const title = t('quabbleTools.title');
+            const words = title.split(' ');
+            const breakPoint = words.indexOf('for');
+            if (breakPoint > 0) {
+              return (
+                <>
+                  {words.slice(0, breakPoint).join(' ')}
+                  <br />
+                  {words.slice(breakPoint).join(' ')}
+                </>
+              );
+            }
+            return title;
+          })()}
         </h1>
         <p className="text-base sm:text-lg lg:text-xl font-normal text-center" style={{ color: '#7B7968' }}>
-          18 different workouts across 6 categories
-          <br />
-          available now and more to come!
+          {(() => {
+            const subtitle = t('quabbleTools.subtitle');
+            const words = subtitle.split(' ');
+            const breakPoint = words.indexOf('available');
+            if (breakPoint > 0) {
+              return (
+                <>
+                  {words.slice(0, breakPoint).join(' ')}
+                  <br />
+                  {words.slice(breakPoint).join(' ')}
+                </>
+              );
+            }
+            return subtitle;
+          })()}
         </p>
       </div>
       
@@ -90,7 +116,7 @@ export function QuabbleToolsScreen({
               <div key={index} className="flex flex-col items-center h-36">
                 <img
                   src={tool.image}
-                  alt={tool.name}
+                  alt={t(tool.nameKey)}
                   className="w-24 h-24 object-contain"
                   style={{ marginBottom: '0.25vh' }}
                 />
@@ -103,7 +129,7 @@ export function QuabbleToolsScreen({
                     paddingBottom: '1vh'
                   }}
                 >
-                  {tool.name}
+                  {t(tool.nameKey).replace(' ', '\n')}
                 </span>
               </div>
             ))}
@@ -127,7 +153,7 @@ export function QuabbleToolsScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

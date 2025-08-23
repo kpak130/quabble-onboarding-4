@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface GoodNightScreenProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function GoodNightScreen({
   onBack,
   onNext
 }: GoodNightScreenProps) {
+  const { t } = useLanguage();
   const [bedTime, setBedTime] = useState('10:00 PM');
   const [showTimeModal, setShowTimeModal] = useState(false);
   const [selectedHour, setSelectedHour] = useState('10');
@@ -116,8 +118,20 @@ export function GoodNightScreen({
           {/* Question text */}
           <div className="text-center mb-6 px-4 mt-48">
             <h1 className="text-2xl font-medium text-white leading-tight">
-              When do you usually<br />
-              go to bed?
+              {(() => {
+                const title = t('goodNight.title');
+                const words = title.split(' ');
+                const breakPoint = words.indexOf('go');
+                if (breakPoint > 0) {
+                  return (
+                    <>
+                      {words.slice(0, breakPoint).join(' ')}<br />
+                      {words.slice(breakPoint).join(' ')}
+                    </>
+                  );
+                }
+                return title;
+              })()}
             </h1>
           </div>
 
@@ -159,7 +173,7 @@ export function GoodNightScreen({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>
@@ -171,7 +185,7 @@ export function GoodNightScreen({
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
           <div className="bg-white max-w-sm w-full mx-4 rounded-3xl p-6">
             <div className="flex justify-center items-center mb-8">
-              <h3 className="text-xl font-semibold text-gray-800">Select Time</h3>
+              <h3 className="text-xl font-semibold text-gray-800">{t('goodNight.modalTitle')}</h3>
             </div>
             
             <div className="flex justify-center items-center gap-2 mb-8">
@@ -221,7 +235,7 @@ export function GoodNightScreen({
                 onClick={handleTimeConfirm}
                 className="w-full bg-black text-white rounded-3xl py-4 px-8 text-lg font-medium hover:bg-gray-800 transition-colors"
               >
-                Done
+                {t('done')}
               </button>
             </div>
           </div>

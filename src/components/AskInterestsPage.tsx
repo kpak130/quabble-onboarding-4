@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AskInterestsPageProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function AskInterestsPage({
   onBack,
   onNext
 }: AskInterestsPageProps) {
+  const { t } = useLanguage();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
   useEffect(() => {
@@ -24,31 +26,31 @@ export function AskInterestsPage({
   
   const interestOptions = [
     [
-      { name: 'Breathing exercises', icon: '21-icon-1.png', bgColor: '#E0EAED', darkColor: '#8FA5AB' },
-      { name: 'Mood tracking', icon: '21-icon-2.png', bgColor: '#E4DEE4', darkColor: '#A396A4' },
-      { name: 'Journaling', icon: '21-icon-3.png', bgColor: '#F3F1E5', darkColor: '#C4B888' }
+      { nameKey: 'askInterests.breathing', icon: '21-icon-1.png', bgColor: '#E0EAED', darkColor: '#8FA5AB' },
+      { nameKey: 'askInterests.moodTracking', icon: '21-icon-2.png', bgColor: '#E4DEE4', darkColor: '#A396A4' },
+      { nameKey: 'askInterests.journaling', icon: '21-icon-3.png', bgColor: '#F3F1E5', darkColor: '#C4B888' }
     ],
     [
-      { name: 'Self-love', icon: '21-icon-4.png', bgColor: '#FCD9D1', darkColor: '#E5A085' },
-      { name: 'Gratitude practices', icon: '21-icon-5.png', bgColor: '#F2EBC0', darkColor: '#D4C56E' },
-      { name: 'Meditation', icon: '21-icon-6.png', bgColor: '#D3EDE4', darkColor: '#8BB3A3' }
+      { nameKey: 'askInterests.selfLove', icon: '21-icon-4.png', bgColor: '#FCD9D1', darkColor: '#E5A085' },
+      { nameKey: 'askInterests.gratitude', icon: '21-icon-5.png', bgColor: '#F2EBC0', darkColor: '#D4C56E' },
+      { nameKey: 'askInterests.meditation', icon: '21-icon-6.png', bgColor: '#D3EDE4', darkColor: '#8BB3A3' }
     ],
     [
-      { name: 'Physical activities', icon: '21-icon-7.png', bgColor: '#D2E5D4', darkColor: '#7DB087' },
-      { name: 'Better\nsleep', icon: '21-icon-8.png', bgColor: '#525F72', darkColor: '#353E4A' },
-      { name: 'Productivity', icon: '21-icon-9.png', bgColor: '#B5D5FF', darkColor: '#6BA3E6' }
+      { nameKey: 'askInterests.physical', icon: '21-icon-7.png', bgColor: '#D2E5D4', darkColor: '#7DB087' },
+      { nameKey: 'askInterests.sleep', icon: '21-icon-8.png', bgColor: '#525F72', darkColor: '#353E4A' },
+      { nameKey: 'askInterests.productivity', icon: '21-icon-9.png', bgColor: '#B5D5FF', darkColor: '#6BA3E6' }
     ]
   ];
 
-  const handleInterestClick = (interest: string) => {
+  const handleInterestClick = (interestKey: string) => {
     setSelectedInterests(prev => 
-      prev.includes(interest)
-        ? prev.filter(i => i !== interest)
-        : [...prev, interest]
+      prev.includes(interestKey)
+        ? prev.filter(i => i !== interestKey)
+        : [...prev, interestKey]
     );
   };
 
-  const isSelected = (interest: string) => selectedInterests.includes(interest);
+  const isSelected = (interestKey: string) => selectedInterests.includes(interestKey);
 
   return (
     <>
@@ -68,15 +70,27 @@ export function AskInterestsPage({
                           {/* Title */}
         <div className="text-center px-4" style={{ marginBottom: '0.8vh', marginTop: '-2vh' }}>
           <h1 className="font-medium text-gray-800 leading-tight" style={{ fontSize: '3vh' }}>
-            Which of the following are<br />
-            you interested in practicing?
+            {(() => {
+              const title = t('askInterests.title');
+              const words = title.split(' ');
+              const breakPoint = words.indexOf('interested');
+              if (breakPoint > 0) {
+                return (
+                  <>
+                    {words.slice(0, breakPoint).join(' ')}<br />
+                    {words.slice(breakPoint).join(' ')}
+                  </>
+                );
+              }
+              return title;
+            })()}
           </h1>
         </div>
 
         {/* Subtitle */}
         <div className="text-center px-4" style={{ marginBottom: '2.3vh' }}>
             <p style={{ color: '#7B7968', fontSize: '2vh' }}>
-              Choose all that apply
+              {t('askInterests.subtitle')}
             </p>
           </div>
 
@@ -90,7 +104,7 @@ export function AskInterestsPage({
                 <div key={rowIndex} className="flex gap-1">
                 {row.map((interest) => (
                   <button
-                    key={interest.name}
+                    key={interest.nameKey}
                     className="flex-1 aspect-square p-2 rounded-3xl text-xs font-medium transition-colors relative"
                     style={{ 
                       backgroundColor: interest.bgColor,
@@ -98,14 +112,14 @@ export function AskInterestsPage({
                       minHeight: '0',
                       height: 'auto'
                     }}
-                    onClick={() => handleInterestClick(interest.name)}
+                    onClick={() => handleInterestClick(interest.nameKey)}
                   >
                     <img 
                       src={`/images/${interest.icon}`} 
-                      alt={interest.name}
+                      alt={t(interest.nameKey)}
                       className="w-7 h-7 object-contain absolute top-3 left-3"
                     />
-                    {isSelected(interest.name) && (
+                    {isSelected(interest.nameKey) && (
                       <div 
                         className="absolute top-2 right-2 w-5 h-5 rounded-full flex items-center justify-center"
                         style={{ backgroundColor: interest.darkColor }}
@@ -117,7 +131,7 @@ export function AskInterestsPage({
                     )}
                     <div className="flex items-end h-full pl-2 pb-2">
                       <span className="text-left leading-tight text-base font-medium whitespace-pre-line">
-                        {interest.name}
+                        {t(interest.nameKey).replace(' ', '\n')}
                       </span>
                     </div>
                   </button>
@@ -151,7 +165,7 @@ export function AskInterestsPage({
                   onNext();
                 }}
               >
-                Next
+                {t('next')}
               </button>
             </div>
           </div>

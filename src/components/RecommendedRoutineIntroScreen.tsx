@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useRecommendations } from '../contexts/RecommendationsContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface RecommendedRoutineIntroScreenProps {
   onBack: () => void;
@@ -11,6 +12,7 @@ export function RecommendedRoutineIntroScreen({
   onBack,
   onNext
 }: RecommendedRoutineIntroScreenProps) {
+  const { t } = useLanguage();
   // Get recommendations context
   const { recommendations, loading, error, fetchRecommendations } = useRecommendations();
   const [showDebugModal, setShowDebugModal] = useState(false);
@@ -61,8 +63,20 @@ export function RecommendedRoutineIntroScreen({
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
               <p className="text-white font-medium leading-relaxed" style={{ fontSize: '3vh' }}>
-                Here is your<br />
-                recommended routine
+                {(() => {
+                  const message = t('recommendedRoutineIntro.message');
+                  const words = message.split(' ');
+                  const breakPoint = words.indexOf('your');
+                  if (breakPoint > 0) {
+                    return (
+                      <>
+                        {words.slice(0, breakPoint + 1).join(' ')}<br />
+                        {words.slice(breakPoint + 1).join(' ')}
+                      </>
+                    );
+                  }
+                  return message;
+                })()}
               </p>
             </div>
           </div>
@@ -76,7 +90,7 @@ export function RecommendedRoutineIntroScreen({
           style={{ color: '#2d2b2a' }}
           onClick={onNext}
         >
-          Check it out &gt;&gt;
+          {t('recommendedRoutineIntro.checkItOutButton')}
         </button>
       </div>
 

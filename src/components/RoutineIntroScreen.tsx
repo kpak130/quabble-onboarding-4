@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface RoutineIntroScreenProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function RoutineIntroScreen({
   onBack,
   onNext
 }: RoutineIntroScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     sendToFlutter(JSON.stringify({
@@ -54,16 +56,28 @@ export function RoutineIntroScreen({
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            It delivers bite-sized, personalized daily routines to help you build sustainable habits
+            {t('routineIntro.title')}
           </h1>
         </div>
         
         {/* Morning Section */}
         <div className="flex flex-col items-center mb-8 sm:mb-12">
           <p className="text-base sm:text-lg font-normal text-center mb-6" style={{ color: '#7B7968' }}>
-            Start your morning
-            <br />
-            with a positive mindset
+            {(() => {
+              const morningText = t('routineIntro.morningText');
+              const words = morningText.split(' ');
+              const breakPoint = words.indexOf('with');
+              if (breakPoint > 0) {
+                return (
+                  <>
+                    {words.slice(0, breakPoint).join(' ')}
+                    <br />
+                    {words.slice(breakPoint).join(' ')}
+                  </>
+                );
+              }
+              return morningText;
+            })()}
           </p>
           <div className="flex space-x-3 sm:space-x-4">
             {morningIcons.map((icon, index) => (
@@ -85,9 +99,21 @@ export function RoutineIntroScreen({
         {/* Evening Section */}
         <div className="flex flex-col items-center mb-8 sm:mb-12">
           <p className="text-base sm:text-lg font-normal text-center mb-6" style={{ color: '#7B7968' }}>
-            End your day
-            <br />
-            with a kind reflection
+            {(() => {
+              const eveningText = t('routineIntro.eveningText');
+              const words = eveningText.split(' ');
+              const breakPoint = words.indexOf('with');
+              if (breakPoint > 0) {
+                return (
+                  <>
+                    {words.slice(0, breakPoint).join(' ')}
+                    <br />
+                    {words.slice(breakPoint).join(' ')}
+                  </>
+                );
+              }
+              return eveningText;
+            })()}
           </p>
           <div className="flex space-x-3 sm:space-x-4">
             {eveningIcons.map((icon, index) => (
@@ -122,7 +148,7 @@ export function RoutineIntroScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

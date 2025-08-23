@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface RadarScreenProps {
   onBack: () => void;
@@ -10,6 +11,7 @@ export function RadarScreen({
   onBack,
   onNext
 }: RadarScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     sendToFlutter(JSON.stringify({
@@ -42,12 +44,24 @@ export function RadarScreen({
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            Quabble takes a holistic
-            <br />
-            approach to mental health
+            {(() => {
+              const title = t('radar.title');
+              const words = title.split(' ');
+              const breakPoint = words.indexOf('approach');
+              if (breakPoint > 0) {
+                return (
+                  <>
+                    {words.slice(0, breakPoint).join(' ')}
+                    <br />
+                    {words.slice(breakPoint).join(' ')}
+                  </>
+                );
+              }
+              return title;
+            })()}
           </h1>
           <p className="text-base sm:text-lg font-normal leading-relaxed" style={{ color: '#7B7968' }}>
-            Our mind and body are deeply connected, and lasting mental health can only come from caring for all areas of life.
+            {t('radar.subtitle')}
           </p>
         </div>
         
@@ -63,9 +77,21 @@ export function RadarScreen({
             }}
           />
           <p className="text-base sm:text-lg font-normal text-center leading-relaxed" style={{ color: '#7B7968' }}>
-            Measure your progress with
-            <br />
-            our Wellness Radar!
+            {(() => {
+              const description = t('radar.radarDescription');
+              const words = description.split(' ');
+              const breakPoint = words.indexOf('our');
+              if (breakPoint > 0) {
+                return (
+                  <>
+                    {words.slice(0, breakPoint).join(' ')}
+                    <br />
+                    {words.slice(breakPoint).join(' ')}
+                  </>
+                );
+              }
+              return description;
+            })()}
           </p>
         </div>
       </div>
@@ -85,7 +111,7 @@ export function RadarScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

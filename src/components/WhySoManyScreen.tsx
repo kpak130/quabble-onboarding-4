@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface WhySoManyScreenProps {
   onBack: () => void;
@@ -10,6 +11,8 @@ export function WhySoManyScreen({
   onBack,
   onNext
 }: WhySoManyScreenProps) {
+  const { t } = useLanguage();
+
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
@@ -68,9 +71,12 @@ export function WhySoManyScreen({
           <div className="absolute inset-4 rounded-full bg-gradient-to-br from-orange-400 to-orange-500 flex items-center justify-center p-8" style={{ width: 'calc(100% - 2rem)', height: 'calc(100% - 2rem)' }}>
             <div className="text-center">
               <p className="text-white font-medium leading-relaxed" style={{ fontSize: '1.7rem' }}>
-                So, why do so many<br />
-                people find Quabble<br />
-                so helpful?
+                {t('whySoMany.message').split(' ').map((word, index) => {
+                  // Break lines at logical points for better readability
+                  if (index === 5) return <span key={index}>{word}<br /></span>; // After "many"
+                  if (index === 8) return <span key={index}>{word}<br /></span>; // After "Quabble" 
+                  return <span key={index}>{word} </span>;
+                })}
               </p>
             </div>
           </div>
@@ -90,7 +96,7 @@ export function WhySoManyScreen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

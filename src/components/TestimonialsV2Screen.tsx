@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface TestimonialsV2ScreenProps {
   onNext: () => void;
@@ -8,6 +9,7 @@ interface TestimonialsV2ScreenProps {
 export function TestimonialsV2Screen({
   onNext
 }: TestimonialsV2ScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Send the new event for onboarding survey
@@ -21,24 +23,24 @@ export function TestimonialsV2Screen({
 
   const testimonials = [
     {
-      text: "It's an app I've been looking for all my life.",
-      author: "t.m.s.d7d"
+      textKey: "testimonialsV2.testimonial1Text",
+      authorKey: "testimonialsV2.testimonial1Author"
     },
     {
-      text: "It has been a game changer for my mental health and mindfulness and brings me so much joy.",
-      author: "Emma"
+      textKey: "testimonialsV2.testimonial2Text",
+      authorKey: "testimonialsV2.testimonial2Author"
     },
     {
-      text: "It is a mind blowing way and a different perspective on how you look at mental health as a whole.",
-      author: "Lucy N"
+      textKey: "testimonialsV2.testimonial3Text",
+      authorKey: "testimonialsV2.testimonial3Author"
     },
     {
-      text: "Y'all should know dis the best wellness app ever.",
-      author: "Daryn T"
+      textKey: "testimonialsV2.testimonial4Text",
+      authorKey: "testimonialsV2.testimonial4Author"
     },
     {
-      text: "It's not a game pretending to be a mental health tool; it's a genuine mental health tool that happens to be fun and adorable.",
-      author: "Katherine"
+      textKey: "testimonialsV2.testimonial5Text",
+      authorKey: "testimonialsV2.testimonial5Author"
     }
   ];
 
@@ -114,13 +116,13 @@ export function TestimonialsV2Screen({
                   marginBottom: 'min(3vw, 12px)'
                 }}
               >
-                {testimonial.text}
+                {t(testimonial.textKey)}
               </p>
               <p 
                 className="text-gray-500"
                 style={{ fontSize: 'min(3.5vw, 14px)' }}
               >
-                by {testimonial.author}
+                {t('testimonialsV2.authorPrefix')} {t(testimonial.authorKey)}
               </p>
             </div>
           ))}
@@ -142,7 +144,7 @@ export function TestimonialsV2Screen({
                 onNext();
               }}
             >
-              Next
+              {t('next')}
             </button>
           </div>
         </div>

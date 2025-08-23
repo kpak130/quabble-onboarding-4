@@ -560,6 +560,85 @@ function getTranslations() {
       // Let's Find Out Screen
       "letsFindOut.message": "환영합니다!\n저희가 어떻게\n도움을 드릴 수 있는지 알아보겠습니다",
       
+      // Why So Many Screen
+      "whySoMany.message": "그렇다면, 왜 그렇게 많은 사람들이 Quabble을 도움이 된다고 생각할까요?",
+      
+      // Quabble Tools Screen
+      "quabbleTools.title": "Quabble은 모든 사람에게 적합한 도구를 가지고 있습니다",
+      "quabbleTools.subtitle": "6개 카테고리의 18가지 다양한 운동이 지금 이용 가능하며 더 많은 것들이 출시될 예정입니다!",
+      "quabbleTools.moodDiary": "기분 일기",
+      "quabbleTools.meditation": "명상",
+      "quabbleTools.bambooForest": "대나무 숲",
+      "quabbleTools.oneMinBreathing": "1분 호흡",
+      "quabbleTools.watermelonTaiChi": "수박 태극권",
+      "quabbleTools.proudDandelion": "자랑스러운 민들레",
+      "quabbleTools.gratitudeJar": "감사 항아리",
+      "quabbleTools.worryBox": "걱정 상자",
+      "quabbleTools.treasureBox": "보물 상자",
+      "quabbleTools.safePlace": "안전한 장소",
+      "quabbleTools.moonlight": "달빛",
+      "quabbleTools.outdoorWalk": "야외 산책",
+      "quabbleTools.fiveFourThreeTwoOne": "54321",
+      "quabbleTools.pleasantActivities": "즐거운 활동",
+      "quabbleTools.thankYou": "감사합니다",
+      "quabbleTools.dearSelf": "소중한 나에게",
+      "quabbleTools.smartGoals": "스마트 목표",
+      "quabbleTools.mindfulEating": "마음챙김 식사",
+      
+      // Radar Screen
+      "radar.title": "Quabble은 정신건강에 대해 전인적인 접근을 취합니다",
+      "radar.subtitle": "우리의 마음과 몸은 깊이 연결되어 있으며, 지속적인 정신건강은 삶의 모든 영역을 돌보는 것에서만 나올 수 있습니다.",
+      "radar.radarDescription": "웰니스 레이더로 당신의 진전을 측정하세요!",
+      
+      // Routine Intro Screen
+      "routineIntro.title": "지속 가능한 습관을 구축하는 데 도움이 되는 작고 개인화된 일일 루틴을 제공합니다",
+      "routineIntro.morningText": "긍정적인 마음가짐으로 아침을 시작하세요",
+      "routineIntro.eveningText": "친절한 성찰로 하루를 마무리하세요",
+      "routineIntro.readyButton": "준비됐어요",
+      
+      // Testimonials V2 Screen
+      "testimonialsV2.testimonial1Text": "제가 평생 찾고 있던 앱입니다.",
+      "testimonialsV2.testimonial1Author": "t.m.s.d7d",
+      "testimonialsV2.testimonial2Text": "제 정신건강과 마음챙김에 게임 체인저가 되었고 저에게 많은 기쁨을 가져다주었습니다.",
+      "testimonialsV2.testimonial2Author": "Emma",
+      "testimonialsV2.testimonial3Text": "정신건강 전반을 바라보는 놀라운 방법이자 다른 관점입니다.",
+      "testimonialsV2.testimonial3Author": "Lucy N",
+      "testimonialsV2.testimonial4Text": "여러분도 아셔야 해요, 이게 최고의 웰니스 앱입니다.",
+      "testimonialsV2.testimonial4Author": "Daryn T",
+      "testimonialsV2.testimonial5Text": "정신건강 도구인 척하는 게임이 아니라, 재미있고 사랑스럽기도 한 진짜 정신건강 도구입니다.",
+      "testimonialsV2.testimonial5Author": "Katherine",
+      "testimonialsV2.authorPrefix": "작성자",
+      
+      // Are You Ready Screen
+      "areYouReady.title": "개인화된 루틴을 설정하고 여정을 시작할 준비가 되셨나요?",
+      "areYouReady.yesButton": "네",
+      "areYouReady.maybeLaterButton": "나중에",
+      
+      // Wake Up Screen
+      "wakeUp.title": "보통 몇 시에 일어나시나요?",
+      "wakeUp.modalTitle": "시간 선택",
+      
+      // Good Night Screen
+      "goodNight.title": "보통 몇 시에 주무시나요?",
+      "goodNight.modalTitle": "시간 선택",
+      
+      // Ask Interests Page
+      "askInterests.title": "다음 중 연습하고 싶은 것은 무엇인가요?",
+      "askInterests.subtitle": "해당하는 모든 것을 선택해주세요",
+      "askInterests.breathing": "호흡 운동",
+      "askInterests.moodTracking": "기분 추적",
+      "askInterests.journaling": "저널링",
+      "askInterests.selfLove": "자기사랑",
+      "askInterests.gratitude": "감사 연습",
+      "askInterests.meditation": "명상",
+      "askInterests.physical": "신체 활동",
+      "askInterests.sleep": "더 나은 수면",
+      "askInterests.productivity": "생산성",
+      
+      // Recommended Routine Intro Screen
+      "recommendedRoutineIntro.message": "당신을 위한 추천 루틴입니다",
+      "recommendedRoutineIntro.checkItOutButton": "확인하기 >>",
+      
       // Mind Quote Screen
       "mindQuote.quote": "건강한 마음은 성공적이고\n풍요로우며 의미 있는\n삶의 기초입니다.",
       
@@ -730,6 +809,85 @@ function getTranslations() {
       
       // Let's Find Out Screen
       "letsFindOut.message": "ようこそ！\nどのようにお手伝い\nできるか見つけましょう",
+      
+      // Why So Many Screen
+      "whySoMany.message": "では、なぜこれほど多くの人がQuabbleを役立つと感じるのでしょうか？",
+      
+      // Quabble Tools Screen
+      "quabbleTools.title": "Quabbleには誰にでも適したツールがあります",
+      "quabbleTools.subtitle": "6つのカテゴリーにわたる18種類のワークアウトが利用可能で、さらに多くが追加予定です！",
+      "quabbleTools.moodDiary": "気分日記",
+      "quabbleTools.meditation": "瞑想",
+      "quabbleTools.bambooForest": "竹林",
+      "quabbleTools.oneMinBreathing": "1分呼吸",
+      "quabbleTools.watermelonTaiChi": "スイカ太極拳",
+      "quabbleTools.proudDandelion": "誇らしいタンポポ",
+      "quabbleTools.gratitudeJar": "感謝の瓶",
+      "quabbleTools.worryBox": "心配箱",
+      "quabbleTools.treasureBox": "宝箱",
+      "quabbleTools.safePlace": "安全な場所",
+      "quabbleTools.moonlight": "月光",
+      "quabbleTools.outdoorWalk": "屋外散歩",
+      "quabbleTools.fiveFourThreeTwoOne": "54321",
+      "quabbleTools.pleasantActivities": "楽しい活動",
+      "quabbleTools.thankYou": "ありがとう",
+      "quabbleTools.dearSelf": "親愛なる自分へ",
+      "quabbleTools.smartGoals": "スマート目標",
+      "quabbleTools.mindfulEating": "マインドフル食事",
+      
+      // Radar Screen
+      "radar.title": "Quabbleはメンタルヘルスに対してホリスティックなアプローチを取ります",
+      "radar.subtitle": "私たちの心と体は深くつながっており、持続的なメンタルヘルスは人生のすべての領域をケアすることからのみ生まれます。",
+      "radar.radarDescription": "ウェルネスレーダーで進歩を測定しましょう！",
+      
+      // Routine Intro Screen
+      "routineIntro.title": "持続可能な習慣を構築するのに役立つ、一口サイズのパーソナライズされた日常ルーチンを提供します",
+      "routineIntro.morningText": "ポジティブなマインドセットで朝を始めましょう",
+      "routineIntro.eveningText": "親切な振り返りで一日を終えましょう",
+      "routineIntro.readyButton": "準備完了",
+      
+      // Testimonials V2 Screen
+      "testimonialsV2.testimonial1Text": "私が生涯探し求めていたアプリです。",
+      "testimonialsV2.testimonial1Author": "t.m.s.d7d",
+      "testimonialsV2.testimonial2Text": "私のメンタルヘルスとマインドフルネスにとってゲームチェンジャーとなり、多くの喜びをもたらしてくれました。",
+      "testimonialsV2.testimonial2Author": "Emma",
+      "testimonialsV2.testimonial3Text": "メンタルヘルス全体を見る驚くべき方法であり、異なる視点です。",
+      "testimonialsV2.testimonial3Author": "Lucy N",
+      "testimonialsV2.testimonial4Text": "皆さんも知っておくべきです、これは史上最高のウェルネスアプリです。",
+      "testimonialsV2.testimonial4Author": "Daryn T",
+      "testimonialsV2.testimonial5Text": "メンタルヘルスツールのふりをしたゲームではなく、楽しくて愛らしい本物のメンタルヘルスツールです。",
+      "testimonialsV2.testimonial5Author": "Katherine",
+      "testimonialsV2.authorPrefix": "投稿者",
+      
+      // Are You Ready Screen
+      "areYouReady.title": "パーソナライズされたルーチンを設定して、あなたの旅を始める準備はできていますか？",
+      "areYouReady.yesButton": "はい",
+      "areYouReady.maybeLaterButton": "後で",
+      
+      // Wake Up Screen
+      "wakeUp.title": "普段何時に起きますか？",
+      "wakeUp.modalTitle": "時間を選択",
+      
+      // Good Night Screen
+      "goodNight.title": "普段何時に寝ますか？",
+      "goodNight.modalTitle": "時間を選択",
+      
+      // Ask Interests Page
+      "askInterests.title": "以下のうち、実践したいものはどれですか？",
+      "askInterests.subtitle": "該当するものをすべて選択してください",
+      "askInterests.breathing": "呼吸エクササイズ",
+      "askInterests.moodTracking": "気分の記録",
+      "askInterests.journaling": "ジャーナリング",
+      "askInterests.selfLove": "自己愛",
+      "askInterests.gratitude": "感謝の実践",
+      "askInterests.meditation": "瞑想",
+      "askInterests.physical": "身体活動",
+      "askInterests.sleep": "より良い睡眠",
+      "askInterests.productivity": "生産性",
+      
+      // Recommended Routine Intro Screen
+      "recommendedRoutineIntro.message": "あなたのための推奨ルーティンです",
+      "recommendedRoutineIntro.checkItOutButton": "確認する >>",
       
       // Mind Quote Screen
       "mindQuote.quote": "健康な心は成功した\n充実した意味のある\n人生の基盤です。",

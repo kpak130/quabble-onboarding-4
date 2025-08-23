@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface AreYouReadyScreenProps {
   onYes: () => void;
@@ -10,6 +11,7 @@ export function AreYouReadyScreen({
   onYes,
   onMaybeLater
 }: AreYouReadyScreenProps) {
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Send the new event for onboarding survey
@@ -45,7 +47,7 @@ export function AreYouReadyScreen({
             color: '#4C4A3C',
             fontSize: 'min(6.5vw, 2.25rem)'
           }}>
-            Are you ready for setting up your personalized routine and start your journey?
+            {t('areYouReady.title')}
           </h1>
         </div>
       </div>
@@ -68,7 +70,7 @@ export function AreYouReadyScreen({
                 onYes();
               }}
             >
-              Yes
+              {t('areYouReady.yesButton')}
             </button>
 
             {/* Maybe Later Button */}
@@ -85,7 +87,7 @@ export function AreYouReadyScreen({
                 // Don't call onMaybeLater() - just fire the event and stay on this screen
               }}
             >
-              Maybe later
+              {t('areYouReady.maybeLaterButton')}
             </button>
           </div>
         </div>
