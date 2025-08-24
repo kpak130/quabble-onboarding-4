@@ -635,9 +635,22 @@ function getTranslations() {
       "askInterests.sleep": "더 나은 수면",
       "askInterests.productivity": "생산성",
       
+      // Customize Routine Screen
+      "customizeRoutine.title": "정신건강 루틴을\n맞춤화하고 있습니다",
+      "customizeRoutine.percentage": "%",
+      
       // Recommended Routine Intro Screen
       "recommendedRoutineIntro.message": "당신을 위한 추천 루틴입니다",
       "recommendedRoutineIntro.checkItOutButton": "확인하기 >>",
+      
+      // Routine Recommendation Screen
+      "routineRecommendation.morningRoutineTitle": "아침 루틴",
+      "routineRecommendation.eveningRoutineTitle": "저녁 루틴",
+      "routineRecommendation.checkIn": "체크인",
+      "routineRecommendation.moodDiary": "기분 일기",
+      "routineRecommendation.gratitudeJar": "감사 항아리",
+      "routineRecommendation.changeText": "나중에 변경할 수 있습니다",
+      "routineRecommendation.okayButton": "확인",
       
       // Mind Quote Screen
       "mindQuote.quote": "건강한 마음은 성공적이고\n풍요로우며 의미 있는\n삶의 기초입니다.",
@@ -885,9 +898,22 @@ function getTranslations() {
       "askInterests.sleep": "より良い睡眠",
       "askInterests.productivity": "生産性",
       
+      // Customize Routine Screen
+      "customizeRoutine.title": "あなたのメンタルウェルネス\nルーティンをカスタマイズ中",
+      "customizeRoutine.percentage": "%",
+      
       // Recommended Routine Intro Screen
       "recommendedRoutineIntro.message": "あなたのための推奨ルーティンです",
       "recommendedRoutineIntro.checkItOutButton": "確認する >>",
+      
+      // Routine Recommendation Screen
+      "routineRecommendation.morningRoutineTitle": "朝のルーティン",
+      "routineRecommendation.eveningRoutineTitle": "夜のルーティン",
+      "routineRecommendation.checkIn": "チェックイン",
+      "routineRecommendation.moodDiary": "気分日記",
+      "routineRecommendation.gratitudeJar": "感謝の瓶",
+      "routineRecommendation.changeText": "後で変更できます",
+      "routineRecommendation.okayButton": "OK",
       
       // Mind Quote Screen
       "mindQuote.quote": "健康な心は成功した\n充実した意味のある\n人生の基盤です。",

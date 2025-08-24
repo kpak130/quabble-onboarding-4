@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useSelections } from '../contexts/SelectionsContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface CustomizeRoutineScreenProps {
   onBack: () => void;
@@ -13,6 +14,7 @@ export function CustomizeRoutineScreen({
 }: CustomizeRoutineScreenProps) {
   const [progress, setProgress] = useState(0);
   const { submitSelections } = useSelections();
+  const { t } = useLanguage();
 
   useEffect(() => {
     // Send the new event for onboarding survey
@@ -66,8 +68,7 @@ export function CustomizeRoutineScreen({
         {/* Title */}
         <div className="text-center px-4" style={{ marginBottom: '0.8vh', marginTop: '1vh' }}>
           <h1 className="font-medium text-gray-800 leading-tight" style={{ fontSize: '3vh' }}>
-            Customizing your<br />
-            mental wellness routine
+            {t("customizeRoutine.title")}
           </h1>
         </div>
         
@@ -90,7 +91,7 @@ export function CustomizeRoutineScreen({
           </div>
           <div className="text-center">
             <span className="text-2xl font-medium text-gray-800">
-              {Math.round(progress)}%
+              {Math.round(progress)}{t("customizeRoutine.percentage")}
             </span>
           </div>
           </div>

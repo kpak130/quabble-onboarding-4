@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { sendToFlutter } from '../lib/quabbleFlutterChannel';
 import { useRecommendations } from '../contexts/RecommendationsContext';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface RoutineRecommendationScreenProps {
   onBack: () => void;
@@ -12,6 +13,7 @@ export function RoutineRecommendationScreen({
   onNext
 }: RoutineRecommendationScreenProps) {
   const { recommendations, loading } = useRecommendations();
+  const { t } = useLanguage();
   const [showDebugModal, setShowDebugModal] = useState(false);
 
   useEffect(() => {
@@ -30,12 +32,12 @@ export function RoutineRecommendationScreen({
 
   // Default fallback data
   const defaultMorning = {
-    displayName: "Mood Diary",
+    displayName: t("routineRecommendation.moodDiary"),
     smallThumbnailUrl: "/images/24-smoothie.png"
   };
   
   const defaultEvening = {
-    displayName: "Gratitude Jar", 
+    displayName: t("routineRecommendation.gratitudeJar"), 
     smallThumbnailUrl: "/images/24-jar.png"
   };
 
@@ -68,7 +70,7 @@ export function RoutineRecommendationScreen({
         {/* Morning Routine */}
         <div className="bg-white rounded-[3rem] p-6 mb-6 shadow-sm">
           <h2 className="text-lg font-medium text-gray-800 mb-6 text-center">
-            Morning Routine
+            {t("routineRecommendation.morningRoutineTitle")}
           </h2>
           
           <div className="relative flex justify-start items-center ml-8">
@@ -84,7 +86,7 @@ export function RoutineRecommendationScreen({
                   className="w-full h-full object-contain" 
                 />
               </div>
-              <span className="text-sm text-gray-700">Check-in</span>
+              <span className="text-sm text-gray-700">{t("routineRecommendation.checkIn")}</span>
             </div>
             
             {/* Morning Routine - Dynamic */}
@@ -106,7 +108,7 @@ export function RoutineRecommendationScreen({
         {/* Evening Routine */}
         <div className="rounded-[3rem] p-6 mb-8" style={{ backgroundColor: '#605D4E' }}>
           <h2 className="text-lg font-medium text-white mb-6 text-center">
-            Evening Routine
+            {t("routineRecommendation.eveningRoutineTitle")}
           </h2>
           
           <div className="relative flex justify-start items-center ml-8">
@@ -122,7 +124,7 @@ export function RoutineRecommendationScreen({
                   className="w-full h-full object-contain" 
                 />
               </div>
-              <span className="text-sm text-white">Check-in</span>
+              <span className="text-sm text-white">{t("routineRecommendation.checkIn")}</span>
             </div>
             
             {/* Evening Routine - Dynamic */}
@@ -146,7 +148,7 @@ export function RoutineRecommendationScreen({
       <div className="fixed bottom-20 left-0 right-0 z-40">
         <div className="text-center">
           <p className="text-orange-500 text-sm">
-            You can change this later
+            {t("routineRecommendation.changeText")}
           </p>
         </div>
       </div>
@@ -169,7 +171,7 @@ export function RoutineRecommendationScreen({
                 }));
               }}
             >
-              Okay
+              {t("routineRecommendation.okayButton")}
             </button>
           </div>
         </div>
