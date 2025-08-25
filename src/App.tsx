@@ -136,6 +136,10 @@ export function App() {
 
   // Handle feeling selection and conditional navigation
   const handleFeelingNext = (feelingChoice: 'difficult_recently' | 'ongoing_challenges' | 'doing_okay') => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
+    
     setUserFeelingChoice(feelingChoice);
     setFromHaveMentalIssueYes(false); // Clear flags as this is not from HaveMentalIssueScreen
     setFromHaveMentalIssueNo(false);
@@ -152,6 +156,10 @@ export function App() {
 
   // Handle mental issue screen response
   const handleMentalIssueNext = (hasIssue: 'yes' | 'no') => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
+
     if (hasIssue === 'yes') {
       setCameFromYesPath(true);
       setFromHaveMentalIssueYes(true);
@@ -170,12 +178,18 @@ export function App() {
 
   // Handle achievement screen response
   const handleAchievementNext = (achievementSelection: string) => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
     setUserAchievementSelection(achievementSelection);
     performTransition('mindquote');
   };
 
   // Handle what did you try screen response
   const handleWhatDidYouTryNext = (selection: string) => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
     setWhatDidYouTrySelection(selection);
     
     // If user selected mental wellness apps, go to WhatFeltMissingScreen
