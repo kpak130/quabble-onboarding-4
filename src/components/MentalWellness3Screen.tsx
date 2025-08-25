@@ -148,7 +148,9 @@ export function MentalWellness3Screen({
                     setIsSigningIn(true);
                     setError(null);
                     sendToFlutter('{"event":"request-signin"}');
-                    // Wait for Flutter to dispatch 'sign-in-complete' event
+                    sendToFlutter(JSON.stringify({
+                      "event": "heptic",
+                    }));
                   }
                 }}
               >
