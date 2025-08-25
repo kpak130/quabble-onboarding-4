@@ -35,6 +35,9 @@ export function AchivementScreen({
     t
   );
   const handleFocusClick = (focus: string) => {
+    sendToFlutter(JSON.stringify(
+      {"event": "heptic"}
+    ));
     setSelectedFocus(focus);
   };
 

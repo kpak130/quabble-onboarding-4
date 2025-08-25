@@ -22,6 +22,9 @@ export function FocusScreen({
   ];
   
   const handleFocusClick = (focusKey: string) => {
+    sendToFlutter(JSON.stringify(
+      {"event": "heptic"}
+    ));
     setSelectedFocus(focusKey);
   };
 

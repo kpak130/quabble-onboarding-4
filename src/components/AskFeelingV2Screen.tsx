@@ -30,6 +30,9 @@ export function AskFeelingV2Screen({
   };
 
   const handleFeelingClick = (feeling: string) => {
+    sendToFlutter(JSON.stringify(
+      {"event": "heptic"}
+    ));
     setSelectedFeeling(feeling);
   };
 
