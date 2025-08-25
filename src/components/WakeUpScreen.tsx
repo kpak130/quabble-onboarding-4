@@ -158,7 +158,9 @@ export function WakeUpScreen({
                   fontSize: '2.5vh' // 1/40 of viewport height
                 }}
                 onClick={() => {
-                  // Send click next event with wake up time
+                  sendToFlutter(JSON.stringify({
+                    "event": "heptic",
+                  }));
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_wake_up",
                     "eventProperties": {

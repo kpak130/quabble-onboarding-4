@@ -145,7 +145,9 @@ export function SupportSystemScreen({
                     // Get system name for selected option
                     const selectedOptionData = selectedOption ? options.find(opt => opt.key === selectedOption) : null;
                     const systemName = selectedOptionData ? selectedOptionData.systemName : null;
-                    
+                    sendToFlutter(JSON.stringify({
+                      "event": "heptic",
+                    }));
                     sendToFlutter(JSON.stringify({
                       "event": "click_next_ob_survey_support_system",
                       "eventProperties": {

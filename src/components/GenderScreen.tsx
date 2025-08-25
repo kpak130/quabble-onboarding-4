@@ -132,6 +132,9 @@ export function GenderScreen({
                 const gender = selectedOption ? [selectedOption.system] : [];
                 
                 sendToFlutter(JSON.stringify({
+                  "event": "heptic",
+                }));
+                sendToFlutter(JSON.stringify({
                   "event": "v2_5_7_onboarding_A::onboarding:page_2_part_4:click_next",
                   "eventProperties": {
                     "gender": gender

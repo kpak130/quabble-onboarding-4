@@ -163,7 +163,9 @@ export function WhatDidYouTryScreen({
                 
                 // Note: This screen doesn't correspond to a specific question in questionsService.ts
                 // Selection tracking would need to be added if a corresponding question is created
-                
+                sendToFlutter(JSON.stringify({
+                  "event": "heptic",
+                }));
                 sendToFlutter(JSON.stringify({
                   "event": "click_next_ob_survey_tried_before",
                   "eventProperties": {

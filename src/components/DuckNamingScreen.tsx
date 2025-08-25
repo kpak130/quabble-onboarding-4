@@ -116,6 +116,9 @@ export function DuckNamingScreen({
                   //     "duckname": duckName
                   //   }
                   // }));
+                  sendToFlutter(JSON.stringify({
+                    "event": "heptic",
+                  }));
                   onNext();
                 }}
               >

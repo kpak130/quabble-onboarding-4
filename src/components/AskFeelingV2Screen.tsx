@@ -144,6 +144,9 @@ export function AskFeelingV2Screen({
                     const systemName = selectedFeeling ? toggleSystemNames[selectedFeeling] : null;
                     
                     sendToFlutter(JSON.stringify({
+                      "event": "heptic",
+                    }));
+                    sendToFlutter(JSON.stringify({
                       "event": "click_next_ob_survey_how_have_you_been",
                       "eventProperties": {
                         "onboarding_version": 4.0

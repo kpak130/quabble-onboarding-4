@@ -132,12 +132,9 @@ export function FocusScreen({
                 const selectedOption = focusOptions.find(opt => opt.key === selectedFocus);
                 const focuses = selectedOption ? [selectedOption.system] : [];
                 
-                // sendToFlutter(JSON.stringify({
-                //   "event": "v2_5_7_onboarding_A::onboarding:page_2_part_2:click_next",
-                //   "eventProperties": {
-                //     "focuses": focuses
-                //   }
-                // }));
+                sendToFlutter(JSON.stringify({
+                  "event": "heptic",
+                }));
                 onNext();
               }}
             >

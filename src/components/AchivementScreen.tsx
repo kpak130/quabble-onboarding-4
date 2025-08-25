@@ -160,7 +160,9 @@ export function AchivementScreen({
                       addSelection(selectedOptionId);
                     }
                   }
-                  
+                  sendToFlutter(JSON.stringify({
+                    "event": "heptic",
+                  }));
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_want_to_achieve",
                     "eventProperties": {

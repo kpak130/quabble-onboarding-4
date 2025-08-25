@@ -157,7 +157,9 @@ export function WhatFeltMissingScreen({
               onClick={() => {
                 // Get system names for selected options
                 const systemNames = selectedOptions.map(option => getSystemName(option)).filter(Boolean);
-                
+                sendToFlutter(JSON.stringify({
+                  "event": "heptic",
+                }));
                 sendToFlutter(JSON.stringify({
                   "event": "click_next_ob_survey_tried_not_working",
                   "eventProperties": {
