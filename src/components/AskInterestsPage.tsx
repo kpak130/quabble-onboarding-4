@@ -43,6 +43,9 @@ export function AskInterestsPage({
   ];
 
   const handleInterestClick = (interestKey: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedInterests(prev => 
       prev.includes(interestKey)
         ? prev.filter(i => i !== interestKey)

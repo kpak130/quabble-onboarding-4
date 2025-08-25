@@ -50,6 +50,9 @@ export function AgeGroupScreen({
     ];
   
   const handleAgeGroupClick = (ageGroupKey: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedAgeGroup(ageGroupKey);
   };
 

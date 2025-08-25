@@ -21,6 +21,9 @@ export function GenderScreen({
   ];
   
   const handleGenderClick = (optionKey: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedGender(optionKey);
   };
 
