@@ -25,7 +25,7 @@ export function AskFeelingScreen({
 
   const handleFeelingClick = (feeling: string) => {
     sendToFlutter(JSON.stringify(
-      {"events": "heptic"}
+      {"event": "heptic"}
     ));
     setSelectedFeelings(prev => 
       prev.includes(feeling)

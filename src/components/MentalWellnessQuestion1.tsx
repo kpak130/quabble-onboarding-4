@@ -21,7 +21,7 @@ export function MentalWellnessQuestion1({
 
   const handleOptionClick = (option: string) => {
     sendToFlutter(JSON.stringify(
-      {"events": "heptic"}
+      {"event": "heptic"}
     ));
     setSelectedOption(option);
   };

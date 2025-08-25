@@ -35,7 +35,7 @@ export function SorryToHeartScreen({
 
   const handleOptionClick = (option: string) => {
     sendToFlutter(JSON.stringify(
-      {"events": "heptic"}
+      {"event": "heptic"}
     ));
     setSelectedOption(option);
   };

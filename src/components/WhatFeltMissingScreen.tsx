@@ -33,7 +33,7 @@ export function WhatFeltMissingScreen({
 
   const handleOptionClick = (option: string) => {
     sendToFlutter(JSON.stringify(
-      {"events": "heptic"}
+      {"event": "heptic"}
     ));
     setSelectedOptions(prev => 
       prev.includes(option) 

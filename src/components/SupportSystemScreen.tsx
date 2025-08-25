@@ -33,7 +33,7 @@ export function SupportSystemScreen({
 
   const handleOptionClick = (optionKey: string) => {
     sendToFlutter(JSON.stringify(
-      {"events": "heptic"}
+      {"event": "heptic"}
     ));
     setSelectedOption(optionKey);
   };
