@@ -40,9 +40,6 @@ export function TellUsIntroScreen({
           className="py-6 px-12 font-medium text-2xl hover:text-gray-900 transition-colors"
           style={{ color: '#2d2b2a' }}
           onClick={() => {
-            sendToFlutter(JSON.stringify({
-              "event": "heptic",
-            }));
             onNext();
           }}
         >

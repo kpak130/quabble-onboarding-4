@@ -223,9 +223,6 @@ export function AgeGroupScreen({
                     }
                   }
                   sendToFlutter(JSON.stringify({
-                    "event": "heptic",
-                  }));
-                  sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_age_group",
                     "eventProperties": {
                       "onboarding_version": 4.0

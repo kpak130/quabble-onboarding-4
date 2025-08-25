@@ -130,10 +130,6 @@ export function GenderScreen({
                 // Get system name for selected gender
                 const selectedOption = genderOptions.find(opt => opt.key === selectedGender);
                 const gender = selectedOption ? [selectedOption.system] : [];
-                
-                sendToFlutter(JSON.stringify({
-                  "event": "heptic",
-                }));
                 sendToFlutter(JSON.stringify({
                   "event": "v2_5_7_onboarding_A::onboarding:page_2_part_4:click_next",
                   "eventProperties": {

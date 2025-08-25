@@ -67,9 +67,6 @@ export function WhyQuabbleScreen({ onBack, onNext }: WhyQuabbleScreenProps) {
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter(JSON.stringify({
-                  "event": "heptic",
-                }));
                 onNext();
               }}
             >

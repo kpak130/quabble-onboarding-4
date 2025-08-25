@@ -51,6 +51,7 @@ import { TestimonialsV2Screen } from './components/TestimonialsV2Screen';
 import { AreYouReadyScreen } from './components/AreYouReadyScreen';
 import { AchivementScreen } from './components/AchivementScreen';
 import { TooYoungToUseScreen } from './components/TooYoungToUseScreen';
+import { sendToFlutter } from './lib/quabbleFlutterChannel';
 
 export function App() {
   const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'tooyoung' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'whysomany' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
@@ -187,6 +188,9 @@ export function App() {
   };
 
   const handleNext = () => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
     if (currentScreen === 'referral') {
       performTransition('age');
     } else if (currentScreen === 'age') {

@@ -155,9 +155,6 @@ export function AskInterestsPage({
                 }}
                 onClick={() => {
                   sendToFlutter(JSON.stringify({
-                    "event": "heptic",
-                  }));
-                  sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_interested_activity",
                     "eventProperties": {
                       "onboarding_version": 4.0,

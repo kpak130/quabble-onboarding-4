@@ -150,9 +150,6 @@ export function QuabbleToolsScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                sendToFlutter(JSON.stringify({
-                  "event": "heptic",
-                }));
                 onNext();
               }}
             >

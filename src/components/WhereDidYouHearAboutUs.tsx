@@ -185,9 +185,6 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
                     addSelection(selectedOptionId);
                   }
                   sendToFlutter(JSON.stringify({
-                    "event": "heptic",
-                  }));
-                  sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_first_hear_us",
                     "eventProperties": {
                       "onboarding_version": 4.0

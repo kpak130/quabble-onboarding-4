@@ -162,9 +162,6 @@ export function GoodNightScreen({
                 onClick={() => {
                   // Send click next event with bed time
                   sendToFlutter(JSON.stringify({
-                    "event": "heptic",
-                  }));
-                  sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_go_to_bed",
                     "eventProperties": {
                       "onboarding_version": 4.0

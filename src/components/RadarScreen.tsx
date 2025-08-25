@@ -108,9 +108,6 @@ export function RadarScreen({
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter(JSON.stringify({
-                  "event": "heptic",
-                }));
                 onNext();
               }}
             >

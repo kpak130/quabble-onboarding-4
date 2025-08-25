@@ -156,9 +156,6 @@ export function WhatDealingWithScreen({
                   // Get system name for selected option
                   const systemName = selectedOption ? getSystemName(selectedOption) : null;
                   sendToFlutter(JSON.stringify({
-                    "event": "heptic",
-                  }));
-                  sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_what_dealing_with",
                     "eventProperties": {
                       "onboarding_version": 4.0

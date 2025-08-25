@@ -112,9 +112,6 @@ export function ImprovedProofScreen({ onBack, onNext }: ImprovedProofScreenProps
                 fontSize: '2.5vh'
               }}
               onClick={() => {
-                sendToFlutter(JSON.stringify({
-                  "event": "heptic",
-                }));
                 onNext();
               }}
             >
