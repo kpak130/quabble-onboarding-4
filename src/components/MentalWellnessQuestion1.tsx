@@ -20,6 +20,9 @@ export function MentalWellnessQuestion1({
   const options = ['Great', 'Good', 'Not very good', 'Poor'];
 
   const handleOptionClick = (option: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedOption(option);
   };
 

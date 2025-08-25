@@ -34,6 +34,9 @@ export function WhatDealingWithScreen({
   };
 
   const handleOptionClick = (option: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedOption(option);
   };
 

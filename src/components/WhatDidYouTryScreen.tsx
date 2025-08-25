@@ -35,6 +35,9 @@ export function WhatDidYouTryScreen({
   };
 
   const handleOptionClick = (option: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedOptions(prev => 
       prev.includes(option) 
         ? prev.filter(o => o !== option)

@@ -22,6 +22,9 @@ export function HaveMentalIssueScreen({
   ];
 
   const handleOptionClick = (optionKey: string) => {
+    sendToFlutter(JSON.stringify(
+      {"events": "heptic"}
+    ));
     setSelectedOption(optionKey);
   };
 
