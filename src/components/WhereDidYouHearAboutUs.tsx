@@ -53,6 +53,9 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
   }, []); 
 
   const handleOptionClick = (option: string) => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
     setSelectedOption(option);
   };
 
@@ -181,7 +184,9 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
                     const selectedOptionId = questionData.options[optionIndex].id;
                     addSelection(selectedOptionId);
                   }
-                  
+                  sendToFlutter(JSON.stringify({
+                    "event": "heptic",
+                  }));
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_first_hear_us",
                     "eventProperties": {
