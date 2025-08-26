@@ -16,7 +16,7 @@ export function TestimonialsV2Screen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_review",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 

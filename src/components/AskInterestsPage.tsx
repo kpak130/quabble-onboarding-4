@@ -19,7 +19,7 @@ export function AskInterestsPage({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_survey_interested_activity",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []);
@@ -160,7 +160,7 @@ export function AskInterestsPage({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_interested_activity",
                     "eventProperties": {
-                      "onboarding_version": 4.0,
+                      "onboarding_version": 4.1,
                       "survey_interested_activity": selectedInterests.join(', ') || ""
                     }
                   }));

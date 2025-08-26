@@ -16,7 +16,7 @@ export function MindQuoteScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_healthy_mind",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 

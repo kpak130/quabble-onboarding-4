@@ -18,7 +18,7 @@ export function StatsScreen({ onBack, onNext }: StatsScreenProps) {
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_quabble_help_manage",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
 

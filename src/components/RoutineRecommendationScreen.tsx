@@ -21,7 +21,7 @@ export function RoutineRecommendationScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_ask_recommended_routine",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []);

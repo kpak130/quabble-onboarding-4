@@ -45,7 +45,7 @@ export function WhatDealingWithScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_survey_what_dealing_with",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 
@@ -161,7 +161,7 @@ export function WhatDealingWithScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_what_dealing_with",
                     "eventProperties": {
-                      "onboarding_version": 4.0
+                      "onboarding_version": 4.1
                     },
                     "userProperties": {
                       "survey_what_dealing_with": systemName || selectedOption || ""

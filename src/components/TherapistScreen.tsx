@@ -18,7 +18,7 @@ export function TherapistScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_therapist_recommended",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 

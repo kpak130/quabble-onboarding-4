@@ -73,7 +73,7 @@ export function AgeGroupScreen({
     sendToFlutter(JSON.stringify({
       "event": "click_next_ob_birthday_selection",
       "eventProperties": {
-        "onboarding_version": 4.0,
+        "onboarding_version": 4.1,
         "user_age": age,
         "birth_day": selectedDay,
         "birth_month": selectedMonth,
@@ -95,7 +95,7 @@ export function AgeGroupScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_survey_age_group",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 
@@ -120,7 +120,7 @@ export function AgeGroupScreen({
           sendToFlutter(JSON.stringify({
             "event": "click_skip_ob_survey_age_group",
             "eventProperties": {
-              "onboarding_version": 4.0
+              "onboarding_version": 4.1
             }
           }));
           onSkip();
@@ -228,7 +228,7 @@ export function AgeGroupScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_age_group",
                     "eventProperties": {
-                      "onboarding_version": 4.0
+                      "onboarding_version": 4.1
                     },
                     "userProperties": {
                       "survey_age_group": systemName || selectedAgeGroup || ""

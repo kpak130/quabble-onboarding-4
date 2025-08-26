@@ -22,7 +22,7 @@ export function RecommendedRoutineIntroScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_check_out_routine",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []);

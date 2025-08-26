@@ -7,7 +7,7 @@ export function TooYoungToUseScreen() {
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_12_under",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []);

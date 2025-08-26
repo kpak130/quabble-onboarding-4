@@ -23,7 +23,7 @@ export function WakeUpScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_survey_wake_up",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []);
@@ -161,7 +161,7 @@ export function WakeUpScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_wake_up",
                     "eventProperties": {
-                      "onboarding_version": 4.0
+                      "onboarding_version": 4.1
                     },
                     "userProperties": {
                       "survey_wake_up": wakeUpTime

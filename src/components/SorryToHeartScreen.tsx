@@ -45,7 +45,7 @@ export function SorryToHeartScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_survey_what_is_going_on",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 
@@ -158,7 +158,7 @@ export function SorryToHeartScreen({
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_what_is_going_on",
                     "eventProperties": {
-                      "onboarding_version": 4.0
+                      "onboarding_version": 4.1
                     },
                     "userProperties": {
                       "survey_what_is_going_on": systemName || selectedOption || ""

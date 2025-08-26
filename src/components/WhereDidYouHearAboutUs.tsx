@@ -44,10 +44,10 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
     sendToFlutter(JSON.stringify({
       "event": "view_ob_survey_first_hear_us",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       },
       "userProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 
@@ -83,7 +83,7 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
             sendToFlutter(JSON.stringify({
               "event": "click_skip_ob_survey_first_hear_us",
               "eventProperties": {
-                "onboarding_version": 4.0
+                "onboarding_version": 4.1
               }
             }));
             onSkip();
@@ -187,7 +187,7 @@ export function WhereDidYouHearAboutUs({ onBack, onNext, onSkip, questionData, q
                   sendToFlutter(JSON.stringify({
                     "event": "click_next_ob_survey_first_hear_us",
                     "eventProperties": {
-                      "onboarding_version": 4.0
+                      "onboarding_version": 4.1
                     },
                     "userProperties": {
                       "survey_first_hear_us": systemName || selectedOption || ""

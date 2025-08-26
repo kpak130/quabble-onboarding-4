@@ -18,7 +18,7 @@ export function AreYouReadyScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_ask_routine_set_up",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 

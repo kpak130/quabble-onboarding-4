@@ -18,7 +18,7 @@ export function ImprovedProofScreen({ onBack, onNext }: ImprovedProofScreenProps
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_quabble_improve_mental",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
 

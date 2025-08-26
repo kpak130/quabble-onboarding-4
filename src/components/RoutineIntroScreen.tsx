@@ -17,7 +17,7 @@ export function RoutineIntroScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_bite_sized_routine",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 

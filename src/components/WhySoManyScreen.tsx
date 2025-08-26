@@ -18,7 +18,7 @@ export function WhySoManyScreen({
     sendToFlutter(JSON.stringify({
       "event": "view_ob_info_why_quable_help",
       "eventProperties": {
-        "onboarding_version": 4.0
+        "onboarding_version": 4.1
       }
     }));
   }, []); 
