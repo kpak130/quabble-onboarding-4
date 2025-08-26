@@ -19,7 +19,7 @@ export function CustomizeRoutineScreen({
   useEffect(() => {
     // Send the new event for onboarding survey
     sendToFlutter(JSON.stringify({
-      "event": "ob_info_customizing_routine",
+      "event": "view_ob_info_customizing_routine",
       "eventProperties": {
         "onboarding_version": 4.0
       }

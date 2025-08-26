@@ -69,7 +69,6 @@ export function AreYouReadyScreen({
                 sendToFlutter(JSON.stringify({
                   "event": "heptic",
                 }));
-                // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:are_you_ready:click_yes"}');
                 onYes();
               }}
             >
@@ -85,9 +84,7 @@ export function AreYouReadyScreen({
                 minHeight: '6vh'
               }}
               onClick={() => {
-                // sendToFlutter('{"event":"v2_5_7_onboarding_A::onboarding:are_you_ready:click_maybe_later"}');
                 sendToFlutter('{"event":"onboarding-complete"}');
-                // Don't call onMaybeLater() - just fire the event and stay on this screen
               }}
             >
               {t('areYouReady.maybeLaterButton')}
