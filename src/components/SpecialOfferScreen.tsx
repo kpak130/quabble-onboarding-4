@@ -1,5 +1,5 @@
 import { sendToFlutter } from '@/lib/quabbleFlutterChannel';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 interface SpecialOfferScreenProps {
   onBack: () => void;
@@ -10,6 +10,18 @@ export function SpecialOfferScreen({
   onBack,
   onNext
 }: SpecialOfferScreenProps) {
+
+  useEffect(() => {
+    sendToFlutter(JSON.stringify(
+      {
+        "event":"view_ob_info_coach_intro",
+        "eventProperties": {
+          "onboarding_version": 4.1,
+        }
+      }
+    ));
+  }, []); 
+
   const onNextClicked = () => {
     sendToFlutter('{"event":"onboarding-complete"}');
     // onNext();
