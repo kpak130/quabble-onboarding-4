@@ -84,7 +84,7 @@ export function AreYouReadyScreen({
                 minHeight: '6vh'
               }}
               onClick={() => {
-                sendToFlutter('{"event":"onboarding-complete"}');
+                onMaybeLater();
               }}
             >
               {t('areYouReady.maybeLaterButton')}

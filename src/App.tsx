@@ -51,10 +51,11 @@ import { TestimonialsV2Screen } from './components/TestimonialsV2Screen';
 import { AreYouReadyScreen } from './components/AreYouReadyScreen';
 import { AchivementScreen } from './components/AchivementScreen';
 import { TooYoungToUseScreen } from './components/TooYoungToUseScreen';
+import { SpecialOfferScreen } from './components/SpecialOfferScreen';
 import { sendToFlutter } from './lib/quabbleFlutterChannel';
 
 export function App() {
-  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'tooyoung' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'whysomany' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro'>('referral');
+  const [currentScreen, setCurrentScreen] = useState<'referral' | 'age' | 'tooyoung' | 'duckjar' | 'gender' | 'focus' | 'confirmation' | 'achievement' | 'mindquote' | 'askfeelingv2' | 'sorrytoheart' | 'havementalissue' | 'whatdealingwith' | 'wecanhelp' | 'whatdidyoutry' | 'whatfeltmissing' | 'whyquabble' | 'stats' | 'improvedproof' | 'whysomany' | 'letsfindout' | 'quabbletools' | 'therapist' | 'radar' | 'routineintro' | 'testimonialsv2' | 'areyouready' | 'testimonials' | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' | 'customizeroutine' | 'recommendedroutineintro' | 'specialoffer'>('referral');
   
   // Add transition state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -201,6 +202,13 @@ export function App() {
     }
   };
 
+  const handleMaybeLater = () => {
+    sendToFlutter(JSON.stringify({
+      "event": "heptic",
+    }));
+    performTransition('specialoffer');
+  };
+  
   const handleNext = () => {
     sendToFlutter(JSON.stringify({
       "event": "heptic",
@@ -300,8 +308,7 @@ export function App() {
       performTransition('tellusintro');
     } else if (currentScreen === 'tellusintro') {
       performTransition('wakeup');
-    } else if (currentScreen === 'routine') {
-      performTransition('gender');
+
     } else if (currentScreen === 'appfinale') {
       performTransition('wakeup');
     } else if (currentScreen === 'wakeup') {
@@ -320,6 +327,8 @@ export function App() {
       performTransition('recommendedroutineintro');
     } else if (currentScreen === 'recommendedroutineintro') {
       performTransition('routine');
+    } else if (currentScreen === 'routine') {
+      performTransition('specialoffer');
     }
   };
   const handleBack = () => {
@@ -420,6 +429,8 @@ export function App() {
       performTransition('supportsystem');
     } else if (currentScreen === 'recommendedroutineintro') {
       performTransition('customizeroutine');
+    } else if (currentScreen === 'specialoffer') {
+      performTransition('routine');
     }
   };
   const handleSkip = () => {
@@ -625,7 +636,7 @@ export function App() {
     }
     if (currentScreen === 'areyouready') {
       return <TransitionWrapper show={!isTransitioning}>
-          <AreYouReadyScreen onYes={handleNext} onMaybeLater={handleNext} />
+          <AreYouReadyScreen onYes={handleNext} onMaybeLater={handleMaybeLater} />
         </TransitionWrapper>;
     }
     if (currentScreen === 'focus') {
@@ -657,6 +668,11 @@ export function App() {
     if (currentScreen === 'duckjar') {
       return <TransitionWrapper show={!isTransitioning}>
           <DuckWithJarScreen onNext={handleNext} />
+        </TransitionWrapper>;
+    }
+    if (currentScreen === 'specialoffer') {
+      return <TransitionWrapper show={!isTransitioning}>
+          <SpecialOfferScreen onBack={handleBack} onNext={handleNext} />
         </TransitionWrapper>;
     }
     return <TransitionWrapper show={!isTransitioning}>

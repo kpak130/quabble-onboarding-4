@@ -17,7 +17,7 @@ export function AppFinaleScreen({
   }, []);
 
   const handleComplete = () => {
-    sendToFlutter('{"event":"onboarding-complete"}');
+    onNext();
   };
 
   return (

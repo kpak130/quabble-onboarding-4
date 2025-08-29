@@ -3,7 +3,7 @@ type ScreenType =
   | 'completion' | 'mentalwellness1' | 'mentalwellness2' | 'chart' | 'mentalwellness3' 
   | 'signup' | 'ducknaming' | 'tellusintro' | 'routine' | 'appfinale' | 'wakeup' 
   | 'goodnight' | 'mentalwellnessq1' | 'askfeeling' | 'askinterests' | 'supportsystem' 
-  | 'customizeroutine' | 'recommendedroutineintro';
+  | 'customizeroutine' | 'recommendedroutineintro' | 'specialoffer';
 
 const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   referral: [],
@@ -70,14 +70,15 @@ const SCREEN_IMAGES: Record<ScreenType, string[]> = {
   ],
   supportsystem: ['/images/21-background.jpg'],
   customizeroutine: ['/images/22-background.png'],
-  recommendedroutineintro: []
+  recommendedroutineintro: [],
+  specialoffer: ['/images/3people.png']
 };
 
 const SCREEN_SEQUENCE: ScreenType[] = [
   'referral', 'age', 'gender', 'focus', 'confirmation', 'testimonials', 'completion',
   'mentalwellness1', 'mentalwellness2', 'chart', 'mentalwellness3', 'ducknaming',
   'tellusintro', 'wakeup', 'goodnight', 'mentalwellnessq1', 'askfeeling', 'askinterests',
-  'supportsystem', 'customizeroutine', 'recommendedroutineintro', 'routine', 'appfinale'
+  'supportsystem', 'customizeroutine', 'recommendedroutineintro', 'routine', 'specialoffer'
 ];
 
 const prefetchedImages = new Set<string>();

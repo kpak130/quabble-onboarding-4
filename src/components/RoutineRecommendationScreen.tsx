@@ -165,10 +165,7 @@ export function RoutineRecommendationScreen({
                 fontSize: '2.5vh' // 1/40 of viewport height
               }}
               onClick={() => {
-                // Fire onboarding-complete event to Flutter
-                sendToFlutter(JSON.stringify({
-                  "event": "onboarding-complete"
-                }));
+                onNext();
               }}
             >
               {t("routineRecommendation.okayButton")}
